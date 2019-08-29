@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 //@EnableWebSecurity
+//@EnableOAuth2Sso
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -13,6 +14,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/hello2").authenticated()
+                .antMatchers("/oauth_login").permitAll()
                 .antMatchers("/*").permitAll()
                 .antMatchers("/h2_console/**").permitAll()
                 .and()

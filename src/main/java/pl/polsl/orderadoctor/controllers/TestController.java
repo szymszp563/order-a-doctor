@@ -19,8 +19,6 @@ public class TestController {
         userAttributes.forEach((k, v) -> System.out.println(k + ":" + v));
         System.out.println("==================================");
         curr.getPrincipal().getAuthorities().stream().forEach(System.out::println);
-
-
         System.out.println("==================================");
         System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
 

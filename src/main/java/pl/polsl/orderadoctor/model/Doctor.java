@@ -6,10 +6,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
-import java.time.LocalDateTime;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 @Builder
 @AllArgsConstructor
@@ -37,9 +50,9 @@ public class Doctor {
 
     private String street;
 
-    private LocalDateTime workingHoursFrom;
+    private String workingHoursFrom;
 
-    private LocalDateTime workingHoursTo;
+    private String workingHoursTo;
 
     @Lob
     private Byte[] image;
@@ -47,7 +60,9 @@ public class Doctor {
     @Lob
     private String about;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    private Double averageGrade;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "doctor")
     private List<Visit> visits = new LinkedList<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -58,14 +73,36 @@ public class Doctor {
     @OneToMany(cascade = CascadeType.ALL)
     private List<MedicalProduct> medicalProducts = new LinkedList<>();
 
-    public void addVisit(Visit visit){
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "doctor_id")
+    private Set<Grade> grades = new HashSet<>();
+
+    public void addVisit(Visit visit) {
         this.visits.add(visit);
         visit.setDoctor(this);
     }
 
-    public void addMedicalProduct(MedicalProduct medicalProduct){
+    public void addMedicalProduct(MedicalProduct medicalProduct) {
         this.medicalProducts.add(medicalProduct);
         medicalProduct.setDoctor(this);
+    }
+
+    public void addGrade(Grade grade){
+        this.grades.add(grade);
+        calculateAverageGrade();
+    }
+
+    public Double calculateAverageGrade() {
+        Double average = 0D;
+        if (!this.grades.isEmpty()) {
+            Integer sum = 0;
+            for (Grade grade : grades) {
+                sum += grade.getGrade();
+            }
+            average = Double.valueOf(sum) / (double) this.grades.size();
+        }
+        this.averageGrade = average;
+        return average;
     }
 
 }

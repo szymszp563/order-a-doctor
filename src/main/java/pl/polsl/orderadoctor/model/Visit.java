@@ -5,15 +5,17 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,7 +38,10 @@ public class Visit {
 
     private LocalDateTime dateTo;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "visits_medical_products", joinColumns = @JoinColumn(name = "visit_id"),
+            inverseJoinColumns = @JoinColumn(name = "medical_product_id"))
     private List<MedicalProduct> medicalProducts = new LinkedList<>();
 
     @ManyToOne
@@ -49,6 +54,9 @@ public class Visit {
 
     public void addMedicalProduct(MedicalProduct medicalProduct){
         this.medicalProducts.add(medicalProduct);
+        if(dateTo==null){
+            dateTo=dateFrom;
+        }
         this.dateTo = dateFrom.plus(medicalProduct.getDuration());
     }
 
