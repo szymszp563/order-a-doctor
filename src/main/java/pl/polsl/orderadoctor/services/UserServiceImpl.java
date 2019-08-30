@@ -1,6 +1,7 @@
 package pl.polsl.orderadoctor.services;
 
 import org.springframework.stereotype.Service;
+import pl.polsl.orderadoctor.model.AccountType;
 import pl.polsl.orderadoctor.model.User;
 import pl.polsl.orderadoctor.repositories.UserRepository;
 
@@ -28,6 +29,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findById(Long id) {
         User user = userRepository.findById(id).get();
+        return user;
+    }
+
+    @Override
+    public User findByExternalIdAndAccountType(String externalId, AccountType accountType) {
+        User user = userRepository.findByExternalIdAndAccountType(externalId, accountType);
+        return user;
+    }
+
+    @Override
+    public User findByExternalId(String externalId) {
+        User user = userRepository.findByExternalId(externalId);
         return user;
     }
 }

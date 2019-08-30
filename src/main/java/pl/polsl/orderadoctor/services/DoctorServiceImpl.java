@@ -1,6 +1,7 @@
 package pl.polsl.orderadoctor.services;
 
 import org.springframework.stereotype.Service;
+import pl.polsl.orderadoctor.model.AccountType;
 import pl.polsl.orderadoctor.model.Doctor;
 import pl.polsl.orderadoctor.model.Speciality;
 import pl.polsl.orderadoctor.repositories.DoctorRepository;
@@ -39,6 +40,18 @@ public class DoctorServiceImpl implements DoctorService {
         List<Doctor> doctors;
         doctors = doctorRepository.findAllBySpecialitiesAndCity(speciality, city);
         return doctors;
+    }
+
+    @Override
+    public Doctor findByExternalIdAndAccountType(String externalId, AccountType accountType) {
+        Doctor doctor = doctorRepository.findByExternalIdAndAccountType(externalId, accountType);
+        return doctor;
+    }
+
+    @Override
+    public Doctor findByExternalId(String externalId) {
+        Doctor doctor = doctorRepository.findByExternalId(externalId);
+        return doctor;
     }
 
 }

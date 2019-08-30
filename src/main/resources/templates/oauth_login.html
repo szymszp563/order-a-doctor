@@ -18,18 +18,11 @@
             th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<div class="container-fluid" style="margin-top: 20px">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="jumbotron">
-                <h1>Order a Doctor</h1>
-                <p>Welcome in Order a Doctor site. Here you will find BEST doctor in BEST price!</p>
-                <p><a class="btn btn-primary btn-lg" href="#" th:href="@{'/register_or_logged_in'}" role="button">Login</a></p>
-            </div>
-        </div>
-    </div>
-</div>
 
+    <h3>Login with:</h3>
+    <p th:each="url : ${urls}">
+        <a th:text="${url.key}" th:href="${url.value}">Client</a>
+    </p>
 
 </body>
 </html>
