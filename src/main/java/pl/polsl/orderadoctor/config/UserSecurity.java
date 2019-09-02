@@ -25,15 +25,13 @@ public class UserSecurity {
         Doctor d = doctorService.findByExternalId(authentication.getName());
         log.debug("In hasUserId");
 
-        if (u==null&&d==null) {
-            return false;
+
+        if (u != null) {
+            return u.getId().equals(userId);
+        } else if (d != null) {
+            return d.getId().equals(userId);
         }
 
-        if (u.getId().equals(userId)) {
-            return true;
-        } else if (d.getId().equals(userId)) {
-            return true;
-        }
         return false;
 
     }
@@ -42,11 +40,10 @@ public class UserSecurity {
         User u = userService.findByExternalId(authentication.getName());
         Doctor d = doctorService.findByExternalId(authentication.getName());
         log.debug("In hasNoUserId");
-        if (u!=null) {
-            return false;
-        } else if (d!=null) {
+        if (u != null || d != null) {
             return false;
         }
+
         return true;
 
     }

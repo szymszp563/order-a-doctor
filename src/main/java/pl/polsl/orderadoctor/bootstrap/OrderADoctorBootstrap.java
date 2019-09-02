@@ -74,7 +74,7 @@ public class OrderADoctorBootstrap implements ApplicationListener<ContextRefresh
         Grade g6 = Grade.builder().grade((byte) 5).comment("Extra!").build();
 
         Doctor d1 = Doctor.builder().externalId("1").firstName("Dr John W.").lastName("Thackery").city("Katowice")
-                .email("J.W.Thack@gmail.com").street("Raciborska 6/65").workingHoursFrom("8:00").workingHoursTo("16:00")
+                .email("J.W.Thack@gmail.com").street("Raciborska 6/65").workingFrom("8:00").workingTo("16:00")
                 .about("Best Medical Doctor of 20th Century").specialities(Arrays.asList(surgery, orthopaedist))
                 .visits(new LinkedList<>()).medicalProducts(new LinkedList<>()).grades(new HashSet<>()).averageGrade(0D)
                 .accountType(AccountType.GOOGLE).build();
@@ -84,7 +84,7 @@ public class OrderADoctorBootstrap implements ApplicationListener<ContextRefresh
         d1.addGrade(g2);
 
         Doctor d2 = Doctor.builder().externalId("2").firstName("Dr Kevin").lastName("Garvey").city("Katowice")
-                .email("DrGarvey@gmail.com").street("MPK 8").workingHoursFrom("8:00").workingHoursTo("16:00")
+                .email("DrGarvey@gmail.com").street("MPK 8").workingFrom("8:00").workingTo("16:00")
                 .about("Where is his mind").specialities(Arrays.asList(internist, oncologist))
                 .visits(new LinkedList<>()).medicalProducts(new LinkedList<>()).grades(new HashSet<>()).averageGrade(0D)
                 .accountType(AccountType.GOOGLE).build();
@@ -94,7 +94,7 @@ public class OrderADoctorBootstrap implements ApplicationListener<ContextRefresh
         d2.addGrade(g4);
 
         Doctor d3 = Doctor.builder().externalId("3").firstName("Dr Algernon").lastName("Edwards").city("Opole")
-                .email("Algernon@facebook.com").street("Koszalinska 32/64").workingHoursFrom("8:00").workingHoursTo("16:00")
+                .email("Algernon@facebook.com").street("Koszalinska 32/64").workingFrom("8:00").workingTo("16:00")
                 .about("Rich mind").specialities(Arrays.asList(ophthalmologist, dermatologist))
                 .visits(new LinkedList<>()).medicalProducts(new LinkedList<>()).grades(new HashSet<>()).averageGrade(0D)
                 .accountType(AccountType.FACEBOOK).build();

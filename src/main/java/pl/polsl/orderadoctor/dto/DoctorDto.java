@@ -35,11 +35,9 @@ public class DoctorDto {
     @NotBlank
     private String street;
 
-    @NotBlank
-    private String workingHoursFrom;
+    private String workingFrom;
 
-    @NotBlank
-    private String workingHoursTo;
+    private String workingTo;
 
     private Byte[] image;
 

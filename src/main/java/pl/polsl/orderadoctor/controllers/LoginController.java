@@ -100,7 +100,55 @@ public class LoginController {
     }
 
     @GetMapping("/register/doctor")
-    public String registerDoctor() {
+    public String registerDoctor(OAuth2AuthenticationToken curr, Model model) {
+
+        RestTemplate restTemplate = new RestTemplate();
+        String externalId = curr.getName();
+        String accountTypeName = curr.getAuthorizedClientRegistrationId();
+        AccountType accountType = null;
+
+        byte[] unwrappedImg = null;
+
+        switch (accountTypeName) {
+            case "facebook":
+                accountType = AccountType.FACEBOOK;
+                String url = "https://graph.facebook.com/" + externalId + "/picture?type=large";
+                unwrappedImg = restTemplate.getForObject(url, byte[].class);
+                break;
+            case "google":
+                String urlG = curr.getPrincipal().getAttributes().get("picture").toString();
+                unwrappedImg = restTemplate.getForObject(urlG, byte[].class);
+                accountType = AccountType.GOOGLE;
+                break;
+        }
+
+        Byte[] img = new Byte[unwrappedImg.length];
+
+        int i = 0;
+
+        for (byte b : unwrappedImg) {
+            img[i++] = b;
+        }
+
+        String name = curr.getPrincipal().getAttributes().get("name").toString();
+        String firstName = null;
+        String lastName = null;
+        if (name != null) {
+            String nameTab[] = name.split(" ");
+            firstName = name.split(" ")[0];
+            if (nameTab[1] != null) {
+                lastName = name.split(" ")[1];
+            }
+        }
+
+        DoctorDto doctorDto = new DoctorDto();
+        doctorDto.setAccountType(accountType);
+        doctorDto.setExternalId(externalId);
+        doctorDto.setFirstName(firstName);
+        doctorDto.setLastName(lastName);
+        doctorDto.setImage(img);
+        model.addAttribute("doctor", doctorDto);
+
         return "login/registerDoctor";
     }
 
@@ -171,12 +219,12 @@ public class LoginController {
     }
 
     @PostMapping("/register/doctor")
-    public String saveOrUpadateDoctor(@Valid @ModelAttribute("user") DoctorDto dto, BindingResult bindingResult) {
+    public String saveOrUpadateDoctor(@Valid @ModelAttribute("doctor") DoctorDto dto, BindingResult bindingResult) {
 
-//        if(bindingResult.hasErrors()){
-//            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
-//            return "login/registerUser";
-//        }
+        if(bindingResult.hasErrors()){
+            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
+            return "login/registerDoctor";
+        }
 
         DoctorDto saveDto = doctorService.saveDto(dto);
 

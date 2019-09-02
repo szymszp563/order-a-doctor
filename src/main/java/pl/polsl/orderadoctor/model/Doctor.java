@@ -50,9 +50,9 @@ public class Doctor {
 
     private String street;
 
-    private String workingHoursFrom;
+    private String workingFrom;
 
-    private String workingHoursTo;
+    private String workingTo;
 
     @Lob
     private Byte[] image;
