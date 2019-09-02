@@ -1,6 +1,10 @@
 package pl.polsl.orderadoctor.services;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import pl.polsl.orderadoctor.dto.DoctorDto;
+import pl.polsl.orderadoctor.mappers.DoctorMapper;
 import pl.polsl.orderadoctor.model.AccountType;
 import pl.polsl.orderadoctor.model.Doctor;
 import pl.polsl.orderadoctor.model.Speciality;
@@ -8,13 +12,16 @@ import pl.polsl.orderadoctor.repositories.DoctorRepository;
 
 import java.util.List;
 
+@Log4j2
 @Service
 public class DoctorServiceImpl implements DoctorService {
 
     private final DoctorRepository doctorRepository;
+    private final DoctorMapper doctorMapper;
 
-    public DoctorServiceImpl(DoctorRepository doctorRepository) {
+    public DoctorServiceImpl(DoctorRepository doctorRepository, DoctorMapper doctorMapper) {
         this.doctorRepository = doctorRepository;
+        this.doctorMapper = doctorMapper;
     }
 
     @Override
@@ -52,6 +59,19 @@ public class DoctorServiceImpl implements DoctorService {
     public Doctor findByExternalId(String externalId) {
         Doctor doctor = doctorRepository.findByExternalId(externalId);
         return doctor;
+    }
+
+    @Override
+    @Transactional
+    public DoctorDto saveDto(DoctorDto dto) {
+
+        Doctor detachedDoctor = doctorMapper.doctorDtoToDoctor(dto);
+
+        Doctor savedDoctor = doctorRepository.save(detachedDoctor);
+        log.debug("Saved user: " + savedDoctor.getId());
+
+        return doctorMapper.doctorToDoctorDto(savedDoctor);
+
     }
 
 }

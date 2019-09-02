@@ -1,5 +1,6 @@
 package pl.polsl.orderadoctor.services;
 
+import pl.polsl.orderadoctor.dto.UserDto;
 import pl.polsl.orderadoctor.model.AccountType;
 import pl.polsl.orderadoctor.model.User;
 
@@ -16,4 +17,5 @@ public interface UserService {
 
     User findByExternalId(String externalId);
 
+    UserDto saveDto(UserDto dto);
 }

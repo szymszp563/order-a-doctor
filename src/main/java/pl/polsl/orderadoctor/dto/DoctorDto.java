@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.polsl.orderadoctor.model.AccountType;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,18 +25,25 @@ public class DoctorDto {
 
     private String lastName;
 
+    @NotBlank
     private String city;
 
+    @NotBlank
+    @Email
     private String email;
 
+    @NotBlank
     private String street;
 
+    @NotBlank
     private String workingHoursFrom;
 
+    @NotBlank
     private String workingHoursTo;
 
     private Byte[] image;
 
+    @NotBlank
     private String about;
 
     private List<VisitDto> visits = new LinkedList<>();

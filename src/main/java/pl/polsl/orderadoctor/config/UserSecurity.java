@@ -25,9 +25,7 @@ public class UserSecurity {
         Doctor d = doctorService.findByExternalId(authentication.getName());
         log.debug("In hasUserId");
 
-        if (u==null) {
-            return false;
-        } else if (d==null) {
+        if (u==null&&d==null) {
             return false;
         }
 

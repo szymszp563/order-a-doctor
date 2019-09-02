@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .access("@userSecurity.hasUserId(authentication, #userId)")
                 .antMatchers("/doctor/{userId}/**")
                     .access("@userSecurity.hasUserId(authentication, #userId)")
-                .antMatchers("/register")
+                .antMatchers("/register/**")
                     .access("@userSecurity.hasNoUserId(authentication)");
 
     }

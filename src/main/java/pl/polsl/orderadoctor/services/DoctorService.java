@@ -1,5 +1,6 @@
 package pl.polsl.orderadoctor.services;
 
+import pl.polsl.orderadoctor.dto.DoctorDto;
 import pl.polsl.orderadoctor.model.AccountType;
 import pl.polsl.orderadoctor.model.Doctor;
 import pl.polsl.orderadoctor.model.Speciality;
@@ -20,4 +21,5 @@ public interface DoctorService {
 
     Doctor findByExternalId(String externalId);
 
+    DoctorDto saveDto(DoctorDto dto);
 }

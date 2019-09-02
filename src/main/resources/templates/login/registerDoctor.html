@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Order a Doctor Register</title>
+    <title>Order a Doctor Register Doctor</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -17,24 +17,7 @@
             crossorigin="anonymous"
             th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
-
 <body>
-    <h3>Register</h3>
-    <div class="row">
-        <div class="col-md-8">
-            <h1 class="panel-title">Register as:</h1>
-        </div>
-        <div class="col-md-2">
-            <a class="btn btn-default btn-block" href="#" th:href="@{'/register/user'}" role="button">Patient</a>
-        </div>
-        <div class="col-md-2">
-            <a class="btn btn-default btn-block" href="#" th:href="@{'/register/doctor'}" role="button">Doctor</a>
-        </div>
-        <div class="col-md-6">
-            <img src=""
-                 th:src="@{'/userr/' + '1' + '/userimage'}"
-                 width="200" height="200">
-        </div>
-    </div>
+    <h3>REGISTER DOCTOR</h3>
 </body>
 </html>
