@@ -1,5 +1,6 @@
 package pl.polsl.orderadoctor.services;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,15 +15,11 @@ import java.util.List;
 
 @Log4j2
 @Service
+@RequiredArgsConstructor
 public class DoctorServiceImpl implements DoctorService {
 
     private final DoctorRepository doctorRepository;
     private final DoctorMapper doctorMapper;
-
-    public DoctorServiceImpl(DoctorRepository doctorRepository, DoctorMapper doctorMapper) {
-        this.doctorRepository = doctorRepository;
-        this.doctorMapper = doctorMapper;
-    }
 
     @Override
     public void save(Doctor doctor) {

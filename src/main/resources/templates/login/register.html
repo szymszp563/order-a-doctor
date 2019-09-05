@@ -16,25 +16,53 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"
             th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+
+    <style>
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 50px;
+            margin: 3% 2%;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .button2 {
+            background-color: #008CBA;
+            color: black;
+            border: 2px solid #008CBA;
+            width: 24%;
+        }
+
+        .button2:hover {
+            background-color: white;
+            color: #008CBA;
+        }
+
+
+    </style>
 </head>
 
 <body>
-    <h3>Register</h3>
     <div class="row">
-        <div class="col-md-8">
-            <h1 class="panel-title">Register as:</h1>
-        </div>
-        <div class="col-md-2">
-            <a class="btn btn-default btn-block" href="#" th:href="@{'/register/user'}" role="button">Patient</a>
-        </div>
-        <div class="col-md-2">
-            <a class="btn btn-default btn-block" href="#" th:href="@{'/register/doctor'}" role="button">Doctor</a>
-        </div>
-        <div class="col-md-6">
-            <img src=""
-                 th:src="@{'/userr/' + '1' + '/userimage'}"
-                 width="200" height="200">
-        </div>
+        <h3 style="margin-left: 45%">Register as:</h3>
+    </div>
+    <div class="row" style="margin-top: 20px">
+        <a class="button button2" style="margin-left: 25%" href="#" th:href="@{'/register/user'}" role="button">Patient</a>
+
+        <a class="button button2" th:href="@{'/register/doctor'}" role="button">Doctor</a>
     </div>
 </body>
 </html>
+
+<!--        <div class="col-md-6">-->
+<!--            <img src=""-->
+<!--                 th:src="@{'/userr/' + '1' + '/userimage'}"-->
+<!--                 width="200" height="200">-->
+<!--        </div>-->

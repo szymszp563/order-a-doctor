@@ -21,7 +21,7 @@ public class ImageController {
         this.userService = userService;
     }
 
-    @GetMapping("userr/{id}/userimage")
+    @GetMapping("user/{id}/image")
     public void renderImageFromDB(@PathVariable String id, HttpServletResponse response) throws IOException {
         User user = userService.findById(Long.valueOf(id));
 
