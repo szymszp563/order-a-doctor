@@ -16,33 +16,134 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"
             th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .checked {
+            color: #ff5772;
+        }
+    </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Order a Doctor</a>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#" th:href="@{'/doctor/' + ${doctor.id} + '/logged'}">Order a Doctor</a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <!--                    <li class="active"><a href="#">Link </a></li>-->
+                <!--                    <li><a href="#" th:href="@{'/find_doctor'}">Find Doctor</a></li>-->
+                <li class="active"><a href="#" th:href="@{'/doctor/' + ${doctor.id} + '/show'}">View Profile</a></li>
+
+            </ul>
+
+            <p class="navbar-text navbar-right">Signed in as
+                <a href="#" th:href="@{'/doctor/' + ${doctor.id} + '/show'}"
+                   class="navbar-link" th:text="${doctor.firstName}+' '+${doctor.lastName}">Doc Name</a>
+            </p>
+
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="pannel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h1 class="panel-title" th:text="${doctor.firstName} + ' ' + ${doctor.lastName}">
+                                    FirstName LastName</h1>
+                            </div>
+
+                            <div class="col-md-2">
+                                <a class="btn btn-default" href="#"
+                                   th:href="@{'/doctor/' + ${doctor.id} + '/doctorform'}" role="button">Edit Profile</a>
+                            </div>
+                            <div class="col-md-1">
+                                <a class="btn btn-default" href="#"
+                                   th:href="@{'/doctor/' + ${doctor.id} + '/image'}" role="button">Change Image</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <h5>First Name:</h5>
+                                <h5>Last Name:</h5>
+                                <h5>AvgGrade:</h5>
+                                <h5>Rating:</h5>
+                                <h5>Email:</h5>
+                                <h5>City:</h5>
+                            </div>
+                            <div class="col-md-7">
+                                <p th:text="${(doctor.firstName)}">John</p>
+                                <p th:text="${(doctor.lastName)}">Doe</p>
+                                <span class="fa fa-heartbeat checked" th:remove="all"></span>
+                                <span class="fa fa-heartbeat checked" th:remove="all"></span>
+                                <span class="fa fa-heartbeat checked" th:remove="all"></span>
+                                <span class="fa fa-heartbeat" th:remove="all"></span>
+                                <span class="fa fa-heartbeat" th:remove="all"></span>
+
+                                <p th:text="${(doctor.averageGrade)}">grade</p>
+
+                                <span th:if="__${doctor.getIntGrade()}__ > 0" class="fa fa-heartbeat checked"
+                                      th:each="heart : ${#numbers.sequence( 1, __${doctor.getIntGrade()}__)}"></span>
+                                <span th:if="__${doctor.getIntGrade()}__ < 5" class="fa fa-heartbeat"
+                                      th:each="heart : ${#numbers.sequence( 1, __${5 - doctor.getIntGrade()}__)}"></span>
+
+
+                                <p th:text="${(doctor.email)}">JohnDoe@mail.com</p>
+                                <p th:text="${(doctor.city)}">New York</p>
+                            </div>
+                            <div class="col-md-2">
+                                <img src="../../../images/user.jpg"
+                                     th:src="@{'/doctor/' + ${doctor.id} + '/doctorimage'}"
+                                     width="200" height="200">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">About</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p th:text="${doctor.about}">Lorem ipsum dolor sit amet, consectetuer adipiscing
+                                    elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
+                                    penatibus
+                                    et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+                                    ultricies
+                                    nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec
+                                    pede
+                                    justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus
+                                    ut,
+                                    imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+                                    Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate
+                                    eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,
+                                    enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus
+                                    viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam
+                                    ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.
+                                    Etiam
+                                    rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper
+                                    libero,
+                                    sit amet adipiscing sem neque sed ipsum.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-<!--                    <li class="active"><a href="#">Link </a></li>-->
-<!--                    <li><a href="#" th:href="@{'/find_doctor'}">Find Doctor</a></li>-->
-                    <li class="active"><a href="#" th:href="@{'/doctor/' + ${doctor.id} + '/show'}">View Profile</a></li>
-
-                </ul>
-
-                <p class="navbar-text navbar-right">Signed in as
-                    <a href="#" th:href="@{'/doctor/' + ${doctor.id} + '/show'}"
-                       class="navbar-link" th:text="${doctor.firstName}+' '+${doctor.lastName}">Doc Name</a>
-                </p>
-
-
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-    </nav>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

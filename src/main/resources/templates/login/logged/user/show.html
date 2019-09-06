@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order a Doctor Logged-In</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"
+            th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#" th:href="@{'/user/' + ${user.id} + '/logged'}">Order a Doctor</a>
+            </div>
+
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+<!--                    <li class="active"><a href="#">Link </a></li>-->
+                    <li><a href="#" th:href="@{'/user/' + ${user.id} + '/find_doctor'}">Find Doctor</a></li>
+                    <li class="active"><a href="#" th:href="@{'/user/' + ${user.id} + '/show'}">View Profile</a></li>
+
+                </ul>
+
+                <p class="navbar-text navbar-right">Signed in as
+                    <a href="#" th:href="@{'/user/' + ${user.id} + '/show'}"
+                       class="navbar-link" th:text="${user.firstName}+' '+${user.lastName}">User Name</a>
+                </p>
+
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="container-fluid" style="margin-top: 20px">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="pannel-group">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <h1 class="panel-title" th:text="${user.firstName} + ' ' + ${user.lastName}">FirstName  LastName</h1>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <a class="btn btn-default" href="#"
+                                       th:href="@{'/user/' + ${user.id} + '/userform'}" role="button">Edit Profile</a>
+                                </div>
+                                <div class="col-md-1">
+                                    <a class="btn btn-default" href="#"
+                                       th:href="@{'/user/' + ${user.id} + '/image'}" role="button">Change Image</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <h5>First Name:</h5>
+                                    <h5>Last Name:</h5>
+                                    <h5>Email:</h5>
+                                    <h5>City:</h5>
+                                </div>
+                                <div class="col-md-7">
+                                    <p th:text="${(user.firstName)}">John</p>
+                                    <p th:text="${(user.lastName)}">Doe</p>
+                                    <p th:text="${(user.email)}">JohnDoe@mail.com</p>
+                                    <p th:text="${(user.city)}">New York</p>
+                                </div>
+                                <div class="col-md-2">
+                                    <img src="../../../images/user.jpg"
+                                         th:src="@{'/user/' + ${user.id} + '/userimage'}"
+                                         width="200" height="200">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

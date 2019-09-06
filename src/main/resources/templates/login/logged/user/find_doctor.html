@@ -23,7 +23,7 @@
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">Order a Doctor</a>
+                <a class="navbar-brand" href="#" th:href="@{'/user/' + ${user.id} + '/logged'}">Order a Doctor</a>
             </div>
 
             <div class="collapse navbar-collapse">
@@ -32,7 +32,7 @@
                     <li class="active"><a href="#" th:href="@{'/user/' + ${user.id} + '/find_doctor'}">Find Doctor</a></li>
                     <li><a href="#" th:href="@{'/user/' + ${user.id} + '/show'}">View Profile</a></li>
 
-                </ul>show.html
+                </ul>
 
                 <p class="navbar-text navbar-right">Signed in as
                     <a href="#" th:href="@{'/user/' + ${user.id} + '/show'}"

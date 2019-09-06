@@ -16,8 +16,17 @@ public class DoctorController {
     private final DoctorService doctorService;
     private final UserService userService;
 
-    @GetMapping("doctor/{id}/show")
+    @GetMapping("doctor/{id}/logged")
     public String doctorLoggedIn(@PathVariable Long id, Model model) {
+        Doctor doctor = doctorService.findById(id);
+
+        model.addAttribute("doctor", doctor);
+
+        return "login/logged/logged_in_doctor";
+    }
+
+    @GetMapping("doctor/{id}/show")
+    public String doctorShow(@PathVariable Long id, Model model) {
         Doctor doctor = doctorService.findById(id);
 
         model.addAttribute("doctor", doctor);

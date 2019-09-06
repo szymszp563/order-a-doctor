@@ -105,4 +105,14 @@ public class Doctor {
         return average;
     }
 
+    public int getIntGrade(){
+        Double g = (averageGrade)*2 + 1;
+        return (g.intValue())/2;
+    }
+
+    public int getTo5IntGrade(){
+        Double g = Double.valueOf((5-getIntGrade())*2);
+        return (g.intValue())/2;
+    }
+
 }

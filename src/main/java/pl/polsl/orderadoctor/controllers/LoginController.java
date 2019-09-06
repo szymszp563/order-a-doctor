@@ -210,7 +210,7 @@ public class LoginController {
 
         UserDto saveDto = userService.saveDto(dto);
 
-        return "redirect:/user/" + saveDto.getId() + "/show";
+        return "redirect:/user/" + saveDto.getId() + "/logged";
 
     }
 
@@ -221,10 +221,10 @@ public class LoginController {
             bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
             return "login/registerDoctor";
         }
-
+        dto.setAverageGrade(0D);
         DoctorDto saveDto = doctorService.saveDto(dto);
 
-        return "redirect:/doctor/" + saveDto.getId() + "/show";
+        return "redirect:/doctor/" + saveDto.getId() + "/logged";
 
     }
 

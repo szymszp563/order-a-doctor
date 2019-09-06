@@ -16,13 +16,49 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"
             th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+
+    <style>
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 16px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 50px;
+            margin: 1% 0%;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .button2 {
+            background-color: #008CBA;
+            color: black;
+            border: 2px solid #008CBA;
+            width: 24%;
+        }
+
+        .button2:hover {
+            background-color: white;
+            color: #008CBA;
+        }
+    </style>
 </head>
 <body>
 
-    <h3>Login with:</h3>
-    <p th:each="url : ${urls}">
-        <a th:text="${url.key}" th:href="${url.value}">Client</a>
-    </p>
+<!--    <h3>Login with:</h3>-->
+<!--    <p th:each="url : ${urls}">-->
+<!--        <a th:text="${url.key}" th:href="${url.value}">Client</a>-->
+<!--    </p>-->
+
+    <div class="row">
+        <h3 style="margin-left: 45%">Login with:</h3>
+    </div>
+    <div th:each="url : ${urls}">
+        <a class="button button2" style="margin-left: 36.5%" href="#" th:text="${url.key}" th:href="${url.value}" role="button">Patient</a>
+    </div>
 
 </body>
 </html>

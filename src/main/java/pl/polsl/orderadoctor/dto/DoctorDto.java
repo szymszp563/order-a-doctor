@@ -7,8 +7,10 @@ import pl.polsl.orderadoctor.model.AccountType;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -41,6 +43,8 @@ public class DoctorDto {
 
     private Byte[] image;
 
+    private Double averageGrade;
+
     @NotBlank
     private String about;
 
@@ -49,4 +53,6 @@ public class DoctorDto {
     private List<SpecialityDto> specialities = new LinkedList<>();
 
     private List<MedicalProductDto> medicalProducts = new LinkedList<>();
+
+    private Set<GradeDto> grades = new HashSet<>();
 }

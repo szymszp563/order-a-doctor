@@ -15,8 +15,19 @@ public class UserController {
     private final UserService userService;
     private final DoctorService doctorService;
 
-    @GetMapping("user/{id}/show")
+
+    @GetMapping("user/{id}/logged")
     public String userLoggedIn(@PathVariable Long id, Model model) {
+
+        User user = userService.findById(id);
+
+        model.addAttribute("user", user);
+
+        return "login/logged/logged_in_user";
+    }
+
+    @GetMapping("user/{id}/show")
+    public String userShow(@PathVariable Long id, Model model) {
 
         User user = userService.findById(id);
 
