@@ -73,8 +73,7 @@ public class Doctor {
     @OneToMany(cascade = CascadeType.ALL)
     private List<MedicalProduct> medicalProducts = new LinkedList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "doctor_id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "doctor")
     private Set<Grade> grades = new HashSet<>();
 
     public void addVisit(Visit visit) {
@@ -89,6 +88,7 @@ public class Doctor {
 
     public void addGrade(Grade grade){
         this.grades.add(grade);
+        grade.setDoctor(this);
         calculateAverageGrade();
     }
 

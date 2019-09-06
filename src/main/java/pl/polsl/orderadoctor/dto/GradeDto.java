@@ -14,4 +14,5 @@ public class GradeDto {
     private String comment;
 
     private Byte grade;
+
 }

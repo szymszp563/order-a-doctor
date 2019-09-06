@@ -57,7 +57,7 @@
 
                                 <div class="col-md-2">
                                     <a class="btn btn-default" href="#"
-                                       th:href="@{'/user/' + ${user.id} + '/userform'}" role="button">Edit Profile</a>
+                                       th:href="@{'/user/' + ${user.id} + '/update'}" role="button">Edit Profile</a>
                                 </div>
                                 <div class="col-md-1">
                                     <a class="btn btn-default" href="#"
@@ -83,6 +83,32 @@
                                     <img src="../../../images/user.jpg"
                                          th:src="@{'/user/' + ${user.id} + '/userimage'}"
                                          width="200" height="200">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <h1 class="panel-title">Comments</h1>
+                                </div>
+                                <div class="col-md-2">
+                                    <a class="btn btn-default btn-block" href="#"
+                                       th:href="@{'/user/' + ${user.id} + '/comments'}" role="button">View</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul>
+                                        <li th:remove="all">5 - fname lname - Beast Dcotor</li>
+                                        <li th:remove="all">2 - fname lname - Not too good</li>
+                                        <li th:each="grade : ${user.grades}"
+                                            th:text="${(user.grade + ' - ' + grade.comment)}">grade grade
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>

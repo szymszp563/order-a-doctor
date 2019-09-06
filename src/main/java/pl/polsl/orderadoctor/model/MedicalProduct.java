@@ -35,4 +35,13 @@ public class MedicalProduct {
     @ManyToOne
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
+
+    public String getFormatedDuration() {
+        long seconds = this.duration.getSeconds();
+        long absSeconds = Math.abs(seconds);
+        return String.format(
+                "%dh %02d min",
+                absSeconds / 3600,
+                (absSeconds % 3600) / 60);
+    }
 }

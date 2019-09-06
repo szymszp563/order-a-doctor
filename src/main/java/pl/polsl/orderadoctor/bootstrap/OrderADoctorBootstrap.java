@@ -54,9 +54,9 @@ public class OrderADoctorBootstrap implements ApplicationListener<ContextRefresh
         specialityRepository.saveAll(Arrays.asList(surgery, internist, oncologist, orthopaedist, ophthalmologist, dermatologist));
 
         MedicalProduct armRemoval = MedicalProduct.builder()
-                .name("Arm Removal").duration(Duration.ofHours(1L)).price(600.00).build();
+                .name("Arm Removal").duration(Duration.ofHours(1L).plusMinutes(20L)).price(600.00).build();
         MedicalProduct legRemoval = MedicalProduct.builder()
-                .name("Leg Removal").duration(Duration.ofHours(2L)).price(1600.00).build();
+                .name("Leg Removal").duration(Duration.ofHours(2L).plusMinutes(10L)).price(1600.00).build();
         MedicalProduct childbirth = MedicalProduct.builder()
                 .name("Childbirth").duration(Duration.ofHours(4L)).price(4900.00).build();
         MedicalProduct oncConsultation = MedicalProduct.builder()
@@ -106,19 +106,34 @@ public class OrderADoctorBootstrap implements ApplicationListener<ContextRefresh
         doctorRepository.saveAll(Arrays.asList(d1, d2, d3));
 
         User u1 = User.builder().externalId("4").firstName("Mike").lastName("Gige").city("Opole")
-                .email("Mike@facebook.com").visits(new LinkedList<>()).accountType(AccountType.FACEBOOK).build();
+                .email("Mike@facebook.com").visits(new LinkedList<>()).accountType(AccountType.FACEBOOK)
+                .grades(new HashSet<>()).build();
         User u2 = User.builder().externalId("5").firstName("Mark").lastName("Maven").city("Opole")
-                .email("Maven@gmail.com").visits(new LinkedList<>()).accountType(AccountType.GOOGLE).build();
+                .email("Maven@gmail.com").visits(new LinkedList<>()).accountType(AccountType.GOOGLE)
+                .grades(new HashSet<>()).build();
         User u3 = User.builder().externalId("6").firstName("Steve").lastName("Buscemi").city("Katowice")
-                .email("SteveB@gmail.com").visits(new LinkedList<>()).accountType(AccountType.GOOGLE).build();
+                .email("SteveB@gmail.com").visits(new LinkedList<>()).accountType(AccountType.GOOGLE)
+                .grades(new HashSet<>()).build();
         User u4 = User.builder().externalId("7").firstName("Clive").lastName("Owen").city("Katowice")
-                .email("Owen@facebook.com").visits(new LinkedList<>()).accountType(AccountType.FACEBOOK).build();
+                .email("Owen@facebook.com").visits(new LinkedList<>()).accountType(AccountType.FACEBOOK)
+                .grades(new HashSet<>()).build();
         User u5 = User.builder().externalId("8").firstName("Simon").lastName("Simons").city("Katowice")
-                .email("Simons@gmail.com").visits(new LinkedList<>()).accountType(AccountType.GOOGLE).build();
+                .email("Simons@gmail.com").visits(new LinkedList<>()).accountType(AccountType.GOOGLE)
+                .grades(new HashSet<>()).build();
         User u6 = User.builder().externalId("9").firstName("Kate").lastName("Moss").city("Katowice")
-                .email("K.Moss@gmail.com").visits(new LinkedList<>()).accountType(AccountType.GOOGLE).build();
+                .email("K.Moss@gmail.com").visits(new LinkedList<>()).accountType(AccountType.GOOGLE)
+                .grades(new HashSet<>()).build();
+
+        u1.addGrade(g1);
+        u2.addGrade(g2);
+        u3.addGrade(g3);
+        u4.addGrade(g4);
+        u5.addGrade(g5);
+        u6.addGrade(g6);
 
         userRepository.saveAll(Arrays.asList(u1, u2, u3, u4, u5, u6));
+
+        gradeRepository.saveAll(Arrays.asList(g1, g2, g3, g4, g5, g6));
 
         Visit v1 = Visit.builder()
                 .dateFrom(LocalDateTime.now().plusDays(10)).description("Visit One").user(u1).doctor(d1)

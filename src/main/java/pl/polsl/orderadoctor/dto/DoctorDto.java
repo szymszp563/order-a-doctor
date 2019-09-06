@@ -23,8 +23,10 @@ public class DoctorDto {
 
     private String externalId;
 
+    @NotBlank
     private String firstName;
 
+    @NotBlank
     private String lastName;
 
     @NotBlank

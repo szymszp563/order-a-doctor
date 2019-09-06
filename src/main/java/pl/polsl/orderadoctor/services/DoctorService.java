@@ -1,5 +1,6 @@
 package pl.polsl.orderadoctor.services;
 
+import org.springframework.web.multipart.MultipartFile;
 import pl.polsl.orderadoctor.dto.DoctorDto;
 import pl.polsl.orderadoctor.model.AccountType;
 import pl.polsl.orderadoctor.model.Doctor;
@@ -22,4 +23,8 @@ public interface DoctorService {
     Doctor findByExternalId(String externalId);
 
     DoctorDto saveDto(DoctorDto dto);
+
+    DoctorDto findDtoById(Long id);
+
+    void saveImageFile(Long id, MultipartFile file);
 }

@@ -201,7 +201,7 @@ public class LoginController {
     }
 
     @PostMapping("/register/user")
-    public String saveOrUpadateUser(@Valid @ModelAttribute("user") UserDto dto, BindingResult bindingResult) {
+    public String saveOrUpdateUser(@Valid @ModelAttribute("user") UserDto dto, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
@@ -215,7 +215,7 @@ public class LoginController {
     }
 
     @PostMapping("/register/doctor")
-    public String saveOrUpadateDoctor(@Valid @ModelAttribute("doctor") DoctorDto dto, BindingResult bindingResult) {
+    public String saveOrUpdateDoctor(@Valid @ModelAttribute("doctor") DoctorDto dto, BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()){
             bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));

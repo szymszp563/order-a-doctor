@@ -1,20 +1,34 @@
 package pl.polsl.orderadoctor.controllers;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import pl.polsl.orderadoctor.dto.DoctorDto;
 import pl.polsl.orderadoctor.model.Doctor;
 import pl.polsl.orderadoctor.services.DoctorService;
+import pl.polsl.orderadoctor.services.GradeService;
+import pl.polsl.orderadoctor.services.MedicalProductService;
+import pl.polsl.orderadoctor.services.SpecialityService;
 import pl.polsl.orderadoctor.services.UserService;
+
+import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
+@Log4j2
 public class DoctorController {
 
     private final DoctorService doctorService;
     private final UserService userService;
+    private final MedicalProductService medicalProductService;
+    private final SpecialityService specialityService;
+    private final GradeService gradeService;
 
     @GetMapping("doctor/{id}/logged")
     public String doctorLoggedIn(@PathVariable Long id, Model model) {
@@ -29,8 +43,44 @@ public class DoctorController {
     public String doctorShow(@PathVariable Long id, Model model) {
         Doctor doctor = doctorService.findById(id);
 
+        doctor.addMedicalProduct(medicalProductService.findById(1L));
+        doctor.addMedicalProduct(medicalProductService.findById(2L));
+        doctor.getSpecialities().add(specialityService.findById(1L));
+        doctor.getSpecialities().add(specialityService.findById(3L));
+
+        doctor.addGrade(gradeService.findById(1L));
+        doctor.addGrade(gradeService.findById(2L));
+        doctor.addGrade(gradeService.findById(3L));
+        doctor.addGrade(gradeService.findById(4L));
+        doctor.addGrade(gradeService.findById(5L));
+        doctor.addGrade(gradeService.findById(6L));
+
         model.addAttribute("doctor", doctor);
 
         return "login/logged/doctor/show";
+    }
+
+    @GetMapping("doctor/{id}/update")
+    public String updateDoctor(@PathVariable Long id, Model model) {
+
+        DoctorDto doctor = doctorService.findDtoById(id);
+
+        model.addAttribute("doctor", doctor);
+
+        return "login/logged/doctor/doctorform";
+    }
+
+    @PostMapping("doctor/{id}/update")
+    public String update(@Valid @ModelAttribute("doctor") DoctorDto dto, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
+            return "login/logged/doctor/doctorform";
+        }
+
+        DoctorDto saveDto = doctorService.saveDto(dto);
+
+        return "redirect:/doctor/" + saveDto.getId() + "/show";
+
     }
 }

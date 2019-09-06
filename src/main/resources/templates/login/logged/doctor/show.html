@@ -64,7 +64,7 @@
 
                             <div class="col-md-2">
                                 <a class="btn btn-default" href="#"
-                                   th:href="@{'/doctor/' + ${doctor.id} + '/doctorform'}" role="button">Edit Profile</a>
+                                   th:href="@{'/doctor/' + ${doctor.id} + '/update'}" role="button">Edit Profile</a>
                             </div>
                             <div class="col-md-1">
                                 <a class="btn btn-default" href="#"
@@ -77,10 +77,11 @@
                             <div class="col-md-2">
                                 <h5>First Name:</h5>
                                 <h5>Last Name:</h5>
-                                <h5>AvgGrade:</h5>
+                                <h5>Average Grade:</h5>
                                 <h5>Rating:</h5>
                                 <h5>Email:</h5>
                                 <h5>City:</h5>
+                                <h5>Working Hours:</h5>
                             </div>
                             <div class="col-md-7">
                                 <p th:text="${(doctor.firstName)}">John</p>
@@ -90,17 +91,15 @@
                                 <span class="fa fa-heartbeat checked" th:remove="all"></span>
                                 <span class="fa fa-heartbeat" th:remove="all"></span>
                                 <span class="fa fa-heartbeat" th:remove="all"></span>
-
-                                <p th:text="${(doctor.averageGrade)}">grade</p>
-
+                                <p th:text="${(doctor.averageGrade.toString().substring(0, 4))}">grade</p>
                                 <span th:if="__${doctor.getIntGrade()}__ > 0" class="fa fa-heartbeat checked"
                                       th:each="heart : ${#numbers.sequence( 1, __${doctor.getIntGrade()}__)}"></span>
                                 <span th:if="__${doctor.getIntGrade()}__ < 5" class="fa fa-heartbeat"
                                       th:each="heart : ${#numbers.sequence( 1, __${5 - doctor.getIntGrade()}__)}"></span>
 
-
                                 <p th:text="${(doctor.email)}">JohnDoe@mail.com</p>
                                 <p th:text="${(doctor.city)}">New York</p>
+                                <p th:text="${(doctor.workingFrom) + ' - ' + (doctor.workingTo)}">08:00 - 16:00</p>
                             </div>
                             <div class="col-md-2">
                                 <img src="../../../images/user.jpg"
@@ -110,6 +109,61 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-10 ">
+                                <h1 class="panel-title">Specialities</h1>
+                            </div>
+                            <div class="col-md-2">
+                                <a class="btn btn-default btn-block" href="#"
+                                   th:href="@{'/doctor/' + ${doctor.id} + '/specialities'}" role="button">View</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul>
+                                    <li th:remove="all">Surgeon</li>
+                                    <li th:remove="all">Internist</li>
+                                    <li th:each="speciality : ${doctor.specialities}"
+                                        th:text="${(speciality.description)}">Gynecologist
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-10 ">
+                                <h1 class="panel-title">Medical Products</h1>
+                            </div>
+                            <div class="col-md-2">
+                                <a class="btn btn-default btn-block" href="#"
+                                   th:href="@{'/doctor/' + ${doctor.id} + '/medicalProducts'}" role="button">View</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul>
+                                    <li th:remove="all">Head removal - 5h - 300zł</li>
+                                    <li th:remove="all">Interview - 1h - 100zł</li>
+                                    <li th:each="medprod : ${doctor.medicalProducts}"
+                                        th:text="${(medprod.name + ' - ' + medprod.getFormatedDuration() + ' - ' + medprod.price + 'zł')}">Injection
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h1 class="panel-title">About</h1>
@@ -136,6 +190,28 @@
                                     rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper
                                     libero,
                                     sit amet adipiscing sem neque sed ipsum.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1 class="panel-title">Grades</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <ul>
+                                    <li th:remove="all">5 - fname lname - Beast Dcotor</li>
+                                    <li th:remove="all">2 - fname lname - Not too good</li>
+                                    <li th:each="grade : ${doctor.grades}"
+                                        th:text="${(grade.grade + ' - ' + grade.user.firstName + ' ' + grade.user.lastName + ' - ' + grade.comment)}">grade grade
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>

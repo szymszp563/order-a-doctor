@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import pl.polsl.orderadoctor.dto.DoctorDto;
 import pl.polsl.orderadoctor.mappers.DoctorMapper;
 import pl.polsl.orderadoctor.model.AccountType;
@@ -11,6 +12,7 @@ import pl.polsl.orderadoctor.model.Doctor;
 import pl.polsl.orderadoctor.model.Speciality;
 import pl.polsl.orderadoctor.repositories.DoctorRepository;
 
+import java.io.IOException;
 import java.util.List;
 
 @Log4j2
@@ -69,6 +71,35 @@ public class DoctorServiceImpl implements DoctorService {
 
         return doctorMapper.doctorToDoctorDto(savedDoctor);
 
+    }
+
+    @Override
+    public DoctorDto findDtoById(Long id) {
+
+        return doctorMapper.doctorToDoctorDto(findById(id));
+    }
+
+    @Override
+    public void saveImageFile(Long id, MultipartFile file) {
+        try {
+            Doctor doctor = doctorRepository.findById(id).get();
+
+            Byte[] byteObjects = new Byte[file.getBytes().length];
+
+            int i = 0;
+
+            for (byte b : file.getBytes()){
+                byteObjects[i++] = b;
+            }
+
+            doctor.setImage(byteObjects);
+
+            doctorRepository.save(doctor);
+        } catch (IOException e) {
+            log.error("Error occurred during uploading image", e);
+
+            e.printStackTrace();
+        }
     }
 
 }

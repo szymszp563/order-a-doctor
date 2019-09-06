@@ -15,8 +15,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 @Builder
 @AllArgsConstructor
@@ -47,6 +49,14 @@ public class User {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<Visit> visits = new LinkedList<>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<Grade> grades = new HashSet<>();
+
+    public void addGrade(Grade grade){
+        this.grades.add(grade);
+        grade.setUser(this);
+    }
 
     public void addVisit(Visit visit){
         this.visits.add(visit);
