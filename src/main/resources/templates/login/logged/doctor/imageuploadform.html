@@ -33,8 +33,9 @@
             </ul>
 
             <p class="navbar-text navbar-right">Signed in as
-                <a href="#" th:href="@{'/doctor/' + ${doctor.id} + '/show'}"
+                <a style="font-weight:bold" href="#" th:href="@{'/doctor/' + ${doctor.id} + '/show'}"
                    class="navbar-link" th:text="${doctor.firstName}+' '+${doctor.lastName}">Doc Name</a>
+                <a href="#" th:href="@{'/logout'}" class="navbar-link">Logout</a>
             </p>
 
         </div><!-- /.navbar-collapse -->

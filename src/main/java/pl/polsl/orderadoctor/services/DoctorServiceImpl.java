@@ -11,6 +11,7 @@ import pl.polsl.orderadoctor.model.AccountType;
 import pl.polsl.orderadoctor.model.Doctor;
 import pl.polsl.orderadoctor.model.Speciality;
 import pl.polsl.orderadoctor.repositories.DoctorRepository;
+import pl.polsl.orderadoctor.repositories.SpecialityRepository;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.List;
 public class DoctorServiceImpl implements DoctorService {
 
     private final DoctorRepository doctorRepository;
+    private final SpecialityRepository specialityRepository;
     private final DoctorMapper doctorMapper;
 
     @Override
@@ -85,7 +87,6 @@ public class DoctorServiceImpl implements DoctorService {
             Doctor doctor = doctorRepository.findById(id).get();
 
             Byte[] byteObjects = new Byte[file.getBytes().length];
-
             int i = 0;
 
             for (byte b : file.getBytes()){
@@ -100,6 +101,12 @@ public class DoctorServiceImpl implements DoctorService {
 
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void deleteSpecialityById(Long doctorId, Long id) {
+        Doctor doctor = doctorRepository.findById(id).get();
+        doctor.getSpecialities().remove(specialityRepository.findById(id).get());
     }
 
 }

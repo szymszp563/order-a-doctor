@@ -27,4 +27,6 @@ public interface DoctorService {
     DoctorDto findDtoById(Long id);
 
     void saveImageFile(Long id, MultipartFile file);
+
+    void deleteSpecialityById(Long doctorId, Long id);
 }

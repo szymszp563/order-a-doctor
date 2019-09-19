@@ -19,7 +19,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/h2_console/**").permitAll()
                 .and()
-                .oauth2Login().loginPage("/oauth_login");
+                .oauth2Login().loginPage("/oauth_login")
+                .and()
+                .logout()
+                .logoutSuccessUrl("http://localhost:8080/");
 
         http.csrf().disable();
         http.headers().frameOptions().disable();
