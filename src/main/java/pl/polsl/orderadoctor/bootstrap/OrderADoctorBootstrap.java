@@ -75,7 +75,7 @@ public class OrderADoctorBootstrap implements ApplicationListener<ContextRefresh
 
         Doctor d1 = Doctor.builder().externalId("1").firstName("Dr John W.").lastName("Thackery").city("Katowice")
                 .email("J.W.Thack@gmail.com").street("Raciborska 6/65").workingFrom("8:00").workingTo("16:00")
-                .about("Best Medical Doctor of 20th Century").specialities(Arrays.asList(surgery, orthopaedist))
+                .about("Best Medical Doctor of 20th Century").specialities(Arrays.asList(surgery, internist, orthopaedist))
                 .visits(new LinkedList<>()).medicalProducts(new LinkedList<>()).grades(new HashSet<>()).averageGrade(0D)
                 .accountType(AccountType.GOOGLE).build();
         d1.addMedicalProduct(armRemoval);
@@ -95,7 +95,7 @@ public class OrderADoctorBootstrap implements ApplicationListener<ContextRefresh
 
         Doctor d3 = Doctor.builder().externalId("3").firstName("Dr Algernon").lastName("Edwards").city("Opole")
                 .email("Algernon@facebook.com").street("Koszalinska 32/64").workingFrom("8:00").workingTo("16:00")
-                .about("Rich mind").specialities(Arrays.asList(ophthalmologist, dermatologist))
+                .about("Rich mind").specialities(Arrays.asList(ophthalmologist, dermatologist, internist))
                 .visits(new LinkedList<>()).medicalProducts(new LinkedList<>()).grades(new HashSet<>()).averageGrade(0D)
                 .accountType(AccountType.FACEBOOK).build();
         d3.addMedicalProduct(consultation);

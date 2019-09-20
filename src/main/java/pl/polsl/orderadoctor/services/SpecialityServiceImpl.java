@@ -6,10 +6,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pl.polsl.orderadoctor.dto.SpecialityDto;
 import pl.polsl.orderadoctor.mappers.SpecialityMapper;
+import pl.polsl.orderadoctor.model.Doctor;
 import pl.polsl.orderadoctor.model.Speciality;
+import pl.polsl.orderadoctor.repositories.DoctorRepository;
 import pl.polsl.orderadoctor.repositories.SpecialityRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Log4j2
@@ -18,6 +21,7 @@ import java.util.stream.Collectors;
 public class SpecialityServiceImpl implements SpecialityService {
 
     private final SpecialityRepository specialityRepository;
+    private final DoctorRepository doctorRepository;
     private final SpecialityMapper specialityMapper;
 
     @Override
@@ -42,6 +46,38 @@ public class SpecialityServiceImpl implements SpecialityService {
         List<Speciality> specialities = specialityRepository
                 .findAll(Sort.by(Sort.Direction.ASC, "description"));
         return specialities.stream().map(specialityMapper::specialityToSpecialityDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public SpecialityDto saveDto(SpecialityDto dto, Long doctorId) {
+        Optional<Doctor> doctorOptional = doctorRepository.findById(doctorId);
+
+        if (!doctorOptional.isPresent()) {
+            log.error("Doctor not found for id: " + doctorId);
+            return new SpecialityDto();
+        } else {
+            Doctor doctor = doctorOptional.get();
+
+            Optional<Speciality> specialityOptional = doctor
+                    .getSpecialities()
+                    .stream()
+                    .filter(speciality -> speciality.getId().equals(dto.getId()))
+                    .findFirst();
+
+            Optional<Speciality> speciality = specialityRepository.findByDescription(dto.getDescription());
+            if(specialityOptional.isPresent()){
+                Speciality specialityFound = specialityOptional.get();
+                doctor.getSpecialities().remove(specialityFound);
+            }
+            speciality.ifPresent(value -> doctor.getSpecialities().add(value));
+            doctorRepository.save(doctor);
+            return specialityMapper.specialityToSpecialityDto(speciality.get());
+        }
+    }
+
+    @Override
+    public SpecialityDto findDtoById(Long id) {
+        return specialityMapper.specialityToSpecialityDto(specialityRepository.findById(id).get());
     }
 
 

@@ -13,8 +13,6 @@ import pl.polsl.orderadoctor.dto.SpecialityDto;
 import pl.polsl.orderadoctor.services.DoctorService;
 import pl.polsl.orderadoctor.services.SpecialityService;
 
-import java.util.List;
-
 @Controller
 @RequiredArgsConstructor
 @Log4j2
@@ -37,27 +35,45 @@ public class SpecialityController {
         DoctorDto doctorDto = doctorService.findDtoById(doctorId);
         model.addAttribute("doctor", doctorDto);
 
-        List<SpecialityDto> dtoList = specialityService.findAllSpecialitiesDto();
+        SpecialityDto specialityDto = new SpecialityDto();
 
-        model.addAttribute("specialities", dtoList);
+        model.addAttribute("speciality", specialityDto);
+
+        model.addAttribute("specialities", specialityService.findAllSpecialitiesDto());
 
         return "login/logged/doctor/speciality/specialityform";
     }
 
-    @PostMapping("doctor/{doctorId}/speciality")
-    public String saveSpeciality(@ModelAttribute("doctor") DoctorDto dto) {
-        DoctorDto savedDoctor = doctorService.saveDto(dto);
+    @GetMapping("doctor/{doctorId}/speciality/{id}/update")
+    public String updateDoctorSpeciality(@PathVariable Long doctorId, @PathVariable Long id, Model model) {
 
-        log.debug("saved doctor id:" + savedDoctor.getId());
+        DoctorDto doctorDto = doctorService.findDtoById(doctorId);
+        model.addAttribute("doctor", doctorDto);
 
-        return "redirect:/doctor/" + savedDoctor.getId() + "/specialities";
+        model.addAttribute("speciality", specialityService.findDtoById(id));
+
+        model.addAttribute("specialities", specialityService.findAllSpecialitiesDto());
+
+        return "login/logged/doctor/speciality/specialityform";
     }
 
-    @GetMapping("recipe/{recipeId}/ingredient/{id}/delete")
+
+    @PostMapping("doctor/{doctorId}/speciality")
+    public String saveSpeciality(@ModelAttribute("speciality") SpecialityDto dto, @PathVariable Long doctorId) {
+        SpecialityDto saveSpeciality = specialityService.saveDto(dto, doctorId);
+
+
+        log.debug("added speciality id: " + saveSpeciality.getId() + "to doctor id: " + doctorId);
+
+        return "redirect:/doctor/" + doctorId + "/specialities";
+    }
+
+    @GetMapping("doctor/{doctorId}/speciality/{id}/delete")
     public String deleteById(@PathVariable Long doctorId, @PathVariable Long id) {
 
         log.debug("Deleting speciality id: " + id);
 
+        //todo something better because not working
 
         doctorService.deleteSpecialityById(doctorId, id);
         return "redirect:/doctor/" + doctorId + "/specialities";
