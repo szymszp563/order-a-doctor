@@ -45,8 +45,6 @@ public class DoctorController {
 
         doctor.addMedicalProduct(medicalProductService.findById(1L));
         doctor.addMedicalProduct(medicalProductService.findById(2L));
-        doctor.getSpecialities().add(specialityService.findById(1L));
-        doctor.getSpecialities().add(specialityService.findById(3L));
 
         doctor.addGrade(gradeService.findById(1L));
         doctor.addGrade(gradeService.findById(2L));

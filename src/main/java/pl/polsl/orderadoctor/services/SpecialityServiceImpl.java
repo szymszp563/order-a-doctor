@@ -64,11 +64,22 @@ public class SpecialityServiceImpl implements SpecialityService {
                     .filter(speciality -> speciality.getId().equals(dto.getId()))
                     .findFirst();
 
+            Optional<Speciality> specialityOptional2 = doctor
+                    .getSpecialities()
+                    .stream()
+                    .filter(speciality -> speciality.getDescription().equals(dto.getDescription()))
+                    .findFirst();
+
             Optional<Speciality> speciality = specialityRepository.findByDescription(dto.getDescription());
-            if(specialityOptional.isPresent()){
-                Speciality specialityFound = specialityOptional.get();
+            if(specialityOptional.isPresent() || specialityOptional2.isPresent()){
+                Speciality specialityFound;
+                if(specialityOptional.isPresent())
+                    specialityFound = specialityOptional.get();
+                else
+                    specialityFound = specialityOptional2.get();
                 doctor.getSpecialities().remove(specialityFound);
             }
+
             speciality.ifPresent(value -> doctor.getSpecialities().add(value));
             doctorRepository.save(doctor);
             return specialityMapper.specialityToSpecialityDto(speciality.get());
