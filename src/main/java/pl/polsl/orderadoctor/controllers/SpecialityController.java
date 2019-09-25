@@ -79,8 +79,6 @@ public class SpecialityController {
 
         log.debug("Deleting speciality id: " + id);
 
-        //todo something better because not working
-
         doctorService.deleteSpecialityById(doctorId, id);
         return "redirect:/doctor/" + doctorId + "/specialities";
     }

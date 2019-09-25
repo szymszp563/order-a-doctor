@@ -11,6 +11,7 @@ import pl.polsl.orderadoctor.model.AccountType;
 import pl.polsl.orderadoctor.model.Doctor;
 import pl.polsl.orderadoctor.model.Speciality;
 import pl.polsl.orderadoctor.repositories.DoctorRepository;
+import pl.polsl.orderadoctor.repositories.MedicalProductRepository;
 import pl.polsl.orderadoctor.repositories.SpecialityRepository;
 
 import java.io.IOException;
@@ -23,6 +24,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     private final DoctorRepository doctorRepository;
     private final SpecialityRepository specialityRepository;
+    private final MedicalProductRepository medicalProductRepository;
     private final DoctorMapper doctorMapper;
 
     @Override
@@ -107,6 +109,13 @@ public class DoctorServiceImpl implements DoctorService {
     public void deleteSpecialityById(Long doctorId, Long id) {
         Doctor doctor = doctorRepository.findById(doctorId).get();
         doctor.getSpecialities().remove(specialityRepository.findById(id).get());
+        doctorRepository.save(doctor);
+    }
+
+    @Override
+    public void deleteMedicalProductById(Long doctorId, Long id) {
+        Doctor doctor = doctorRepository.findById(doctorId).get();
+        doctor.getMedicalProducts().remove(medicalProductRepository.findById(id).get());
         doctorRepository.save(doctor);
     }
 

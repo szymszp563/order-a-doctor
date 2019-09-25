@@ -49,63 +49,68 @@
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-primary">
+
                     <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h1 class="panel-title">Medical Products</h1>
-                            </div>
-                            <div class="col-md-2">
-                                <a class="btn btn-default btn-block" href="#" th:href="@{'/doctor/' + ${doctor.id} + '/product/new'}" role="button">New</a>
-                            </div>
-                            <div class="col-md-2">
-                                <a class="btn btn-default btn-block" href="#" th:href="@{'/doctor/' + ${doctor.id} + '/show'}" role="button">Back</a>
-                            </div>
-                        </div>
-
+                        <h1 class="panel-title">Medical Product</h1>
                     </div>
-
                     <div class="panel-body">
 
-                        <div class="table-responsive" th:if="${not #lists.isEmpty(doctor.medicalProducts)}">
+                        <div class="table-responsive">
                             <table class="table table-hover ">
                                 <thead class="thead-inverse">
                                 <tr>
                                     <th>Name</th>
                                     <th>Duration</th>
                                     <th>Price</th>
-                                    <th>Show</th>
-                                    <th>Update</th>
-                                    <th>Delete</th>
                                 </tr>
                                 </thead>
                                 <tr th:remove="all">
-                                    <td>Product 1</td>
-                                    <td>Duration 1</td>
-                                    <td>Price 1</td>
-                                    <td><a href="#">Show</a></td>
-                                    <td><a href="#">Update</a></td>
-                                    <td><a href="#">Delete</a></td>
+                                    <td>Product</td>
+                                    <td>1 h</td>
+                                    <td>1000 zł</td>
                                 </tr>
-                                <tr th:remove="all">
-                                    <td>Product 2</td>
-                                    <td>Duration 2</td>
-                                    <td>Price 2</td>
-                                    <td><a href="#">Show</a></td>
-                                    <td><a href="#">Update</a></td>
-                                    <td><a href="#">Delete</a></td>
-                                </tr>
-                                <tr th:each="product : ${doctor.medicalProducts}">
-                                    <td th:text="${product.name}">Product 3</td>
-                                    <td th:text="${product.duration}">Duration 3</td>
-                                    <td th:text="${product.price}">Price 3</td>
-                                    <td><a href="#" th:href="@{'/doctor/' + ${doctor.id} + '/product/' + ${product.id} + '/show'}">Show</a></td>
-                                    <td><a href="#" th:href="@{'/doctor/' + ${doctor.id} + '/product/' + ${product.id} + '/update'}">Update</a></td>
-                                    <td><a href="#" th:href="@{'/doctor/' + ${doctor.id} + '/product/' + ${product.id} + '/delete'}">Delete</a></td>
+                                <tr>
+                                    <td th:text="${product.name}">Prod 2</td>
+                                    <td th:text="${__${product.duration}__/60 + 'h ' + __${product.duration}__%60 + 'min'}">Dur 2</td>
+                                    <td th:text="${product.price + 'zł'}">Price 2</td>
                                 </tr>
                             </table>
                         </div>
                     </div>
                 </div>
+
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Description</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p th:text="${product.description}">Lorem ipsum dolor sit amet, consectetuer adipiscing
+                                    elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
+                                    penatibus
+                                    et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+                                    ultricies
+                                    nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec
+                                    pede
+                                    justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus
+                                    ut,
+                                    imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+                                    Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate
+                                    eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,
+                                    enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus
+                                    viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam
+                                    ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.
+                                    Etiam
+                                    rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper
+                                    libero,
+                                    sit amet adipiscing sem neque sed ipsum.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

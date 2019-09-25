@@ -17,7 +17,6 @@ import pl.polsl.orderadoctor.repositories.SpecialityRepository;
 import pl.polsl.orderadoctor.repositories.UserRepository;
 import pl.polsl.orderadoctor.repositories.VisitRepository;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -54,17 +53,17 @@ public class OrderADoctorBootstrap implements ApplicationListener<ContextRefresh
         specialityRepository.saveAll(Arrays.asList(surgery, internist, oncologist, orthopaedist, ophthalmologist, dermatologist));
 
         MedicalProduct armRemoval = MedicalProduct.builder()
-                .name("Arm Removal").duration(Duration.ofHours(1L).plusMinutes(20L)).price(600.00).build();
+                .name("Arm Removal").duration("80").price(600.00).build();
         MedicalProduct legRemoval = MedicalProduct.builder()
-                .name("Leg Removal").duration(Duration.ofHours(2L).plusMinutes(10L)).price(1600.00).build();
+                .name("Leg Removal").duration("130").price(1600.00).build();
         MedicalProduct childbirth = MedicalProduct.builder()
-                .name("Childbirth").duration(Duration.ofHours(4L)).price(4900.00).build();
+                .name("Childbirth").duration("240").price(4900.00).build();
         MedicalProduct oncConsultation = MedicalProduct.builder()
-                .name("Oncological Consultation").duration(Duration.ofMinutes(30L)).price(100.00).build();
+                .name("Oncological Consultation").duration("30").price(100.00).build();
         MedicalProduct consultation = MedicalProduct.builder()
-                .name("Consultation").duration(Duration.ofMinutes(30L)).price(100.00).build();
+                .name("Consultation").duration("30").price(100.00).build();
         MedicalProduct laserTreatment = MedicalProduct.builder()
-                .name("Laser Treatment").duration(Duration.ofMinutes(45L)).price(200.00).build();
+                .name("Laser Treatment").duration("45").price(200.00).build();
 
         Grade g1 = Grade.builder().grade((byte) 5).comment("Best doctor ever!").build();
         Grade g2 = Grade.builder().grade((byte) 4).comment("Good care, but expensive.").build();

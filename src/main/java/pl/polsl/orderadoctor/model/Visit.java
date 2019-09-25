@@ -57,7 +57,7 @@ public class Visit {
         if(dateTo==null){
             dateTo=dateFrom;
         }
-        this.dateTo = dateFrom.plus(medicalProduct.getDuration());
+        this.dateTo = dateFrom.plus(medicalProduct.getDurationTime());
     }
 
 }

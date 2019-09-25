@@ -72,12 +72,14 @@ public class SpecialityServiceImpl implements SpecialityService {
 
             Optional<Speciality> speciality = specialityRepository.findByDescription(dto.getDescription());
             if(specialityOptional.isPresent() || specialityOptional2.isPresent()){
-                Speciality specialityFound;
-                if(specialityOptional.isPresent())
-                    specialityFound = specialityOptional.get();
+
+                if(specialityOptional.isPresent() && specialityOptional2.isPresent()){
+                    doctor.getSpecialities().remove(specialityOptional.get());
+                    doctor.getSpecialities().remove(specialityOptional2.get());
+                } else if(specialityOptional.isPresent())
+                    doctor.getSpecialities().remove(specialityOptional.get());
                 else
-                    specialityFound = specialityOptional2.get();
-                doctor.getSpecialities().remove(specialityFound);
+                    doctor.getSpecialities().remove(specialityOptional2.get());
             }
 
             speciality.ifPresent(value -> doctor.getSpecialities().add(value));

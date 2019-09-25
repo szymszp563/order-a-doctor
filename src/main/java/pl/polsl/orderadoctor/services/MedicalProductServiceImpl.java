@@ -2,11 +2,18 @@ package pl.polsl.orderadoctor.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import pl.polsl.orderadoctor.dto.MedicalProductDto;
+import pl.polsl.orderadoctor.mappers.MedicalProductMapper;
+import pl.polsl.orderadoctor.model.Doctor;
 import pl.polsl.orderadoctor.model.MedicalProduct;
+import pl.polsl.orderadoctor.repositories.DoctorRepository;
 import pl.polsl.orderadoctor.repositories.MedicalProductRepository;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Log4j2
 @Service
@@ -14,6 +21,8 @@ import java.util.List;
 public class MedicalProductServiceImpl implements MedicalProductService {
 
     private final MedicalProductRepository medicalProductRepository;
+    private final DoctorRepository doctorRepository;
+    private final MedicalProductMapper medicalProductMapper;
 
     @Override
     public void save(MedicalProduct medicalProduct) {
@@ -30,5 +39,60 @@ public class MedicalProductServiceImpl implements MedicalProductService {
     public MedicalProduct findById(Long id) {
         MedicalProduct medicalProduct = medicalProductRepository.findById(id).get();
         return medicalProduct;
+    }
+
+    @Override
+    public List<MedicalProductDto> findAllSMedicalProductsDto() {
+
+        List<MedicalProduct> products = medicalProductRepository
+                .findAll(Sort.by(Sort.Direction.ASC, "name"));
+        return products.stream().map(medicalProductMapper::medicalProductToMedicalProductDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public MedicalProductDto findDtoById(Long id) {
+        return medicalProductMapper.medicalProductToMedicalProductDto(medicalProductRepository.findById(id).get());
+    }
+
+    @Override
+    public MedicalProductDto saveDto(MedicalProductDto dto, Long doctorId) {
+
+        Optional<Doctor> doctorOptional = doctorRepository.findById(doctorId);
+
+        if (!doctorOptional.isPresent()) {
+            log.error("Doctor not found for id: " + doctorId);
+            return new MedicalProductDto();
+        } else {
+            Doctor doctor = doctorOptional.get();
+
+            Optional<MedicalProduct> medicalProductOptional = doctor
+                    .getMedicalProducts()
+                    .stream()
+                    .filter(product -> product.getId().equals(dto.getId()))
+                    .findFirst();
+
+            Optional<MedicalProduct> medicalProductOptional2 = doctor
+                    .getMedicalProducts()
+                    .stream()
+                    .filter(product -> product.getName().equals(dto.getName()))
+                    .findFirst();
+
+            if(medicalProductOptional.isPresent() || medicalProductOptional2.isPresent()){
+
+                if(medicalProductOptional.isPresent() && medicalProductOptional2.isPresent()){
+                    doctor.getMedicalProducts().remove(medicalProductOptional.get());
+                    doctor.getMedicalProducts().remove(medicalProductOptional2.get());
+                } else if(medicalProductOptional.isPresent())
+                    doctor.getMedicalProducts().remove(medicalProductOptional.get());
+                else
+                    doctor.getMedicalProducts().remove(medicalProductOptional2.get());
+            }
+
+            MedicalProduct medicalProduct = medicalProductMapper.medicalProductDtoToMedicalProduct(dto);
+            doctor.getMedicalProducts().add(medicalProduct);
+            doctorRepository.save(doctor);
+            return dto;
+        }
+
     }
 }

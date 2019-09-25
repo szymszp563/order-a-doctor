@@ -4,7 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.Duration;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 
 @Getter
 @Setter
@@ -12,11 +13,16 @@ import java.time.Duration;
 public class MedicalProductDto {
     private Long id;
 
+    @NotBlank
     private String name;
 
+    @Positive
     private Double price;
 
-    private Duration duration;
+    @NotBlank
+    private String duration;
+
+    private String description;
 
 //    private DoctorInfo doctorInfo;
 }
