@@ -105,8 +105,9 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public void deleteSpecialityById(Long doctorId, Long id) {
-        Doctor doctor = doctorRepository.findById(id).get();
+        Doctor doctor = doctorRepository.findById(doctorId).get();
         doctor.getSpecialities().remove(specialityRepository.findById(id).get());
+        doctorRepository.save(doctor);
     }
 
 }
