@@ -91,7 +91,7 @@ public class DoctorServiceImpl implements DoctorService {
             Byte[] byteObjects = new Byte[file.getBytes().length];
             int i = 0;
 
-            for (byte b : file.getBytes()){
+            for (byte b : file.getBytes()) {
                 byteObjects[i++] = b;
             }
 

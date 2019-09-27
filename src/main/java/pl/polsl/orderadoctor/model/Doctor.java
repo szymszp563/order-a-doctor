@@ -86,7 +86,7 @@ public class Doctor {
         medicalProduct.setDoctor(this);
     }
 
-    public void addGrade(Grade grade){
+    public void addGrade(Grade grade) {
         this.grades.add(grade);
         grade.setDoctor(this);
         calculateAverageGrade();
@@ -105,14 +105,14 @@ public class Doctor {
         return average;
     }
 
-    public int getIntGrade(){
-        Double g = (averageGrade)*2 + 1;
-        return (g.intValue())/2;
+    public int getIntGrade() {
+        Double g = (averageGrade) * 2 + 1;
+        return (g.intValue()) / 2;
     }
 
-    public int getTo5IntGrade(){
-        Double g = Double.valueOf((5-getIntGrade())*2);
-        return (g.intValue())/2;
+    public int getTo5IntGrade() {
+        Double g = Double.valueOf((5 - getIntGrade()) * 2);
+        return (g.intValue()) / 2;
     }
 
 }

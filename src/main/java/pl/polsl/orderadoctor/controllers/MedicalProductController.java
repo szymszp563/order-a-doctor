@@ -26,8 +26,8 @@ public class MedicalProductController {
     private final MedicalProductService medicalProductService;
 
     @GetMapping("/doctor/{doctorId}/products")
-    public String listProducts(@PathVariable Long doctorId, Model model){
-        log.debug("Getting speciality list from doctor id: "+ doctorId);
+    public String listProducts(@PathVariable Long doctorId, Model model) {
+        log.debug("Getting speciality list from doctor id: " + doctorId);
         model.addAttribute("doctor", doctorService.findDtoById(doctorId));
 
         return "login/logged/doctor/product/list";
@@ -35,11 +35,11 @@ public class MedicalProductController {
 
     @GetMapping("doctor/{doctorId}/product/{id}/show")
     public String showDoctorMedicalProduct(@PathVariable Long doctorId,
-                                       @PathVariable Long id, Model model) {
+                                           @PathVariable Long id, Model model) {
         DoctorDto doctorDto = doctorService.findDtoById(doctorId);
         model.addAttribute("doctor", doctorDto);
 
-        MedicalProductDto medicalProductDto =  medicalProductService.findDtoById(id);
+        MedicalProductDto medicalProductDto = medicalProductService.findDtoById(id);
 
         model.addAttribute("product", medicalProductDto);
         return "login/logged/doctor/product/show";
@@ -56,7 +56,7 @@ public class MedicalProductController {
         model.addAttribute("product", medicalProductDto);
 
         List<MedicalProductDto> medicalProductDtoList = medicalProductService.findAllSMedicalProductsDto();
-        medicalProductDtoList.sort((s1,s2)->s1.getName().compareToIgnoreCase(s2.getName()));
+        medicalProductDtoList.sort((s1, s2) -> s1.getName().compareToIgnoreCase(s2.getName()));
         model.addAttribute("products", medicalProductDtoList);
 
         return "login/logged/doctor/product/productform";
@@ -78,7 +78,7 @@ public class MedicalProductController {
     public String saveSpeciality(@Valid @ModelAttribute("product") MedicalProductDto dto, BindingResult bindingResult, Model model, @PathVariable Long doctorId) {
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("doctor",doctorService.findDtoById(doctorId));
+            model.addAttribute("doctor", doctorService.findDtoById(doctorId));
             bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
             return "login/logged/doctor/product/productform";
         }

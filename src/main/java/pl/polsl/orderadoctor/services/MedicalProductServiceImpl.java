@@ -77,12 +77,12 @@ public class MedicalProductServiceImpl implements MedicalProductService {
                     .filter(product -> product.getName().equals(dto.getName()))
                     .findFirst();
 
-            if(medicalProductOptional.isPresent() || medicalProductOptional2.isPresent()){
+            if (medicalProductOptional.isPresent() || medicalProductOptional2.isPresent()) {
 
-                if(medicalProductOptional.isPresent() && medicalProductOptional2.isPresent()){
+                if (medicalProductOptional.isPresent() && medicalProductOptional2.isPresent()) {
                     doctor.getMedicalProducts().remove(medicalProductOptional.get());
                     doctor.getMedicalProducts().remove(medicalProductOptional2.get());
-                } else if(medicalProductOptional.isPresent())
+                } else if (medicalProductOptional.isPresent())
                     doctor.getMedicalProducts().remove(medicalProductOptional.get());
                 else
                     doctor.getMedicalProducts().remove(medicalProductOptional2.get());

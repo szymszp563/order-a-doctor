@@ -43,9 +43,6 @@ public class DoctorController {
     public String doctorShow(@PathVariable Long id, Model model) {
         Doctor doctor = doctorService.findById(id);
 
-        doctor.addMedicalProduct(medicalProductService.findById(1L));
-        doctor.addMedicalProduct(medicalProductService.findById(2L));
-
         doctor.addGrade(gradeService.findById(1L));
         doctor.addGrade(gradeService.findById(2L));
         doctor.addGrade(gradeService.findById(3L));

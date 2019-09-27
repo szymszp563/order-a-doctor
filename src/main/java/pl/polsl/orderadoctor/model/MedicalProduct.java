@@ -50,7 +50,7 @@ public class MedicalProduct {
                 (absSeconds % 3600) / 60);
     }
 
-    public Duration getDurationTime(){
+    public Duration getDurationTime() {
         return Duration.ofMinutes(Long.valueOf(this.duration));
     }
 }

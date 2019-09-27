@@ -64,7 +64,7 @@ public class ImageController {
             byte[] byteArray = new byte[user.getImage().length];
             int i = 0;
 
-            for (Byte wrappedByte : user.getImage()){
+            for (Byte wrappedByte : user.getImage()) {
                 byteArray[i++] = wrappedByte; //auto unboxing
             }
 
@@ -82,7 +82,7 @@ public class ImageController {
             byte[] byteArray = new byte[doctor.getImage().length];
             int i = 0;
 
-            for (Byte wrappedByte : doctor.getImage()){
+            for (Byte wrappedByte : doctor.getImage()) {
                 byteArray[i++] = wrappedByte; //auto unboxing
             }
 

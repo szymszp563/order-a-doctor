@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
 
             int i = 0;
 
-            for (byte b : file.getBytes()){
+            for (byte b : file.getBytes()) {
                 byteObjects[i++] = b;
             }
 

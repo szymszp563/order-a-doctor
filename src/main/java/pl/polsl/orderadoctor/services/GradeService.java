@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface GradeService {
     void save(Grade grade);
+
     void saveAll(List<Grade> gradeList);
+
     Grade findById(Long id);
 }

@@ -52,10 +52,10 @@ public class Visit {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public void addMedicalProduct(MedicalProduct medicalProduct){
+    public void addMedicalProduct(MedicalProduct medicalProduct) {
         this.medicalProducts.add(medicalProduct);
-        if(dateTo==null){
-            dateTo=dateFrom;
+        if (dateTo == null) {
+            dateTo = dateFrom;
         }
         this.dateTo = dateFrom.plus(medicalProduct.getDurationTime());
     }

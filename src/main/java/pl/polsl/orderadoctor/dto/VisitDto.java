@@ -23,7 +23,4 @@ public class VisitDto {
 
     private List<MedicalProductDto> medicalProducts = new LinkedList<>();
 
-//    private DoctorInfo doctorInfo;
-
-//    private UserInfo userInfo;
 }

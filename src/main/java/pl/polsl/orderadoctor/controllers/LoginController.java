@@ -217,7 +217,7 @@ public class LoginController {
     @PostMapping("/register/doctor")
     public String saveOrUpdateDoctor(@Valid @ModelAttribute("doctor") DoctorDto dto, BindingResult bindingResult) {
 
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
             return "login/registerDoctor";
         }

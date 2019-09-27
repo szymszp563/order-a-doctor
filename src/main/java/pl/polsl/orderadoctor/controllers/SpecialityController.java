@@ -42,7 +42,7 @@ public class SpecialityController {
         model.addAttribute("speciality", specialityDto);
 
         List<SpecialityDto> specialityDtoList = specialityService.findAllSpecialitiesDto();
-        specialityDtoList.sort((s1,s2)->s1.getDescription().compareToIgnoreCase(s2.getDescription()));
+        specialityDtoList.sort((s1, s2) -> s1.getDescription().compareToIgnoreCase(s2.getDescription()));
         model.addAttribute("specialities", specialityDtoList);
 
         return "login/logged/doctor/speciality/specialityform";
@@ -57,7 +57,7 @@ public class SpecialityController {
         model.addAttribute("speciality", specialityService.findDtoById(id));
 
         List<SpecialityDto> specialityDtoList = specialityService.findAllSpecialitiesDto();
-        specialityDtoList.sort((s1,s2)->s1.getDescription().compareToIgnoreCase(s2.getDescription()));
+        specialityDtoList.sort((s1, s2) -> s1.getDescription().compareToIgnoreCase(s2.getDescription()));
         model.addAttribute("specialities", specialityDtoList);
 
         return "login/logged/doctor/speciality/specialityform";

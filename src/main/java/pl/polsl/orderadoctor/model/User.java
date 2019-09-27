@@ -53,12 +53,12 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Grade> grades = new HashSet<>();
 
-    public void addGrade(Grade grade){
+    public void addGrade(Grade grade) {
         this.grades.add(grade);
         grade.setUser(this);
     }
 
-    public void addVisit(Visit visit){
+    public void addVisit(Visit visit) {
         this.visits.add(visit);
         visit.setUser(this);
     }

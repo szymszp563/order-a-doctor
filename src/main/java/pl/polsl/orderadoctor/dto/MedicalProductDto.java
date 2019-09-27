@@ -24,5 +24,4 @@ public class MedicalProductDto {
 
     private String description;
 
-//    private DoctorInfo doctorInfo;
 }
