@@ -78,12 +78,12 @@ public class LoginController {
 
         if (ifUser != null) {
             model.addAttribute("user", ifUser);
-            return "redirect:/user/" + ifUser.getId() + "/show";
+            return "redirect:/user/" + ifUser.getId() + "/logged";
         }
 
         if (ifDoctor != null) {
             model.addAttribute("doctor", ifDoctor);
-            return "redirect:/doctor/" + ifDoctor.getId() + "/show";
+            return "redirect:/doctor/" + ifDoctor.getId() + "/logged";
         }
 
         return "redirect:/register";

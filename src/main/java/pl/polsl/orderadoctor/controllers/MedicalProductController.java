@@ -15,7 +15,6 @@ import pl.polsl.orderadoctor.services.DoctorService;
 import pl.polsl.orderadoctor.services.MedicalProductService;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -54,10 +53,6 @@ public class MedicalProductController {
         MedicalProductDto medicalProductDto = new MedicalProductDto();
 
         model.addAttribute("product", medicalProductDto);
-
-        List<MedicalProductDto> medicalProductDtoList = medicalProductService.findAllSMedicalProductsDto();
-        medicalProductDtoList.sort((s1, s2) -> s1.getName().compareToIgnoreCase(s2.getName()));
-        model.addAttribute("products", medicalProductDtoList);
 
         return "login/logged/doctor/product/productform";
     }

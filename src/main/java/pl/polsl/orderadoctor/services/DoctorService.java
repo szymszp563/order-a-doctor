@@ -31,4 +31,6 @@ public interface DoctorService {
     void deleteSpecialityById(Long doctorId, Long id);
 
     void deleteMedicalProductById(Long doctorId, Long id);
+
+    void deleteGrade(Long id);
 }

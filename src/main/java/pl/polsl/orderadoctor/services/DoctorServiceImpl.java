@@ -9,6 +9,7 @@ import pl.polsl.orderadoctor.dto.DoctorDto;
 import pl.polsl.orderadoctor.mappers.DoctorMapper;
 import pl.polsl.orderadoctor.model.AccountType;
 import pl.polsl.orderadoctor.model.Doctor;
+import pl.polsl.orderadoctor.model.Grade;
 import pl.polsl.orderadoctor.model.Speciality;
 import pl.polsl.orderadoctor.repositories.DoctorRepository;
 import pl.polsl.orderadoctor.repositories.MedicalProductRepository;
@@ -25,6 +26,7 @@ public class DoctorServiceImpl implements DoctorService {
     private final DoctorRepository doctorRepository;
     private final SpecialityRepository specialityRepository;
     private final MedicalProductRepository medicalProductRepository;
+    private final GradeService gradeService;
     private final DoctorMapper doctorMapper;
 
     @Override
@@ -116,6 +118,14 @@ public class DoctorServiceImpl implements DoctorService {
     public void deleteMedicalProductById(Long doctorId, Long id) {
         Doctor doctor = doctorRepository.findById(doctorId).get();
         doctor.getMedicalProducts().remove(medicalProductRepository.findById(id).get());
+        doctorRepository.save(doctor);
+    }
+
+    @Override
+    public void deleteGrade(Long id) {
+        Grade grade = gradeService.findById(id);
+        Doctor doctor = doctorRepository.findById(grade.getDoctor().getId()).get();
+        doctor.getGrades().remove(grade);
         doctorRepository.save(doctor);
     }
 
