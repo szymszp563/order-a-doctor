@@ -44,6 +44,9 @@ public class Doctor {
 
     private String lastName;
 
+    @Enumerated(value = EnumType.STRING)
+    private DegreeType degree;
+
     private String city;
 
     private String email;

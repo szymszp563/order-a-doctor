@@ -26,11 +26,12 @@ public interface DoctorService {
 
     DoctorDto findDtoById(Long id);
 
+    List<DoctorDto> findAllDoctorsDto();
+
     void saveImageFile(Long id, MultipartFile file);
 
     void deleteSpecialityById(Long doctorId, Long id);
 
     void deleteMedicalProductById(Long doctorId, Long id);
 
-    void deleteGrade(Long id);
 }

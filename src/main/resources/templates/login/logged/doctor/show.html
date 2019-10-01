@@ -76,15 +76,17 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-2">
-                                <h5>First Name:</h5>
-                                <h5>Last Name:</h5>
-                                <h5>Average Grade:</h5>
-                                <h5>Rating:</h5>
-                                <h5>Email:</h5>
-                                <h5>City:</h5>
-                                <h5>Working Hours:</h5>
+                                <p>Degree:</p>
+                                <p>First Name:</p>
+                                <p>Last Name:</p>
+                                <p>Average Grade:</p>
+                                <p>Rating:</p>
+                                <p>Email:</p>
+                                <p>City:</p>
+                                <p>Working Hours:</p>
                             </div>
                             <div class="col-md-7">
+                                <p th:text="${(doctor.degree)}">Medical Doctor</p>
                                 <p th:text="${(doctor.firstName)}">John</p>
                                 <p th:text="${(doctor.lastName)}">Doe</p>
                                 <span class="fa fa-heartbeat checked" th:remove="all"></span>
@@ -92,12 +94,15 @@
                                 <span class="fa fa-heartbeat checked" th:remove="all"></span>
                                 <span class="fa fa-heartbeat" th:remove="all"></span>
                                 <span class="fa fa-heartbeat" th:remove="all"></span>
-                                <p th:text="${(doctor.averageGrade.toString().substring(0, 4))}">grade</p>
-                                <span th:if="__${doctor.getIntGrade()}__ > 0" class="fa fa-heartbeat checked"
-                                      th:each="heart : ${#numbers.sequence( 1, __${doctor.getIntGrade()}__)}"></span>
-                                <span th:if="__${doctor.getIntGrade()}__ < 5" class="fa fa-heartbeat"
-                                      th:each="heart : ${#numbers.sequence( 1, __${5 - doctor.getIntGrade()}__)}"></span>
+                                <p th:if="__${doctor.averageGrade}__>0" th:text="${(doctor.averageGrade.toString().substring(0, 4))}">grade</p>
+                                <p th:if="__${doctor.averageGrade}__<=0" th:text="${(doctor.averageGrade.toString())}">grade</p>
+                                <p>
+                                    <span th:if="__${doctor.getIntGrade()}__ > 0" class="fa fa-heartbeat checked"
+                                          th:each="heart : ${#numbers.sequence( 1, __${doctor.getIntGrade()}__)}"></span>
+                                    <span th:if="__${doctor.getIntGrade()}__ < 5" class="fa fa-heartbeat"
+                                          th:each="heart : ${#numbers.sequence( 1, __${5 - doctor.getIntGrade()}__)}"></span>
 
+                                </p>
                                 <p th:text="${(doctor.email)}">JohnDoe@mail.com</p>
                                 <p th:text="${(doctor.city)}">New York</p>
                                 <p th:text="${(doctor.workingFrom) + ' - ' + (doctor.workingTo)}">08:00 - 16:00</p>

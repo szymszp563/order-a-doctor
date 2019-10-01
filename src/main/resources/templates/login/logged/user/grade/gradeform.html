@@ -45,5 +45,74 @@
         </div><!-- /.container-fluid -->
     </nav>
 
+    <div class="container-fluid" style="margin-top: 20px">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <!--/*@thymesVar id="ingredient" type="com.spring.recipes.commands.IngredientCommand"*/-->
+                <form th:object="${grade}" th:action="@{'/user/' + ${user.id} + '/grade'} " method="post">
+                    <input type="hidden" th:field="*{id}"/>
+                    <div class="pannel-group">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-md-11">
+                                        <h1 class="panel-title">Edit Your Grade and Comment</h1>
+                                    </div>
+
+                                    <div class="col-md-1">
+                                        <a class="btn btn-default" href="#"
+                                           th:href="@{'/user/' + ${user.id} + '/grades'}" role="button">Back</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-3 form-group">
+                                        <label>Description:</label>
+                                        <select class="form-control" th:field="*{doctorId}">
+                                            <option th:each="doctor : ${doctors}"
+                                                    th:value="${doctor.id}"
+                                                    th:text="${doctor.id + ' ' + doctor.firstName + ' ' + doctor.lastName}">val
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-3 form-group">
+                                        <label>Working hour from:</label>
+                                        <select class="form-control" th:field="*{grade}">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <h1 class="panel-title">Comment</h1>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-12 form-group">
+                                        <textarea class="form-control" rows="3" th:field="*{comment}"></textarea></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

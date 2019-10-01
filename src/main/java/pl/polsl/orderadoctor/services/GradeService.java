@@ -13,4 +13,6 @@ public interface GradeService {
     Grade findById(Long id);
 
     GradeDto findDtoById(Long id);
+
+    GradeDto saveDto(GradeDto dto, Long userId);
 }

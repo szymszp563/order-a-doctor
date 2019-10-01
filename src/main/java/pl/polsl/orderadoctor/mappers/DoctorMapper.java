@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 import pl.polsl.orderadoctor.dto.DoctorDto;
 import pl.polsl.orderadoctor.model.Doctor;
 
-@Mapper(componentModel = "spring", uses = {SpecialityMapper.class, MedicalProductMapper.class, VisitMapper.class})
+@Mapper(componentModel = "spring", uses = {SpecialityMapper.class, MedicalProductMapper.class, VisitMapper.class, GradeMapper.class})
 public interface DoctorMapper {
 
     Doctor doctorDtoToDoctor(DoctorDto dto);

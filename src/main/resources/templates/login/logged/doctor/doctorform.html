@@ -68,6 +68,18 @@
                         </div>
                         <div class="panel-body">
                             <div class="row">
+                                <div class="col-md-3 form-group">
+                                    <label>Degree:</label>
+                                    <select class="form-control" th:field="*{degree}">
+                                        <option th:remove="all">MD</option>
+                                        <option th:remove="all">PhD</option>
+                                        <option th:each="degreeVal : ${T(pl.polsl.orderadoctor.model.DegreeType).values()}"
+                                                th:value="${degreeVal.name()}"
+                                                th:text="${degreeVal.name()}">val</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-3 form-group" th:class="${#fields.hasErrors('firstName')}
                                 ? 'col-md-3 form-group has-error' : 'col-md-3 form-group'">
                                     <label>First Name:</label>

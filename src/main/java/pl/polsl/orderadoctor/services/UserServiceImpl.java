@@ -8,7 +8,11 @@ import org.springframework.web.multipart.MultipartFile;
 import pl.polsl.orderadoctor.dto.UserDto;
 import pl.polsl.orderadoctor.mappers.UserMapper;
 import pl.polsl.orderadoctor.model.AccountType;
+import pl.polsl.orderadoctor.model.Doctor;
+import pl.polsl.orderadoctor.model.Grade;
 import pl.polsl.orderadoctor.model.User;
+import pl.polsl.orderadoctor.repositories.DoctorRepository;
+import pl.polsl.orderadoctor.repositories.GradeRepository;
 import pl.polsl.orderadoctor.repositories.UserRepository;
 
 import java.io.IOException;
@@ -20,6 +24,8 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final GradeRepository gradeRepository;
+    private final DoctorRepository doctorRepository;
     private final UserMapper userMapper;
 
     @Override
@@ -90,5 +96,17 @@ public class UserServiceImpl implements UserService {
 
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void deleteGrade(Long id) {
+        Grade grade = gradeRepository.findById(id).get();
+        Doctor doctor = doctorRepository.findById(grade.getDoctor().getId()).get();
+        User user = userRepository.findById(id).get();
+        user.getGrades().remove(grade);
+        doctor.getGrades().remove(grade);
+        doctorRepository.save(doctor);
+        userRepository.save(user);
+        gradeRepository.delete(grade);
     }
 }

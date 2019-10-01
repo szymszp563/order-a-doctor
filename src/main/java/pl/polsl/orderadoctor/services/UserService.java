@@ -23,4 +23,6 @@ public interface UserService {
     UserDto findDtoById(Long id);
 
     void saveImageFile(Long id, MultipartFile file);
+
+    void deleteGrade(Long id);
 }

@@ -16,6 +16,13 @@
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
             crossorigin="anonymous"
             th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .checked {
+            color: #ff5772;
+        }
+    </style>
 </head>
 
 <body>
@@ -44,6 +51,80 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
+
+    <div class="container-fluid" style="margin-top: 20px">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h1 class="panel-title">Grades</h1>
+                            </div>
+                            <!--!!!! FOR TESTING-->
+
+                            <div class="col-md-2">
+                                <a class="btn btn-default btn-block" href="#" th:href="@{'/user/' + ${user.id} + '/grade/new'}" role="button">New</a>
+                            </div>
+                            <!--!!!! FOR TESTING-->
+
+                            <div class="col-md-2">
+                                <a class="btn btn-default btn-block" href="#" th:href="@{'/user/' + ${user.id} + '/show'}" role="button">Back</a>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="panel-body">
+
+                        <div class="table-responsive" th:if="${not #lists.isEmpty(user.grades)}">
+                            <table class="table table-hover ">
+                                <thead class="thead-inverse">
+                                <tr>
+                                    <th>Doctor Name</th>
+                                    <th>Grade</th>
+                                    <th>Show</th>
+                                    <th>Update</th>
+                                    <th>Delete</th>
+                                </tr>
+                                </thead>
+                                <tr th:remove="all">
+                                    <td>Doctor Name 1</td>
+                                    <td>Grade 1</td>
+                                    <td><a href="#">Show</a></td>
+                                    <td><a href="#">Update</a></td>
+                                    <td><a href="#">Delete</a></td>
+                                </tr>
+                                <tr th:remove="all">
+                                    <td>Doctor Name 2</td>
+                                    <td>Grade 2</td>
+
+                                    <td><a href="#">Show</a></td>
+                                    <td><a href="#">Update</a></td>
+                                    <td><a href="#">Delete</a></td>
+                                </tr>
+                                <tr th:each="grade : ${user.grades}">
+                                    <td th:text="${grade.doctorFirstName + ' ' + grade.doctorLastName}">Doctor Name 3</td>
+                                    <td>
+                                        <span th:if="__${grade.grade}__ > 0" class="fa fa-heartbeat checked"
+                                              th:each="heart : ${#numbers.sequence( 1, __${grade.grade}__)}"></span>
+                                        <span th:if="__${grade.grade}__ < 5" class="fa fa-heartbeat"
+                                              th:each="heart : ${#numbers.sequence( 1, __${5 - grade.grade}__)}"></span>
+                                    </td>
+
+
+                                    <td><a href="#" th:href="@{'/user/' + ${user.id} + '/grade/' + ${grade.id} + '/show'}">Show</a></td>
+                                    <td><a href="#" th:href="@{'/user/' + ${user.id} + '/grade/' + ${grade.id} + '/update'}">Update</a></td>
+                                    <td><a href="#" th:href="@{'/user/' + ${user.id} + '/grade/' + ${grade.id} + '/delete'}">Delete</a></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

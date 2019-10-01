@@ -4,13 +4,18 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import pl.polsl.orderadoctor.dto.GradeDto;
 import pl.polsl.orderadoctor.dto.UserDto;
 import pl.polsl.orderadoctor.services.DoctorService;
 import pl.polsl.orderadoctor.services.GradeService;
 import pl.polsl.orderadoctor.services.UserService;
+
+import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
@@ -51,6 +56,9 @@ public class GradeController {
 
         model.addAttribute("grade", gradeDto);
 
+        //FOR TESTING!!
+        model.addAttribute("doctors", doctorService.findAllDoctorsDto());
+
         return "login/logged/user/grade/gradeform";
     }
 
@@ -62,29 +70,32 @@ public class GradeController {
 
         model.addAttribute("grade", gradeService.findDtoById(id));
 
+        //FOR TESTING!!
+        model.addAttribute("doctors", doctorService.findAllDoctorsDto());
+
         return "login/logged/user/grade/gradeform";
     }
 
     /**
      * POST NOT HERE
      */
-//    @PostMapping("user/{userId}/grade")
-//    public String saveSpeciality(@Valid @ModelAttribute("grade") GradeDto dto, BindingResult bindingResult, Model model, @PathVariable Long userId) {
-//
-//        if (bindingResult.hasErrors()) {
-//            UserDto userDto = userService.findDtoById(userId);
-//            model.addAttribute("user", userDto);
-//            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
-//            return "login/logged/doctor/product/productform";
-//        }
-//
-//        GradeDto saveGrade = gradeService.saveDto(dto, userId);
-//
-//
-//        log.debug("added medical product id: " + saveGrade.getId() + "to doctor id: " + doctorId);
-//
-//        return "redirect:/doctor/" + doctorId + "/products";
-//    }
+    @PostMapping("user/{userId}/grade")
+    public String saveGrade(@Valid @ModelAttribute("grade") GradeDto dto, BindingResult bindingResult, Model model, @PathVariable Long userId) {
+
+        if (bindingResult.hasErrors()) {
+            UserDto userDto = userService.findDtoById(userId);
+            model.addAttribute("user", userDto);
+            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
+            return "login/logged/doctor/product/productform";
+        }
+
+        GradeDto saveGrade = gradeService.saveDto(dto, userId);
+
+
+        log.debug("posted grade id: " + saveGrade.getId() + "to user id: " + userId);
+
+        return "redirect:/user/" + userId + "/grades";
+    }
 
 
     @GetMapping("user/{userId}/grade/{id}/delete")
@@ -92,7 +103,7 @@ public class GradeController {
 
         log.debug("Deleting speciality id: " + id);
 
-        doctorService.deleteGrade(id);
+        userService.deleteGrade(id);
         return "redirect:/user/" + userId + "/grades";
     }
 

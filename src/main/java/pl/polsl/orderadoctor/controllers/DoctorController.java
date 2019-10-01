@@ -43,13 +43,6 @@ public class DoctorController {
     public String doctorShow(@PathVariable Long id, Model model) {
         Doctor doctor = doctorService.findById(id);
 
-        doctor.addGrade(gradeService.findById(1L));
-        doctor.addGrade(gradeService.findById(2L));
-        doctor.addGrade(gradeService.findById(3L));
-        doctor.addGrade(gradeService.findById(4L));
-        doctor.addGrade(gradeService.findById(5L));
-        doctor.addGrade(gradeService.findById(6L));
-
         model.addAttribute("doctor", doctor);
 
         return "login/logged/doctor/show";

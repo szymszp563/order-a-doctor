@@ -3,6 +3,7 @@ package pl.polsl.orderadoctor.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.polsl.orderadoctor.model.DegreeType;
 
 @Getter
 @Setter
@@ -14,5 +15,13 @@ public class GradeDto {
     private String comment;
 
     private Byte grade;
+
+    private String doctorFirstName;
+
+    private String doctorLastName;
+
+    private Long doctorId;
+
+    private DegreeType doctorDegree;
 
 }

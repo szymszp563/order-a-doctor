@@ -96,7 +96,7 @@
                                 </div>
                                 <div class="col-md-2">
                                     <a class="btn btn-default btn-block" href="#"
-                                       th:href="@{'/user/' + ${user.id} + '/comments'}" role="button">View</a>
+                                       th:href="@{'/user/' + ${user.id} + '/grades'}" role="button">View</a>
                                 </div>
                             </div>
                         </div>
@@ -107,7 +107,7 @@
                                         <li th:remove="all">5 - fname lname - Beast Dcotor</li>
                                         <li th:remove="all">2 - fname lname - Not too good</li>
                                         <li th:each="grade : ${user.grades}"
-                                            th:text="${(user.grade + ' - ' + grade.comment)}">grade grade
+                                            th:text="${(grade.doctor.degree + ' ' + grade.doctor.firstName + ' ' + grade.doctor.lastName + ' - ' + grade.comment)}">grade grade
                                         </li>
                                     </ul>
                                 </div>

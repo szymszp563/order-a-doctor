@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.polsl.orderadoctor.model.AccountType;
+import pl.polsl.orderadoctor.model.DegreeType;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -28,6 +29,8 @@ public class DoctorDto {
 
     @NotBlank
     private String lastName;
+
+    private DegreeType degree;
 
     @NotBlank
     private String city;

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.polsl.orderadoctor.dto.MedicalProductDto;
 import pl.polsl.orderadoctor.mappers.MedicalProductMapper;
 import pl.polsl.orderadoctor.model.Doctor;
@@ -55,6 +56,7 @@ public class MedicalProductServiceImpl implements MedicalProductService {
     }
 
     @Override
+    @Transactional
     public MedicalProductDto saveDto(MedicalProductDto dto, Long doctorId) {
 
         Optional<Doctor> doctorOptional = doctorRepository.findById(doctorId);
@@ -65,12 +67,14 @@ public class MedicalProductServiceImpl implements MedicalProductService {
         } else {
             Doctor doctor = doctorOptional.get();
 
+            //checks if medical product exists in database (same id)
             Optional<MedicalProduct> medicalProductOptional = doctor
                     .getMedicalProducts()
                     .stream()
                     .filter(product -> product.getId().equals(dto.getId()))
                     .findFirst();
 
+            //checks if medical product with the same name exists in database
             Optional<MedicalProduct> medicalProductOptional2 = doctor
                     .getMedicalProducts()
                     .stream()
@@ -89,7 +93,7 @@ public class MedicalProductServiceImpl implements MedicalProductService {
             }
 
             MedicalProduct medicalProduct = medicalProductMapper.medicalProductDtoToMedicalProduct(dto);
-            doctor.getMedicalProducts().add(medicalProduct);
+            doctor.addMedicalProduct(medicalProduct);
             doctorRepository.save(doctor);
             return dto;
         }

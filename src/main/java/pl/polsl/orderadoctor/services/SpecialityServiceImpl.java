@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.polsl.orderadoctor.dto.SpecialityDto;
 import pl.polsl.orderadoctor.mappers.SpecialityMapper;
 import pl.polsl.orderadoctor.model.Doctor;
@@ -49,6 +50,7 @@ public class SpecialityServiceImpl implements SpecialityService {
     }
 
     @Override
+    @Transactional
     public SpecialityDto saveDto(SpecialityDto dto, Long doctorId) {
         Optional<Doctor> doctorOptional = doctorRepository.findById(doctorId);
 

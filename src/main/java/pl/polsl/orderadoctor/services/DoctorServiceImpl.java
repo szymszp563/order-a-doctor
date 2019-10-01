@@ -2,6 +2,7 @@ package pl.polsl.orderadoctor.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -9,7 +10,7 @@ import pl.polsl.orderadoctor.dto.DoctorDto;
 import pl.polsl.orderadoctor.mappers.DoctorMapper;
 import pl.polsl.orderadoctor.model.AccountType;
 import pl.polsl.orderadoctor.model.Doctor;
-import pl.polsl.orderadoctor.model.Grade;
+import pl.polsl.orderadoctor.model.MedicalProduct;
 import pl.polsl.orderadoctor.model.Speciality;
 import pl.polsl.orderadoctor.repositories.DoctorRepository;
 import pl.polsl.orderadoctor.repositories.MedicalProductRepository;
@@ -17,6 +18,7 @@ import pl.polsl.orderadoctor.repositories.SpecialityRepository;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Log4j2
 @Service
@@ -86,6 +88,12 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
+    public List<DoctorDto> findAllDoctorsDto() {
+        List<Doctor> doctors = doctorRepository.findAll(Sort.by(Sort.Direction.ASC, "firstName"));
+        return doctors.stream().map(doctorMapper::doctorToDoctorDto).collect(Collectors.toList());
+    }
+
+    @Override
     public void saveImageFile(Long id, MultipartFile file) {
         try {
             Doctor doctor = doctorRepository.findById(id).get();
@@ -117,16 +125,11 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public void deleteMedicalProductById(Long doctorId, Long id) {
         Doctor doctor = doctorRepository.findById(doctorId).get();
-        doctor.getMedicalProducts().remove(medicalProductRepository.findById(id).get());
+        MedicalProduct medicalProduct = medicalProductRepository.findById(id).get();
+        doctor.getMedicalProducts().remove(medicalProduct);
         doctorRepository.save(doctor);
+        medicalProductRepository.delete(medicalProduct);
     }
 
-    @Override
-    public void deleteGrade(Long id) {
-        Grade grade = gradeService.findById(id);
-        Doctor doctor = doctorRepository.findById(grade.getDoctor().getId()).get();
-        doctor.getGrades().remove(grade);
-        doctorRepository.save(doctor);
-    }
 
 }
