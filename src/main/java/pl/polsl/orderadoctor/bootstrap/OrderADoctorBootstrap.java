@@ -4,6 +4,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import pl.polsl.orderadoctor.model.AccountType;
+import pl.polsl.orderadoctor.model.DegreeType;
 import pl.polsl.orderadoctor.model.Doctor;
 import pl.polsl.orderadoctor.model.Grade;
 import pl.polsl.orderadoctor.model.MedicalProduct;
@@ -72,7 +73,7 @@ public class OrderADoctorBootstrap implements ApplicationListener<ContextRefresh
         Grade g5 = Grade.builder().grade((byte) 1).comment("Worst doctor ever...").build();
         Grade g6 = Grade.builder().grade((byte) 5).comment("Extra!").build();
 
-        Doctor d1 = Doctor.builder().externalId("1").firstName("Dr John W.").lastName("Thackery").city("Katowice")
+        Doctor d1 = Doctor.builder().externalId("1").firstName("John W.").lastName("Thackery").city("Katowice").degree(DegreeType.PhD)
                 .email("J.W.Thack@gmail.com").street("Raciborska 6/65").workingFrom("8:00").workingTo("16:00")
                 .about("Best Medical Doctor of 20th Century").specialities(Arrays.asList(surgery, internist, orthopaedist))
                 .visits(new LinkedList<>()).medicalProducts(new LinkedList<>()).grades(new HashSet<>()).averageGrade(0D)
@@ -82,7 +83,7 @@ public class OrderADoctorBootstrap implements ApplicationListener<ContextRefresh
         d1.addGrade(g1);
         d1.addGrade(g2);
 
-        Doctor d2 = Doctor.builder().externalId("2").firstName("Dr Kevin").lastName("Garvey").city("Katowice")
+        Doctor d2 = Doctor.builder().externalId("2").firstName("Kevin").lastName("Garvey").city("Katowice").degree(DegreeType.MD)
                 .email("DrGarvey@gmail.com").street("MPK 8").workingFrom("8:00").workingTo("16:00")
                 .about("Where is his mind").specialities(Arrays.asList(internist, oncologist))
                 .visits(new LinkedList<>()).medicalProducts(new LinkedList<>()).grades(new HashSet<>()).averageGrade(0D)
@@ -92,7 +93,7 @@ public class OrderADoctorBootstrap implements ApplicationListener<ContextRefresh
         d2.addGrade(g3);
         d2.addGrade(g4);
 
-        Doctor d3 = Doctor.builder().externalId("3").firstName("Dr Algernon").lastName("Edwards").city("Opole")
+        Doctor d3 = Doctor.builder().externalId("3").firstName("Algernon").lastName("Edwards").city("Opole").degree(DegreeType.PhD)
                 .email("Algernon@facebook.com").street("Koszalinska 32/64").workingFrom("8:00").workingTo("16:00")
                 .about("Rich mind").specialities(Arrays.asList(ophthalmologist, dermatologist, internist))
                 .visits(new LinkedList<>()).medicalProducts(new LinkedList<>()).grades(new HashSet<>()).averageGrade(0D)

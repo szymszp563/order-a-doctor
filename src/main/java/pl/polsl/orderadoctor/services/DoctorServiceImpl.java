@@ -131,5 +131,12 @@ public class DoctorServiceImpl implements DoctorService {
         medicalProductRepository.delete(medicalProduct);
     }
 
+    @Override
+    public List<DoctorDto> findAllDtoBySpeciality(Long id) {
+        List<Doctor> doctors = doctorRepository.findAllBySpeciality(id);
+
+        return doctors.stream().map(doctorMapper::doctorToDoctorDto).collect(Collectors.toList());
+    }
+
 
 }

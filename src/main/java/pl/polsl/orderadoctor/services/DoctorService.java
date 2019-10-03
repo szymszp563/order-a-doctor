@@ -34,4 +34,6 @@ public interface DoctorService {
 
     void deleteMedicalProductById(Long doctorId, Long id);
 
+    List<DoctorDto> findAllDtoBySpeciality(Long id);
+
 }

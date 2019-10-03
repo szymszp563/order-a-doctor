@@ -13,7 +13,10 @@ public interface GradeMapper {
             @Mapping(target = "doctorFirstName", source = "doctor.firstName"),
             @Mapping(target = "doctorLastName", source = "doctor.lastName"),
             @Mapping(target = "doctorId", source = "doctor.id"),
-            @Mapping(target = "doctorDegree", source = "doctor.degree")
+            @Mapping(target = "doctorDegree", source = "doctor.degree"),
+            @Mapping(target = "userFirstName", source = "user.firstName"),
+            @Mapping(target = "userLastName", source = "user.lastName"),
+            @Mapping(target = "userId", source = "user.id")
     })
     GradeDto gradeToGradeDto(Grade entity);
 

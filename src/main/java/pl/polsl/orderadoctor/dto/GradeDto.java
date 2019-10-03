@@ -24,4 +24,10 @@ public class GradeDto {
 
     private DegreeType doctorDegree;
 
+    private String userLastName;
+
+    private Long userId;
+
+    private String userFirstName;
+
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import pl.polsl.orderadoctor.dto.UserDto;
 import pl.polsl.orderadoctor.model.User;
 import pl.polsl.orderadoctor.services.DoctorService;
+import pl.polsl.orderadoctor.services.SpecialityService;
 import pl.polsl.orderadoctor.services.UserService;
 
 import javax.validation.Valid;
@@ -22,6 +23,7 @@ import javax.validation.Valid;
 public class UserController {
     private final UserService userService;
     private final DoctorService doctorService;
+    private final SpecialityService specialityService;
 
 
     @GetMapping("user/{id}/logged")
@@ -30,6 +32,8 @@ public class UserController {
         User user = userService.findById(id);
 
         model.addAttribute("user", user);
+
+        model.addAttribute("specialities", specialityService.findAllSpecialitiesDto());
 
         return "login/logged/logged_in_user";
     }
@@ -74,6 +78,8 @@ public class UserController {
         User user = userService.findById(id);
 
         model.addAttribute("user", user);
+
+        model.addAttribute("specialities", specialityService.findAllSpecialitiesDto());
 
         return "login/logged/user/find_doctor";
     }

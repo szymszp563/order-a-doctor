@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order a Doctor Logged-In</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"
+            th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/css/bootstrap-select.min.css"
+          th:href="@{/webjars/bootstrap-select/1.13.8/css/bootstrap-select.css}">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.9/dist/js/bootstrap-select.min.js"
+            th:src="@{/webjars/bootstrap-select/1.13.8/js/bootstrap-select.js}"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .checked {
+            color: #ff5772;
+        }
+    </style>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#" th:href="@{'/user/' + ${user.id} + '/logged'}">Order a Doctor</a>
+            </div>
+
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+<!--                    <li class="active"><a href="#">Link </a></li>-->
+                    <li class="active"><a href="#" th:href="@{'/user/' + ${user.id} + '/find_doctor'}">Find Doctor</a></li>
+                    <li><a href="#" th:href="@{'/user/' + ${user.id} + '/show'}">View Profile</a></li>
+
+                </ul>
+
+                <p class="navbar-text navbar-right">Signed in as
+                    <a style="font-weight:bold" href="#" th:href="@{'/user/' + ${user.id} + '/show'}"
+                       class="navbar-link" th:text="${user.firstName}+' '+${user.lastName}">User Name</a>
+                    <a href="#" th:href="@{'/logout'}" class="navbar-link">Logout</a>
+                </p>
+
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="container-fluid" style="margin-top: 20px">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="pannel-group">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <h1 class="panel-title" th:text="${doctor.firstName} + ' ' + ${doctor.lastName}">
+                                        FirstName LastName</h1>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <a class="btn btn-default btn-block" href="#"
+                                       th:href="@{'/user/' + ${user.id} + '/find/' + ${speciality.id} + '/list'}" role="button">Back</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <p>Degree:</p>
+                                    <p>First Name:</p>
+                                    <p>Last Name:</p>
+                                    <p>Average Grade:</p>
+                                    <p>Rating:</p>
+                                    <p>Email:</p>
+                                    <p>City:</p>
+                                    <p>Working Hours:</p>
+                                </div>
+                                <div class="col-md-7">
+                                    <p th:text="${(doctor.degree)}">Medical Doctor</p>
+                                    <p th:text="${(doctor.firstName)}">John</p>
+                                    <p th:text="${(doctor.lastName)}">Doe</p>
+                                    <span class="fa fa-heartbeat checked" th:remove="all"></span>
+                                    <span class="fa fa-heartbeat checked" th:remove="all"></span>
+                                    <span class="fa fa-heartbeat checked" th:remove="all"></span>
+                                    <span class="fa fa-heartbeat" th:remove="all"></span>
+                                    <span class="fa fa-heartbeat" th:remove="all"></span>
+                                    <p th:if="__${doctor.averageGrade}__>0" th:text="${(doctor.averageGrade.toString().substring(0, 3))}">grade</p>
+                                    <p th:if="__${doctor.averageGrade}__<=0" th:text="${(doctor.averageGrade.toString())}">grade</p>
+                                    <p>
+                                    <span th:if="__${intGrade}__ > 0" class="fa fa-heartbeat checked"
+                                          th:each="heart : ${#numbers.sequence( 1, __${intGrade}__)}"></span>
+                                        <span th:if="__${intGrade}__ < 5" class="fa fa-heartbeat"
+                                              th:each="heart : ${#numbers.sequence( 1, __${5 - intGrade}__)}"></span>
+
+                                    </p>
+                                    <p th:text="${(doctor.email)}">JohnDoe@mail.com</p>
+                                    <p th:text="${(doctor.city)}">New York</p>
+                                    <p th:text="${(doctor.workingFrom) + ' - ' + (doctor.workingTo)}">08:00 - 16:00</p>
+                                </div>
+                                <div class="col-md-2">
+                                    <img src="../../../images/user.jpg"
+                                         th:src="@{'/image/doctor/' + ${doctor.id} + '/doctorimage'}"
+                                         width="200" height="200">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-10 ">
+                                    <h1 class="panel-title">Specialities</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul>
+                                        <li th:remove="all">Surgeon</li>
+                                        <li th:remove="all">Internist</li>
+                                        <li th:each="speciality : ${doctor.specialities}"
+                                            th:text="${(speciality.description)}">Gynecologist
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-10 ">
+                                    <h1 class="panel-title">Medical Products</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul>
+                                        <li th:remove="all">Head removal - 5h - 300zł</li>
+                                        <li th:remove="all">Interview - 1h - 100zł</li>
+                                        <li th:each="medprod : ${doctor.medicalProducts}"
+                                            th:text="${medprod.name + ' - ' + __${medprod.duration}__/60 + 'h ' + __${medprod.duration}__%60 + 'min' + ' - ' + medprod.price + 'zł'}">Injection
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">About</h1>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p th:text="${doctor.about}">Lorem ipsum dolor sit amet, consectetuer adipiscing
+                                        elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
+                                        penatibus
+                                        et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+                                        ultricies
+                                        nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec
+                                        pede
+                                        justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus
+                                        ut,
+                                        imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+                                        Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate
+                                        eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,
+                                        enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus
+                                        viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam
+                                        ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.
+                                        Etiam
+                                        rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper
+                                        libero,
+                                        sit amet adipiscing sem neque sed ipsum.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h1 class="panel-title">Grades</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <ul>
+                                        <li th:remove="all">5 - fname lname - Beast Dcotor</li>
+                                        <li th:remove="all">2 - fname lname - Not too good</li>
+                                        <li th:each="grade : ${doctor.grades}"
+                                            th:text="${(grade.grade + ' - ' + grade.userFirstName + ' ' + grade.userLastName + ' - ' + grade.comment)}">grade grade
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+</html>

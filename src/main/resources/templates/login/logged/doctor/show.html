@@ -94,7 +94,7 @@
                                 <span class="fa fa-heartbeat checked" th:remove="all"></span>
                                 <span class="fa fa-heartbeat" th:remove="all"></span>
                                 <span class="fa fa-heartbeat" th:remove="all"></span>
-                                <p th:if="__${doctor.averageGrade}__>0" th:text="${(doctor.averageGrade.toString().substring(0, 4))}">grade</p>
+                                <p th:if="__${doctor.averageGrade}__>0" th:text="${(doctor.averageGrade.toString().substring(0, 3))}">grade</p>
                                 <p th:if="__${doctor.averageGrade}__<=0" th:text="${(doctor.averageGrade.toString())}">grade</p>
                                 <p>
                                     <span th:if="__${doctor.getIntGrade()}__ > 0" class="fa fa-heartbeat checked"
@@ -109,7 +109,7 @@
                             </div>
                             <div class="col-md-2">
                                 <img src="../../../images/user.jpg"
-                                     th:src="@{'/doctor/' + ${doctor.id} + '/doctorimage'}"
+                                     th:src="@{'/image/doctor/' + ${doctor.id} + '/doctorimage'}"
                                      width="200" height="200">
                             </div>
                         </div>

@@ -56,7 +56,7 @@ public class ImageController {
         return "redirect:/doctor/" + id + "/show";
     }
 
-    @GetMapping("user/{id}/userimage")
+    @GetMapping("image/user/{id}/userimage")
     public void renderUserImageFromDB(@PathVariable String id, HttpServletResponse response) throws IOException {
         User user = userService.findById(Long.valueOf(id));
 
@@ -74,7 +74,7 @@ public class ImageController {
         }
     }
 
-    @GetMapping("doctor/{id}/doctorimage")
+    @GetMapping("image/doctor/{id}/doctorimage")
     public void renderDoctorImageFromDB(@PathVariable String id, HttpServletResponse response) throws IOException {
         Doctor doctor = doctorService.findById(Long.valueOf(id));
 
