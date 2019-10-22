@@ -74,6 +74,12 @@ public class DoctorServiceImpl implements DoctorService {
 
         Doctor detachedDoctor = doctorMapper.doctorDtoToDoctor(dto);
 
+        List<Speciality> specialities = specialityRepository.findByDoctorId(dto.getId());
+
+        if(specialities.size()>0){
+            detachedDoctor.setSpecialities(specialities);
+        }
+
         Doctor savedDoctor = doctorRepository.save(detachedDoctor);
         log.debug("Saved user: " + savedDoctor.getId());
 

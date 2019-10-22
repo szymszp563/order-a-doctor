@@ -10,7 +10,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -68,12 +67,13 @@ public class Doctor {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "doctor")
     private List<Visit> visits = new LinkedList<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "doctor_specialties", joinColumns = @JoinColumn(name = "doctor_id"),
+    @ManyToMany//(fetch = FetchType.EAGER)
+    @JoinTable(name = "doctor_specialties",
+            joinColumns = @JoinColumn(name = "doctor_id"),
             inverseJoinColumns = @JoinColumn(name = "speciality_id"))
     private List<Speciality> specialities = new LinkedList<>();
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "doctor")
     private List<MedicalProduct> medicalProducts = new LinkedList<>();
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "doctor")

@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -24,4 +26,7 @@ public class Speciality {
     private Long id;
 
     private String description;
+
+    @ManyToMany(mappedBy = "specialities")
+    private List<Doctor> doctors;
 }

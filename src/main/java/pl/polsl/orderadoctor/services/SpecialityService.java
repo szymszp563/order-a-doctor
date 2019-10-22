@@ -17,4 +17,6 @@ public interface SpecialityService {
     SpecialityDto saveDto(SpecialityDto dto, Long doctorId);
 
     SpecialityDto findDtoById(Long id);
+
+    List<Speciality> findByDoctorId(Long doctorId);
 }

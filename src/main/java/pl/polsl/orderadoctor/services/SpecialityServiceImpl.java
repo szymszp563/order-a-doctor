@@ -95,5 +95,11 @@ public class SpecialityServiceImpl implements SpecialityService {
         return specialityMapper.specialityToSpecialityDto(specialityRepository.findById(id).get());
     }
 
+    @Override
+    public List<Speciality> findByDoctorId(Long doctorId) {
+        return specialityRepository.findByDoctorId(doctorId);
+
+    }
+
 
 }
