@@ -153,13 +153,23 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <ul>
-                                        <li th:remove="all">Head removal - 5h - 300zł</li>
-                                        <li th:remove="all">Interview - 1h - 100zł</li>
-                                        <li th:each="medprod : ${doctor.medicalProducts}"
-                                            th:text="${medprod.name + ' - ' + __${medprod.duration}__/60 + 'h ' + __${medprod.duration}__%60 + 'min' + ' - ' + medprod.price + 'zł'}">Injection
-                                        </li>
-                                    </ul>
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr style="font-size: 15px;">
+                                            <th>Name</th>
+                                            <th>Duration</th>
+                                            <th>Price</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="medprod : ${doctor.medicalProducts}" style="cursor: pointer; font-size: 15px;"
+                                            th:onclick="'javascript:rowClicked(\'' +'/user/' + ${user.id} + '/find/' + ${speciality.id} + '/show/' + ${doctor.id} + '/' + ${medprod.id} + '\');'">
+                                            <td th:text="${medprod.name}"></td>
+                                            <td th:text="${__${medprod.duration}__/60 + 'h ' + __${medprod.duration}__%60 + 'min'}"></td>
+                                            <td th:text="${medprod.price + 'zł'}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -206,13 +216,22 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <ul>
-                                        <li th:remove="all">5 - fname lname - Beast Dcotor</li>
-                                        <li th:remove="all">2 - fname lname - Not too good</li>
-                                        <li th:each="grade : ${doctor.grades}"
-                                            th:text="${(grade.grade + ' - ' + grade.userFirstName + ' ' + grade.userLastName + ' - ' + grade.comment)}">grade grade
-                                        </li>
-                                    </ul>
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr style="font-size: 15px;">
+                                            <th>Grade</th>
+                                            <th>Name</th>
+                                            <th>Comment</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="grade : ${doctor.grades}">
+                                            <td th:text="${grade.grade}"></td>
+                                            <td th:text="${grade.userFirstName + ' ' + grade.userLastName}"></td>
+                                            <td th:text="${grade.comment}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -223,6 +242,12 @@
     </div>
 
 
+    <script>
+        function rowClicked(value) {
+            console.log("GGLALGLA");
+            location.href = value;
+        }
+    </script>
 
 
 </body>

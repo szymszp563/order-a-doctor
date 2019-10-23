@@ -48,7 +48,6 @@
     <div class="container-fluid" style="margin-top: 20px">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <!--/*@thymesVar id="ingredient" type="com.spring.recipes.commands.IngredientCommand"*/-->
                 <form th:object="${grade}" th:action="@{'/user/' + ${user.id} + '/grade'} " method="post">
                     <input type="hidden" th:field="*{id}"/>
                     <div class="pannel-group">

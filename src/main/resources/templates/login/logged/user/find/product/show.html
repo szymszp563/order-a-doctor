@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order a Doctor Logged-In</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"
+          th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+
+    <script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"
+            th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+
+
+    <style>
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            margin: 1% 0%;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+
+        .button2 {
+            background-color: #008CBA;
+            color: black;
+            border: 2px solid #008CBA;
+            width: 24%;
+        }
+
+        .button2:hover {
+            background-color: white;
+            color: #008CBA;
+        }
+    </style>
+</head>
+
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#" th:href="@{'/user/' + ${user.id} + '/logged'}">Order a Doctor</a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <!--                    <li class="active"><a href="#">Link </a></li>-->
+                <li class="active"><a href="#" th:href="@{'/user/' + ${user.id} + '/find_doctor'}">Find Doctor</a></li>
+                <li><a href="#" th:href="@{'/user/' + ${user.id} + '/show'}">View Profile</a></li>
+
+            </ul>
+
+            <p class="navbar-text navbar-right">Signed in as
+                <a style="font-weight:bold" href="#" th:href="@{'/user/' + ${user.id} + '/show'}"
+                   class="navbar-link" th:text="${user.firstName}+' '+${user.lastName}">User Name</a>
+                <a href="#" th:href="@{'/logout'}" class="navbar-link">Logout</a>
+            </p>
+
+
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-primary">
+
+                <div class="panel-heading">
+                    <h1 class="panel-title">Medical Product</h1>
+                </div>
+                <div class="panel-body">
+
+                    <div class="table-responsive">
+                        <table class="table table-hover ">
+                            <thead class="thead-inverse">
+                            <tr>
+                                <th>Name</th>
+                                <th>Duration</th>
+                                <th>Price</th>
+                            </tr>
+                            </thead>
+                            <tr th:remove="all">
+                                <td>Product</td>
+                                <td>1 h</td>
+                                <td>1000 zł</td>
+                            </tr>
+                            <tr>
+                                <td th:text="${product.name}">Prod 2</td>
+                                <td th:text="${__${product.duration}__/60 + 'h ' + __${product.duration}__%60 + 'min'}">
+                                    Dur 2
+                                </td>
+                                <td th:text="${product.price + 'zł'}">Price 2</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h1 class="panel-title">Description</h1>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p th:text="${product.description}">Lorem ipsum dolor sit amet, consectetuer adipiscing
+                                elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
+                                penatibus
+                                et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+                                ultricies
+                                nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec
+                                pede
+                                justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus
+                                ut,
+                                imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+                                Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate
+                                eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,
+                                enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus
+                                viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam
+                                ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.
+                                Etiam
+                                rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper
+                                libero,
+                                sit amet adipiscing sem neque sed ipsum.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <a class="button button2" style="margin-left: 36.5%" href="#" th:text="${'Schedule a Visit'}"
+                   th:href="@{'/user/' + ${user.id} + '/find/' + ${speciality.id} + '/show/' + ${doctor.id} + '/' + ${product.id} + '/visit'}" role="button">
+                    /user/{userId}/find/{id}/show/{doctorId}/{productId}/visit
+                    Visit
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -3,6 +3,7 @@ package pl.polsl.orderadoctor.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.polsl.orderadoctor.model.VisitState;
 
 import java.time.LocalDateTime;
 import java.util.LinkedList;
@@ -21,6 +22,14 @@ public class VisitDto {
 
     private LocalDateTime dateTo;
 
+    private VisitState visitState;
+
     private List<MedicalProductDto> medicalProducts = new LinkedList<>();
+
+    private String hour;
+
+    private Integer month;
+
+    private Integer day;
 
 }

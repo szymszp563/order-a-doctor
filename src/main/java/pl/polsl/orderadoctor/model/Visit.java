@@ -38,6 +38,8 @@ public class Visit {
 
     private LocalDateTime dateTo;
 
+    private VisitState visitState;
+
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "visits_medical_products", joinColumns = @JoinColumn(name = "visit_id"),
