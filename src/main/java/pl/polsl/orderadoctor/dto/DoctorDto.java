@@ -50,7 +50,7 @@ public class DoctorDto {
 
     private Double averageGrade;
 
-    @NotBlank
+//    @NotBlank
     private String about;
 
     private List<VisitDto> visits = new LinkedList<>();
@@ -60,4 +60,9 @@ public class DoctorDto {
     private List<MedicalProductDto> medicalProducts = new LinkedList<>();
 
     private Set<GradeDto> grades = new HashSet<>();
+
+    public int getIntGrade() {
+        Double g = (averageGrade) * 2 + 1;
+        return (g.intValue()) / 2;
+    }
 }

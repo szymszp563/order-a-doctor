@@ -4,7 +4,6 @@ import org.springframework.web.multipart.MultipartFile;
 import pl.polsl.orderadoctor.dto.DoctorDto;
 import pl.polsl.orderadoctor.model.AccountType;
 import pl.polsl.orderadoctor.model.Doctor;
-import pl.polsl.orderadoctor.model.Speciality;
 
 import java.util.List;
 
@@ -15,8 +14,6 @@ public interface DoctorService {
     void saveAll(List<Doctor> doctorList);
 
     Doctor findById(Long id);
-
-    List<Doctor> findAllBySpecialitiesAndCity(Speciality speciality, String city);
 
     Doctor findByExternalIdAndAccountType(String externalId, AccountType accountType);
 
@@ -35,5 +32,7 @@ public interface DoctorService {
     void deleteMedicalProductById(Long doctorId, Long id);
 
     List<DoctorDto> findAllDtoBySpeciality(Long id);
+
+    List<DoctorDto> findAllBySpecialityAndCity(Long id, String city);
 
 }

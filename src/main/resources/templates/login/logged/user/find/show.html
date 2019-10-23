@@ -72,11 +72,6 @@
                                     <h1 class="panel-title" th:text="${doctor.firstName} + ' ' + ${doctor.lastName}">
                                         FirstName LastName</h1>
                                 </div>
-
-                                <div class="col-md-2">
-                                    <a class="btn btn-default btn-block" href="#"
-                                       th:href="@{'/user/' + ${user.id} + '/find/' + ${speciality.id} + '/list'}" role="button">Back</a>
-                                </div>
                             </div>
                         </div>
                         <div class="panel-body">
@@ -89,6 +84,7 @@
                                     <p>Rating:</p>
                                     <p>Email:</p>
                                     <p>City:</p>
+                                    <p>Street:</p>
                                     <p>Working Hours:</p>
                                 </div>
                                 <div class="col-md-7">
@@ -111,6 +107,7 @@
                                     </p>
                                     <p th:text="${(doctor.email)}">JohnDoe@mail.com</p>
                                     <p th:text="${(doctor.city)}">New York</p>
+                                    <p th:text="${(doctor.street)}">Avenue St.</p>
                                     <p th:text="${(doctor.workingFrom) + ' - ' + (doctor.workingTo)}">08:00 - 16:00</p>
                                 </div>
                                 <div class="col-md-2">

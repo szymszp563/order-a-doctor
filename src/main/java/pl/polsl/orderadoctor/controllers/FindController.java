@@ -18,8 +18,21 @@ public class FindController {
 
     @GetMapping("/user/{userId}/find/{id}/list")
     public String searchDoctors(@PathVariable Long userId, @PathVariable Long id, Model model){
+
         model.addAttribute("user", userService.findDtoById(userId));
         model.addAttribute("doctors", doctorService.findAllDtoBySpeciality(id));
+        model.addAttribute("speciality", specialityService.findDtoById(id));
+
+        return "login/logged/user/find/list";
+    }
+
+    @GetMapping("/user/{userId}/find/{id}/{city}/list")
+    public String searchDoctorsWithCity(@PathVariable Long userId, @PathVariable Long id, @PathVariable String city, Model model){
+
+
+
+        model.addAttribute("user", userService.findDtoById(userId));
+        model.addAttribute("doctors", doctorService.findAllBySpecialityAndCity(id, city));
         model.addAttribute("speciality", specialityService.findDtoById(id));
 
         return "login/logged/user/find/list";

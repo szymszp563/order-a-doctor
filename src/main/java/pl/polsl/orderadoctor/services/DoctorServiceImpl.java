@@ -50,13 +50,6 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public List<Doctor> findAllBySpecialitiesAndCity(Speciality speciality, String city) {
-        List<Doctor> doctors;
-        doctors = doctorRepository.findAllBySpecialitiesAndCity(speciality, city);
-        return doctors;
-    }
-
-    @Override
     public Doctor findByExternalIdAndAccountType(String externalId, AccountType accountType) {
         Doctor doctor = doctorRepository.findByExternalIdAndAccountType(externalId, accountType);
         return doctor;
@@ -142,6 +135,15 @@ public class DoctorServiceImpl implements DoctorService {
         List<Doctor> doctors = doctorRepository.findAllBySpeciality(id);
 
         return doctors.stream().map(doctorMapper::doctorToDoctorDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<DoctorDto> findAllBySpecialityAndCity(Long id, String city) {
+
+        List<Doctor> doctors = doctorRepository.findAllBySpecialityAndCity(id, city);
+
+        return doctors.stream().map(doctorMapper::doctorToDoctorDto).collect(Collectors.toList());
+
     }
 
 

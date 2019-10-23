@@ -83,6 +83,7 @@
                                 <p>Rating:</p>
                                 <p>Email:</p>
                                 <p>City:</p>
+                                <p>Street:</p>
                                 <p>Working Hours:</p>
                             </div>
                             <div class="col-md-7">
@@ -105,6 +106,7 @@
                                 </p>
                                 <p th:text="${(doctor.email)}">JohnDoe@mail.com</p>
                                 <p th:text="${(doctor.city)}">New York</p>
+                                <p th:text="${(doctor.street)}">Avenue St.</p>
                                 <p th:text="${(doctor.workingFrom) + ' - ' + (doctor.workingTo)}">08:00 - 16:00</p>
                             </div>
                             <div class="col-md-2">

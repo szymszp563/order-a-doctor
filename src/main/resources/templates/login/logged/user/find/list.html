@@ -26,6 +26,12 @@
             th:src="@{/webjars/bootstrap-select/1.13.8/js/bootstrap-select.js}"></script>
 
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .checked {
+            color: #ff5772;
+        }
+    </style>
 </head>
 
 <body>
@@ -56,12 +62,43 @@
     </nav>
 
     <div style="margin-left: 10%">
-        <li th:each="doc : ${doctors}">
-        <a style="font-weight:bold" href="#" th:href="@{'/user/' + ${user.id} + '/find/' + ${speciality.id} + '/show/' + ${doc.id}}" th:text="${(doc.degree + ' ' + doc.firstName + ' ' + doc.lastName)} ">grade grade
-        </a></li>
+        <table class="table table-hover">
+            <thead>
+                <tr style="font-size: 20px;">
+                    <th>Degree</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>City</th>
+                    <th>Street</th>
+                    <th>Rating</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="doc : ${doctors}" style="cursor: pointer; font-size: 20px;"
+                    th:onclick="'javascript:rowClicked(\'' +'/user/' + ${user.id} + '/find/' + ${speciality.id} + '/show/' + ${doc.id}+ '\');'">
+                        <td th:text="${doc.degree}"></td>
+                        <td th:text="${doc.firstName}"></td>
+                        <td th:text="${doc.lastName}"></td>
+                        <td th:text="${doc.city}"></td>
+                        <td th:text="${doc.street}"></td>
+                        <td>
+                            <span th:if="__${doc.getIntGrade()}__ > 0" class="fa fa-heartbeat checked"
+                                  th:each="heart : ${#numbers.sequence( 1, __${doc.getIntGrade()}__)}">
+                            </span>
+                            <span th:if="__${doc.getIntGrade()}__ < 5" class="fa fa-heartbeat"
+                                  th:each="heart : ${#numbers.sequence( 1, __${5 - doc.getIntGrade()}__)}">
+                            </span>
+                        </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
-
+    <script>
+        function rowClicked(value) {
+            location.href = value;
+        }
+    </script>
 
 
 </body>
