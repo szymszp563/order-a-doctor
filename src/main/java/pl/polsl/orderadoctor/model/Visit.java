@@ -9,6 +9,8 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,6 +40,7 @@ public class Visit {
 
     private LocalDateTime dateTo;
 
+    @Enumerated(value = EnumType.STRING)
     private VisitState visitState;
 
     @ManyToMany
@@ -55,6 +58,9 @@ public class Visit {
     private User user;
 
     public void addMedicalProduct(MedicalProduct medicalProduct) {
+        if(this.medicalProducts==null){
+            this.medicalProducts = new LinkedList<>();
+        }
         this.medicalProducts.add(medicalProduct);
         if (dateTo == null) {
             dateTo = dateFrom;

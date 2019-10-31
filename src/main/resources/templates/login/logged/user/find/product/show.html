@@ -145,8 +145,7 @@
 
             <div>
                 <a class="button button2" style="margin-left: 36.5%" href="#" th:text="${'Schedule a Visit'}"
-                   th:href="@{'/user/' + ${user.id} + '/find/' + ${speciality.id} + '/show/' + ${doctor.id} + '/' + ${product.id} + '/visit'}" role="button">
-                    /user/{userId}/find/{id}/show/{doctorId}/{productId}/visit
+                   th:href="@{'/user/' + ${user.id} + '/show/' + ${doctor.id} + '/' + ${product.id} + '/visit'}" role="button">
                     Visit
                 </a>
             </div>

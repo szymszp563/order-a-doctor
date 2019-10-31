@@ -40,21 +40,19 @@ public class FindController {
         return "login/logged/user/find/list";
     }
 
-    @GetMapping("/user/{userId}/find/{id}/show/{doctorId}")
-    public String searchDoctors(@PathVariable Long userId, @PathVariable Long doctorId, @PathVariable Long id, Model model){
+    @GetMapping("/user/{userId}/show/{doctorId}")
+    public String showFoundDoctor(@PathVariable Long userId, @PathVariable Long doctorId, Model model){
         model.addAttribute("user", userService.findDtoById(userId));
         model.addAttribute("doctor", doctorService.findDtoById(doctorId));
-        model.addAttribute("speciality", specialityService.findDtoById(id));
         model.addAttribute("intGrade", doctorService.findById(doctorId).getIntGrade());
 
         return "login/logged/user/find/show";
     }
 
-    @GetMapping("/user/{userId}/find/{id}/show/{doctorId}/{productId}")
-    public String selectProduct(@PathVariable Long userId, @PathVariable Long doctorId, @PathVariable Long id, @PathVariable Long productId, Model model){
+    @GetMapping("/user/{userId}/show/{doctorId}/{productId}")
+    public String selectProduct(@PathVariable Long userId, @PathVariable Long doctorId, @PathVariable Long productId, Model model){
         model.addAttribute("user", userService.findDtoById(userId));
         model.addAttribute("doctor", doctorService.findDtoById(doctorId));
-        model.addAttribute("speciality", specialityService.findDtoById(id));
         model.addAttribute("product", medicalProductService.findDtoById(productId));
 
         return "login/logged/user/find/product/show";

@@ -1,5 +1,6 @@
 package pl.polsl.orderadoctor.services;
 
+import pl.polsl.orderadoctor.dto.VisitDto;
 import pl.polsl.orderadoctor.model.Visit;
 
 import java.util.List;
@@ -10,4 +11,6 @@ public interface VisitService {
     void saveAll(List<Visit> visits);
 
     Visit findById(Long id);
+
+    VisitDto saveDto(VisitDto dto, Long userId);
 }

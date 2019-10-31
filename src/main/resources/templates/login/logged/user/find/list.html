@@ -75,7 +75,7 @@
             </thead>
             <tbody>
                 <tr th:each="doc : ${doctors}" style="cursor: pointer; font-size: 20px;"
-                    th:onclick="'javascript:rowClicked(\'' +'/user/' + ${user.id} + '/find/' + ${speciality.id} + '/show/' + ${doc.id}+ '\');'">
+                    th:onclick="'javascript:rowClicked(\'' +'/user/' + ${user.id} + '/show/' + ${doc.id}+ '\');'">
                         <td th:text="${doc.degree}"></td>
                         <td th:text="${doc.firstName}"></td>
                         <td th:text="${doc.lastName}"></td>

@@ -6,8 +6,6 @@ import lombok.Setter;
 import pl.polsl.orderadoctor.model.VisitState;
 
 import java.time.LocalDateTime;
-import java.util.LinkedList;
-import java.util.List;
 
 @Getter
 @Setter
@@ -24,12 +22,16 @@ public class VisitDto {
 
     private VisitState visitState;
 
-    private List<MedicalProductDto> medicalProducts = new LinkedList<>();
+    private Long[] medicalProductIds;
+
+    private String startingDate;
 
     private String hour;
 
-    private Integer month;
+    private Long doctorId;
 
-    private Integer day;
+//    private Integer month;
+//
+//    private Integer day;
 
 }

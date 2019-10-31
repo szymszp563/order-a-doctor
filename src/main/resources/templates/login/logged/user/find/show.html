@@ -163,7 +163,7 @@
                                         </thead>
                                         <tbody>
                                         <tr th:each="medprod : ${doctor.medicalProducts}" style="cursor: pointer; font-size: 15px;"
-                                            th:onclick="'javascript:rowClicked(\'' +'/user/' + ${user.id} + '/find/' + ${speciality.id} + '/show/' + ${doctor.id} + '/' + ${medprod.id} + '\');'">
+                                            th:onclick="'javascript:rowClicked(\'' +'/user/' + ${user.id} + '/show/' + ${doctor.id} + '/' + ${medprod.id} + '\');'">
                                             <td th:text="${medprod.name}"></td>
                                             <td th:text="${__${medprod.duration}__/60 + 'h ' + __${medprod.duration}__%60 + 'min'}"></td>
                                             <td th:text="${medprod.price + 'zł'}"></td>

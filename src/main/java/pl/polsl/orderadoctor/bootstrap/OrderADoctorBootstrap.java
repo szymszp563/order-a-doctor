@@ -45,6 +45,13 @@ public class OrderADoctorBootstrap implements ApplicationListener<ContextRefresh
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
 
+        if(specialityRepository.count()==0){
+            setData();
+        }
+
+    }
+
+    private void setData() {
         Speciality surgery = Speciality.builder().description("Surgery").build();
         Speciality internist = Speciality.builder().description("Internist").build();
         Speciality oncologist = Speciality.builder().description("Oncologist").build();
@@ -183,7 +190,5 @@ public class OrderADoctorBootstrap implements ApplicationListener<ContextRefresh
         d3.addVisit(v6);
 
         visitRepository.saveAll(Arrays.asList(v1, v2, v3, v4, v5, v6));
-
-
     }
 }
