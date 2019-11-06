@@ -32,6 +32,8 @@ public class UserDto {
     @NotBlank
     private String city;
 
+    private String phoneNumber;
+
     @Email
     @NotBlank
     private String email;

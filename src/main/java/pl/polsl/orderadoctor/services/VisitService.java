@@ -13,4 +13,8 @@ public interface VisitService {
     Visit findById(Long id);
 
     VisitDto saveDto(VisitDto dto, Long userId);
+
+    void confirmVisit(Long visitId);
+
+    VisitDto findDtoById(Long visitId);
 }

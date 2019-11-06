@@ -44,6 +44,8 @@ public class User {
 
     private String email;
 
+    private String phoneNumber;
+
     @Lob
     private Byte[] image;
 

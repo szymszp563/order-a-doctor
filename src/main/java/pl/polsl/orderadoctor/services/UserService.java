@@ -25,4 +25,6 @@ public interface UserService {
     void saveImageFile(Long id, MultipartFile file);
 
     void deleteGrade(Long id);
+
+    void endPastVisits(Long id);
 }

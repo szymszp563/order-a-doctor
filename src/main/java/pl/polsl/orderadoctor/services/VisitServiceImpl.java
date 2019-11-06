@@ -9,6 +9,7 @@ import pl.polsl.orderadoctor.model.Doctor;
 import pl.polsl.orderadoctor.model.MedicalProduct;
 import pl.polsl.orderadoctor.model.User;
 import pl.polsl.orderadoctor.model.Visit;
+import pl.polsl.orderadoctor.model.VisitState;
 import pl.polsl.orderadoctor.repositories.DoctorRepository;
 import pl.polsl.orderadoctor.repositories.MedicalProductRepository;
 import pl.polsl.orderadoctor.repositories.UserRepository;
@@ -70,6 +71,7 @@ public class VisitServiceImpl implements VisitService {
             if (optionalVisit.isPresent()){
                 user.getVisits().remove(optionalVisit.get());
                 doctor.getVisits().remove(optionalVisit.get());
+                visitRepository.deleteById(optionalVisit.get().getId());
             }
 
             Visit visit = visitMapper.visitDtoToVisit(dto);
@@ -83,12 +85,29 @@ public class VisitServiceImpl implements VisitService {
             visit.setDateFrom(dateFrom);
 
             visit.addMedicalProduct(medicalProduct);
+            visit.setId(null);
             user.addVisit(visit);
             doctor.addVisit(visit);
-            userRepository.save(user);
-            doctorRepository.save(doctor);
+
+//            userRepository.save(user);
+//            doctorRepository.save(doctor);
+            visitRepository.save(visit);
             return dto;
         }
 
+    }
+
+    @Override
+    public void confirmVisit(Long visitId) {
+        Optional<Visit> visit = visitRepository.findById(visitId);
+        if(visit.isPresent()){
+            visit.get().setVisitState(VisitState.CONFIRMED);
+            visitRepository.save(visit.get());
+        }
+    }
+
+    @Override
+    public VisitDto findDtoById(Long visitId) {
+        return visitMapper.visitToVisitDto(visitRepository.findById(visitId).get());
     }
 }

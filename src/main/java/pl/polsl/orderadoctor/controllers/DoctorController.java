@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.polsl.orderadoctor.dto.DoctorDto;
 import pl.polsl.orderadoctor.model.Doctor;
+import pl.polsl.orderadoctor.model.VisitState;
 import pl.polsl.orderadoctor.services.DoctorService;
 import pl.polsl.orderadoctor.services.GradeService;
 import pl.polsl.orderadoctor.services.MedicalProductService;
@@ -33,6 +34,25 @@ public class DoctorController {
     @GetMapping("doctor/{id}/logged")
     public String doctorLoggedIn(@PathVariable Long id, Model model) {
         Doctor doctor = doctorService.findById(id);
+
+        doctorService.endPastVisits(id);
+
+        doctor.getVisits().sort((v1, v2)-> {
+                    if (v1.getVisitState() != v2.getVisitState()) {
+                        if (v2.getVisitState() == VisitState.CREATED) {
+                            return 1;
+                        } else if (v1.getVisitState() == VisitState.CREATED) {
+                            return -1;
+                        } else if (v1.getVisitState() == VisitState.ENDED) {
+                            return 1;
+                        } else {
+                            return -1;
+                        }
+                    } else {
+                        return v1.getDateFrom().compareTo(v2.getDateFrom());
+                    }
+                }
+        );
 
         model.addAttribute("doctor", doctor);
 

@@ -35,4 +35,5 @@ public interface DoctorService {
 
     List<DoctorDto> findAllBySpecialityAndCity(Long id, String city);
 
+    void endPastVisits(Long id);
 }

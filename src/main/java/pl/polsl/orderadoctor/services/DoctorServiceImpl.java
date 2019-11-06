@@ -12,11 +12,13 @@ import pl.polsl.orderadoctor.model.AccountType;
 import pl.polsl.orderadoctor.model.Doctor;
 import pl.polsl.orderadoctor.model.MedicalProduct;
 import pl.polsl.orderadoctor.model.Speciality;
+import pl.polsl.orderadoctor.model.VisitState;
 import pl.polsl.orderadoctor.repositories.DoctorRepository;
 import pl.polsl.orderadoctor.repositories.MedicalProductRepository;
 import pl.polsl.orderadoctor.repositories.SpecialityRepository;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -144,6 +146,19 @@ public class DoctorServiceImpl implements DoctorService {
 
         return doctors.stream().map(doctorMapper::doctorToDoctorDto).collect(Collectors.toList());
 
+    }
+
+    @Override
+    public void endPastVisits(Long id) {
+
+        Doctor doctor = doctorRepository.findById(id).get();
+
+        doctor.getVisits().stream().forEach(v -> {
+            if(v.getDateFrom().isBefore(LocalDateTime.now())){
+                v.setVisitState(VisitState.ENDED);
+            }
+        });
+        doctorRepository.save(doctor);
     }
 
 

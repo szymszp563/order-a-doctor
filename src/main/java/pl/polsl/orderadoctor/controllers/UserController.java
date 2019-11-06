@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.polsl.orderadoctor.dto.UserDto;
 import pl.polsl.orderadoctor.model.User;
+import pl.polsl.orderadoctor.model.VisitState;
 import pl.polsl.orderadoctor.services.DoctorService;
 import pl.polsl.orderadoctor.services.SpecialityService;
 import pl.polsl.orderadoctor.services.UserService;
@@ -30,6 +31,25 @@ public class UserController {
     public String userLoggedIn(@PathVariable Long id, Model model) {
 
         User user = userService.findById(id);
+
+        userService.endPastVisits(id);
+
+        user.getVisits().sort((v1, v2)-> {
+                    if (v1.getVisitState() != v2.getVisitState()) {
+                        if (v2.getVisitState() == VisitState.CREATED) {
+                            return 1;
+                        } else if (v1.getVisitState() == VisitState.CREATED) {
+                            return -1;
+                        } else if (v1.getVisitState() == VisitState.ENDED) {
+                            return 1;
+                        } else {
+                            return -1;
+                        }
+                    } else {
+                        return v1.getDateFrom().compareTo(v2.getDateFrom());
+                    }
+                }
+        );
 
         model.addAttribute("user", user);
 

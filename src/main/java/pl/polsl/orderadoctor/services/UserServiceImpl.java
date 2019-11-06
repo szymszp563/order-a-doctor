@@ -11,11 +11,13 @@ import pl.polsl.orderadoctor.model.AccountType;
 import pl.polsl.orderadoctor.model.Doctor;
 import pl.polsl.orderadoctor.model.Grade;
 import pl.polsl.orderadoctor.model.User;
+import pl.polsl.orderadoctor.model.VisitState;
 import pl.polsl.orderadoctor.repositories.DoctorRepository;
 import pl.polsl.orderadoctor.repositories.GradeRepository;
 import pl.polsl.orderadoctor.repositories.UserRepository;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Log4j2
@@ -108,5 +110,19 @@ public class UserServiceImpl implements UserService {
         doctorRepository.save(doctor);
         userRepository.save(user);
         gradeRepository.delete(grade);
+    }
+
+    @Override
+    public void endPastVisits(Long id) {
+
+        User user = userRepository.findById(id).get();
+
+        user.getVisits().stream().forEach(v -> {
+            if(v.getDateFrom().isBefore(LocalDateTime.now())){
+                v.setVisitState(VisitState.ENDED);
+            }
+        });
+        userRepository.save(user);
+
     }
 }

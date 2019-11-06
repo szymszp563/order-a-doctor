@@ -45,5 +45,50 @@
         </div><!-- /.container-fluid -->
     </nav>
 
+    <div class="row">
+        <h3 style="margin-left: 45%; margin-bottom: 2%; font-size: 30px; font-weight: bold;">Visits:</h3>
+    </div>
+
+    <div style="margin-left: 1%">
+        <table class="table table-hover">
+            <thead>
+            <tr style="font-size: 18px;">
+                <th>Date</th>
+                <th>Hour From</th>
+                <th>Hour To</th>
+                <th>Procedure</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="visit : ${doctor.visits}" style="cursor: pointer; font-size: 20px;"
+                th:onclick="'javascript:rowClicked(\'' +'/doctor/' + ${doctor.id} + '/show/' + ${visit.id}+ '\',\'' + ${visit.getVisitState() != T(pl.polsl.orderadoctor.model.VisitState).ENDED} + '\');'">
+                <td th:text="${#temporals.format(visit.dateFrom, 'dd-MM-yyyy')}"></td>
+                <td th:text="${#temporals.format(visit.dateFrom, 'HH:mm')}"></td>
+                <td th:text="${#temporals.format(visit.dateTo, 'HH:mm')}"></td>
+                <td th:each="medprod : ${visit.medicalProducts}" th:text="${medprod.name}"></td>
+                <td th:text="${visit.user.firstName + ' ' + visit.user.lastName}"></td>
+                <td th:text="${visit.user.email}"></td>
+                <td th:text="${visit.user.phoneNumber}"></td>
+                <td th:text="${visit.visitState.toString()}"></td>
+                <td><a th:if="${visit.getVisitState()== T(pl.polsl.orderadoctor.model.VisitState).CREATED}"
+                       href="#" th:href="@{'/doctor/' + ${doctor.id} + '/visit/' + ${visit.id} + '/updateVisitStatus'}">Confirm</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function rowClicked(value, notEnded) {
+            console.log(notEnded);
+            if(notEnded == 'true') {
+                location.href = value;
+            }
+        }
+    </script>
+
 </body>
 </html>
