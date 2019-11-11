@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.polsl.orderadoctor.model.DegreeType;
 
+import javax.validation.constraints.NotBlank;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -12,6 +14,7 @@ public class GradeDto {
 
     private Long id;
 
+    @NotBlank
     private String comment;
 
     private Byte grade;
@@ -29,5 +32,7 @@ public class GradeDto {
     private Long userId;
 
     private String userFirstName;
+
+    private Long visitId;
 
 }

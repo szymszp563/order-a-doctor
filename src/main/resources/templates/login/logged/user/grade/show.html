@@ -45,5 +45,70 @@
         </div><!-- /.container-fluid -->
     </nav>
 
+    <div class="container-fluid" style="margin-top: 20px">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="panel panel-primary">
+
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Grade</h1>
+                    </div>
+                    <div class="panel-body">
+
+                        <div class="table-responsive">
+                            <table class="table table-hover ">
+                                <thead class="thead-inverse">
+                                <tr>
+                                    <th>Grade</th>
+                                </tr>
+                                </thead>
+                                <tr th:remove="all">
+                                    <td>Grade</td>
+                                </tr>
+                                <tr>
+                                    <td th:text="${grade.grade}">Grade 2</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 class="panel-title">Comment</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p th:text="${grade.comment}">Lorem ipsum dolor sit amet, consectetuer adipiscing
+                                    elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque
+                                    penatibus
+                                    et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+                                    ultricies
+                                    nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec
+                                    pede
+                                    justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus
+                                    ut,
+                                    imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
+                                    Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate
+                                    eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac,
+                                    enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus
+                                    viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam
+                                    ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui.
+                                    Etiam
+                                    rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper
+                                    libero,
+                                    sit amet adipiscing sem neque sed ipsum.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
 </body>
 </html>

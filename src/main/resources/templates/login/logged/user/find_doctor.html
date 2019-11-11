@@ -84,17 +84,18 @@
         <div class="row" style="margin-top: 1%">
             <select class="selectpicker" multiple data-actions-box="true" data-width="30%" id="filter">
                 <option value="C">City</option>
-                <option value="B">sth1</option>
-                <option value="A">sth2</option>
+<!--                <option value="B">sth1</option>-->
+<!--                <option value="A">sth2</option>-->
             </select>
             <button onclick="filterFunc()" type="submit" class="btn btn-primary">Filter</button>
         </div>
         <div class="row" style="margin-top: 1%">
             <select class="selectpicker" data-style="btn-info" data-size="10" data-width="50%" id="sel2"
-                    data-live-search="true" data-header="Select a specialization">
-                <option>Opole</option>
-                <option>Katowice</option>
-                <option>Poznań</option>
+                    data-live-search="true" data-header="Select city">
+                <option th:each="city : ${cities}" th:text="${city.name}"></option>
+                <option th:remove="all">Opole</option>
+                <option th:remove="all">Katowice</option>
+                <option th:remove="all">Poznań</option>
             </select>
         </div>
 
@@ -124,6 +125,8 @@
         if(select.options[0].selected){
             console.info(select.options[0].value + ' selected');
             $('#sel2').selectpicker('show');
+        } else {
+            $('#sel2').selectpicker('hide');
         }
     }
 </script>

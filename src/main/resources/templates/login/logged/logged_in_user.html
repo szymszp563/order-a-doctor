@@ -116,6 +116,10 @@
             <td th:text="${visit.visitState.toString()}"></td>
             <td><a th:if="${visit.getVisitState()== T(pl.polsl.orderadoctor.model.VisitState).CREATED}"
                    href="#" th:href="@{'/user/' + ${user.id} + '/visit/' + ${visit.id} + '/updateVisit/' + ${visit.doctor.id}}">Edit</a></td>
+            <td><a th:if="${visit.getVisitState()== T(pl.polsl.orderadoctor.model.VisitState).ENDED}"
+                   href="#" th:href="@{'/user/' + ${user.id} + '/grade/' + ${visit.id} + '/new'}">Rate</a></td>
+            <td><a th:if="${visit.getVisitState()== T(pl.polsl.orderadoctor.model.VisitState).RATED}"
+                   href="#" th:href="@{'/user/' + ${user.id} + '/grade/' + ${visit.grade.id} + '/update'}">Update Rate</a></td>
         </tr>
         </tbody>
     </table>

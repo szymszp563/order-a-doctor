@@ -9,10 +9,12 @@ import org.springframework.web.multipart.MultipartFile;
 import pl.polsl.orderadoctor.dto.DoctorDto;
 import pl.polsl.orderadoctor.mappers.DoctorMapper;
 import pl.polsl.orderadoctor.model.AccountType;
+import pl.polsl.orderadoctor.model.City;
 import pl.polsl.orderadoctor.model.Doctor;
 import pl.polsl.orderadoctor.model.MedicalProduct;
 import pl.polsl.orderadoctor.model.Speciality;
 import pl.polsl.orderadoctor.model.VisitState;
+import pl.polsl.orderadoctor.repositories.CityRepository;
 import pl.polsl.orderadoctor.repositories.DoctorRepository;
 import pl.polsl.orderadoctor.repositories.MedicalProductRepository;
 import pl.polsl.orderadoctor.repositories.SpecialityRepository;
@@ -30,16 +32,23 @@ public class DoctorServiceImpl implements DoctorService {
     private final DoctorRepository doctorRepository;
     private final SpecialityRepository specialityRepository;
     private final MedicalProductRepository medicalProductRepository;
+    private final CityRepository cityRepository;
     private final GradeService gradeService;
     private final DoctorMapper doctorMapper;
 
     @Override
     public void save(Doctor doctor) {
+        if(!cityRepository.findByName(doctor.getCity()).isPresent())
+            cityRepository.save(City.builder().name(doctor.getCity()).build());
         doctorRepository.save(doctor);
     }
 
     @Override
     public void saveAll(List<Doctor> doctorList) {
+        doctorList.forEach(d->{
+            if(!cityRepository.findByName(d.getCity()).isPresent())
+                cityRepository.save(City.builder().name(d.getCity()).build());
+        });
         doctorRepository.saveAll(doctorList);
     }
 
@@ -76,6 +85,8 @@ public class DoctorServiceImpl implements DoctorService {
         }
 
         Doctor savedDoctor = doctorRepository.save(detachedDoctor);
+        if(!cityRepository.findByName(savedDoctor.getCity()).isPresent())
+            cityRepository.save(City.builder().name(savedDoctor.getCity()).build());
         log.debug("Saved user: " + savedDoctor.getId());
 
         return doctorMapper.doctorToDoctorDto(savedDoctor);

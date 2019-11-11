@@ -4,6 +4,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import pl.polsl.orderadoctor.model.AccountType;
+import pl.polsl.orderadoctor.model.City;
 import pl.polsl.orderadoctor.model.DegreeType;
 import pl.polsl.orderadoctor.model.Doctor;
 import pl.polsl.orderadoctor.model.Grade;
@@ -11,6 +12,7 @@ import pl.polsl.orderadoctor.model.MedicalProduct;
 import pl.polsl.orderadoctor.model.Speciality;
 import pl.polsl.orderadoctor.model.User;
 import pl.polsl.orderadoctor.model.Visit;
+import pl.polsl.orderadoctor.repositories.CityRepository;
 import pl.polsl.orderadoctor.repositories.DoctorRepository;
 import pl.polsl.orderadoctor.repositories.GradeRepository;
 import pl.polsl.orderadoctor.repositories.MedicalProductRepository;
@@ -32,18 +34,25 @@ public class OrderADoctorBootstrap implements ApplicationListener<ContextRefresh
     private final UserRepository userRepository;
     private final VisitRepository visitRepository;
     private final GradeRepository gradeRepository;
+    private final CityRepository cityRepository;
 
-    public OrderADoctorBootstrap(DoctorRepository doctorRepository, MedicalProductRepository medicalProductRepository, SpecialityRepository specialityRepository, UserRepository userRepository, VisitRepository visitRepository, GradeRepository gradeRepository) {
+    public OrderADoctorBootstrap(DoctorRepository doctorRepository, MedicalProductRepository medicalProductRepository, SpecialityRepository specialityRepository, UserRepository userRepository, VisitRepository visitRepository, GradeRepository gradeRepository, CityRepository cityRepository) {
         this.doctorRepository = doctorRepository;
         this.medicalProductRepository = medicalProductRepository;
         this.specialityRepository = specialityRepository;
         this.userRepository = userRepository;
         this.visitRepository = visitRepository;
         this.gradeRepository = gradeRepository;
+        this.cityRepository = cityRepository;
     }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+
+        doctorRepository.findAll().forEach(d->{
+            if(!cityRepository.findByName(d.getCity()).isPresent())
+                cityRepository.save(City.builder().name(d.getCity()).build());
+        });
 
         if(specialityRepository.count()==0){
             setData();

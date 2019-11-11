@@ -25,6 +25,7 @@ public class GradeServiceImpl implements GradeService {
     private final UserRepository userRepository;
     private final DoctorRepository doctorRepository;
     private final GradeMapper gradeMapper;
+    private final VisitService visitService;
 
     @Override
     public void save(Grade grade) {
@@ -84,6 +85,7 @@ public class GradeServiceImpl implements GradeService {
         doctor.addGrade(grade);
         userRepository.save(user);
         doctorRepository.save(doctor);
+        visitService.rateVisit(dto.getVisitId());
         return dto;
     }
 

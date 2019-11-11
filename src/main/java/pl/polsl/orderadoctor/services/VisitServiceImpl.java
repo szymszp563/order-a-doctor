@@ -107,6 +107,15 @@ public class VisitServiceImpl implements VisitService {
     }
 
     @Override
+    public void rateVisit(Long visitId) {
+        Optional<Visit> visit = visitRepository.findById(visitId);
+        if(visit.isPresent()){
+            visit.get().setVisitState(VisitState.RATED);
+            visitRepository.save(visit.get());
+        }
+    }
+
+    @Override
     public VisitDto findDtoById(Long visitId) {
         return visitMapper.visitToVisitDto(visitRepository.findById(visitId).get());
     }

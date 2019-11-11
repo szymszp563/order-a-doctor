@@ -14,6 +14,7 @@ import pl.polsl.orderadoctor.dto.UserDto;
 import pl.polsl.orderadoctor.services.DoctorService;
 import pl.polsl.orderadoctor.services.GradeService;
 import pl.polsl.orderadoctor.services.UserService;
+import pl.polsl.orderadoctor.services.VisitService;
 
 import javax.validation.Valid;
 
@@ -25,6 +26,7 @@ public class GradeController {
     private final GradeService gradeService;
     private final UserService userService;
     private final DoctorService doctorService;
+    private final VisitService visitService;
 
     @GetMapping("/user/{userId}/grades")
     public String listGrades(@PathVariable Long userId, Model model) {
@@ -46,18 +48,22 @@ public class GradeController {
         return "login/logged/user/grade/show";
     }
 
-    @GetMapping("user/{userId}/grade/new")
-    public String addNewGrade(@PathVariable Long userId, Model model) {
+    @GetMapping("user/{userId}/grade/{visitId}/new")
+    public String addNewGrade(@PathVariable Long userId, @PathVariable Long visitId, Model model) {
 
         UserDto userDto = userService.findDtoById(userId);
         model.addAttribute("user", userDto);
 
         GradeDto gradeDto = new GradeDto();
 
+        gradeDto.setVisitId(visitId);
+
+        gradeDto.setDoctorId(visitService.findById(visitId).getDoctor().getId());
+
         model.addAttribute("grade", gradeDto);
 
         //FOR TESTING!!
-        model.addAttribute("doctors", doctorService.findAllDoctorsDto());
+//        model.addAttribute("doctors", doctorService.findAllDoctorsDto());
 
         return "login/logged/user/grade/gradeform";
     }
@@ -71,26 +77,24 @@ public class GradeController {
         model.addAttribute("grade", gradeService.findDtoById(id));
 
         //FOR TESTING!!
-        model.addAttribute("doctors", doctorService.findAllDoctorsDto());
+//        model.addAttribute("doctors", doctorService.findAllDoctorsDto());
 
         return "login/logged/user/grade/gradeform";
     }
 
-    /**
-     * POST NOT HERE
-     */
     @PostMapping("user/{userId}/grade")
-    public String saveGrade(@Valid @ModelAttribute("grade") GradeDto dto, BindingResult bindingResult, Model model, @PathVariable Long userId) {
+    public String saveGrade(@Valid @ModelAttribute("grade") GradeDto dto, BindingResult bindingResult,
+                           Model model, @PathVariable Long userId) {
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("doctors", doctorService.findAllDoctorsDto());//TESTING
             UserDto userDto = userService.findDtoById(userId);
             model.addAttribute("user", userDto);
             bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
-            return "login/logged/doctor/product/productform";
+            return "login/logged/user/grade/gradeform";
         }
 
         GradeDto saveGrade = gradeService.saveDto(dto, userId);
-
 
         log.debug("posted grade id: " + saveGrade.getId() + "to user id: " + userId);
 

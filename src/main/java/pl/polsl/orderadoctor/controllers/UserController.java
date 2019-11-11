@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import pl.polsl.orderadoctor.dto.UserDto;
 import pl.polsl.orderadoctor.model.User;
 import pl.polsl.orderadoctor.model.VisitState;
+import pl.polsl.orderadoctor.repositories.CityRepository;
 import pl.polsl.orderadoctor.services.DoctorService;
 import pl.polsl.orderadoctor.services.SpecialityService;
 import pl.polsl.orderadoctor.services.UserService;
@@ -25,6 +26,7 @@ public class UserController {
     private final UserService userService;
     private final DoctorService doctorService;
     private final SpecialityService specialityService;
+    private final CityRepository cityRepository;
 
 
     @GetMapping("user/{id}/logged")
@@ -100,6 +102,8 @@ public class UserController {
         model.addAttribute("user", user);
 
         model.addAttribute("specialities", specialityService.findAllSpecialitiesDto());
+
+        model.addAttribute("cities", cityRepository.findAll());
 
         return "login/logged/user/find_doctor";
     }

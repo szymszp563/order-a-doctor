@@ -16,5 +16,7 @@ public interface VisitService {
 
     void confirmVisit(Long visitId);
 
+    void rateVisit(Long visitId);
+
     VisitDto findDtoById(Long visitId);
 }

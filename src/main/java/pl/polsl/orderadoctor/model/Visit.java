@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -18,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
@@ -56,6 +58,10 @@ public class Visit {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "grade_id")
+    private Grade grade;
 
     public void addMedicalProduct(MedicalProduct medicalProduct) {
         if(this.medicalProducts==null){
