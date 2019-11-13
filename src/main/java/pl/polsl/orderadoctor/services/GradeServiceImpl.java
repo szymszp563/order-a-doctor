@@ -75,17 +75,23 @@ public class GradeServiceImpl implements GradeService {
                 .findFirst();
 
 
+        Grade grade = gradeMapper.gradeDtoToGrade(dto);
+
         if (gradeOptional.isPresent()) {
             user.getGrades().remove(gradeOptional.get());
             doctor.getGrades().remove(gradeOptional.get());
-        }
+            grade.addVisit(gradeOptional.get().getVisit());
+        }else {
+            grade.addVisit(visitService.findById(dto.getVisitId()));
 
-        Grade grade = gradeMapper.gradeDtoToGrade(dto);
+        }
+        gradeRepository.save(grade);
         user.addGrade(grade);
         doctor.addGrade(grade);
         userRepository.save(user);
         doctorRepository.save(doctor);
-        visitService.rateVisit(dto.getVisitId());
+
+        visitService.rateVisit(grade.getVisit().getId());
         return dto;
     }
 

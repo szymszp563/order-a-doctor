@@ -43,7 +43,16 @@ public class UserController {
                         } else if (v1.getVisitState() == VisitState.CREATED) {
                             return -1;
                         } else if (v1.getVisitState() == VisitState.ENDED) {
+                            if(v2.getVisitState()==VisitState.RATED){
+                                return v1.getDateFrom().compareTo(v2.getDateFrom());
+                            }
                             return 1;
+                        }else if(v1.getVisitState()==VisitState.RATED){
+                            if(v2.getVisitState()==VisitState.ENDED){
+                                return v1.getDateFrom().compareTo(v2.getDateFrom());
+                            }
+                            return 1;
+
                         } else {
                             return -1;
                         }

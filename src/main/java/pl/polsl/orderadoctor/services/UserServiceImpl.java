@@ -11,10 +11,12 @@ import pl.polsl.orderadoctor.model.AccountType;
 import pl.polsl.orderadoctor.model.Doctor;
 import pl.polsl.orderadoctor.model.Grade;
 import pl.polsl.orderadoctor.model.User;
+import pl.polsl.orderadoctor.model.Visit;
 import pl.polsl.orderadoctor.model.VisitState;
 import pl.polsl.orderadoctor.repositories.DoctorRepository;
 import pl.polsl.orderadoctor.repositories.GradeRepository;
 import pl.polsl.orderadoctor.repositories.UserRepository;
+import pl.polsl.orderadoctor.repositories.VisitRepository;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -28,6 +30,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final GradeRepository gradeRepository;
     private final DoctorRepository doctorRepository;
+    private final VisitRepository visitRepository;
     private final UserMapper userMapper;
 
     @Override
@@ -104,9 +107,14 @@ public class UserServiceImpl implements UserService {
     public void deleteGrade(Long id) {
         Grade grade = gradeRepository.findById(id).get();
         Doctor doctor = doctorRepository.findById(grade.getDoctor().getId()).get();
-        User user = userRepository.findById(id).get();
+        User user = userRepository.findById(grade.getUser().getId()).get();
+        Visit visit = visitRepository.findById(grade.getVisit().getId()).get();
         user.getGrades().remove(grade);
         doctor.getGrades().remove(grade);
+        doctor.calculateAverageGrade();
+        visit.setVisitState(VisitState.ENDED);
+        visit.setGrade(null);
+        visitRepository.save(visit);
         doctorRepository.save(doctor);
         userRepository.save(user);
         gradeRepository.delete(grade);
@@ -118,7 +126,7 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).get();
 
         user.getVisits().stream().forEach(v -> {
-            if(v.getDateFrom().isBefore(LocalDateTime.now())){
+            if(v.getDateFrom().isBefore(LocalDateTime.now()) && v.getVisitState()!=VisitState.RATED){
                 v.setVisitState(VisitState.ENDED);
             }
         });

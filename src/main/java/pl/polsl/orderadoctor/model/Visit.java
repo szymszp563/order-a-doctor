@@ -60,7 +60,7 @@ public class Visit {
     private User user;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "grade_id")
+//    @JoinColumn(name = "grade_id")
     private Grade grade;
 
     public void addMedicalProduct(MedicalProduct medicalProduct) {

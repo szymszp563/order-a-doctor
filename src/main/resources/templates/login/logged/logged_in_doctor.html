@@ -65,7 +65,7 @@
             </thead>
             <tbody>
             <tr th:each="visit : ${doctor.visits}" style="cursor: pointer; font-size: 20px;"
-                th:onclick="'javascript:rowClicked(\'' +'/doctor/' + ${doctor.id} + '/show/' + ${visit.id}+ '\',\'' + ${visit.getVisitState() != T(pl.polsl.orderadoctor.model.VisitState).ENDED} + '\');'">
+                th:onclick="'javascript:rowClicked(\'' +'/doctor/' + ${doctor.id} + '/show/' + ${visit.id}+ '\',\'' + ${(visit.getVisitState() != T(pl.polsl.orderadoctor.model.VisitState).ENDED && visit.getVisitState() != T(pl.polsl.orderadoctor.model.VisitState).RATED)} + '\');'">
                 <td th:text="${#temporals.format(visit.dateFrom, 'dd-MM-yyyy')}"></td>
                 <td th:text="${#temporals.format(visit.dateFrom, 'HH:mm')}"></td>
                 <td th:text="${#temporals.format(visit.dateTo, 'HH:mm')}"></td>

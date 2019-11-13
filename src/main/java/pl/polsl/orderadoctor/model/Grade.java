@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Getter
 @Setter
@@ -37,4 +38,12 @@ public class Grade {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToOne
+    private Visit visit;
+
+    public void addVisit(Visit visit) {
+        this.visit = visit;
+        visit.setGrade(this);
+    }
 }
