@@ -19,4 +19,7 @@ public interface VisitService {
     void rateVisit(Long visitId);
 
     VisitDto findDtoById(Long visitId);
+
+    void deleteVitById(Long id);
+
 }

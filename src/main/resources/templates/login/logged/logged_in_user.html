@@ -120,6 +120,8 @@
                    href="#" th:href="@{'/user/' + ${user.id} + '/grade/' + ${visit.id} + '/new'}">Rate</a></td>
             <td><a th:if="${visit.getVisitState()== T(pl.polsl.orderadoctor.model.VisitState).RATED}"
                    href="#" th:href="@{'/user/' + ${user.id} + '/grade/' + ${visit.grade.id} + '/update'}">Update Rate</a></td>
+            <td><a th:if="${visit.getVisitState()== T(pl.polsl.orderadoctor.model.VisitState).CREATED}"
+                   href="#" th:href="@{'/user/' + ${user.id} + '/visit/' + ${visit.id} + '/delete'}">Delete</a></td>
         </tr>
         </tbody>
     </table>

@@ -80,7 +80,8 @@ public class VisitServiceImpl implements VisitService {
             String sTime = dto.getHour();
             DateTimeFormatter df = DateTimeFormatter .ofPattern("d-MM-yyyy");
             LocalDate date = LocalDate.parse(sDate, df);
-            LocalTime time = LocalTime.parse(sTime);
+            DateTimeFormatter dt = DateTimeFormatter .ofPattern("H:mm");
+            LocalTime time = LocalTime.parse(sTime, dt);
             LocalDateTime dateFrom = date.atTime(time);
             visit.setDateFrom(dateFrom);
 
@@ -119,4 +120,17 @@ public class VisitServiceImpl implements VisitService {
     public VisitDto findDtoById(Long visitId) {
         return visitMapper.visitToVisitDto(visitRepository.findById(visitId).get());
     }
+
+    @Override
+    public void deleteVitById(Long id) {
+        Visit visit = visitRepository.findById(id).get();
+        Doctor doctor = doctorRepository.findById(visit.getDoctor().getId()).get();
+        User user = userRepository.findById(visit.getUser().getId()).get();
+        doctor.getVisits().remove(visit);
+        user.getVisits().remove(visit);
+        userRepository.save(user);
+        doctorRepository.save(doctor);
+        visitRepository.delete(visit);
+    }
+
 }

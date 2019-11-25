@@ -99,10 +99,15 @@
                                 </div>
                             </div>
 
+<!--                            <span th:if="__${doc.getIntGrade()}__ < 5" class="fa fa-heartbeat"-->
+<!--                                  th:each="heart : ${#numbers.sequence( 1, __${5 - doc.getIntGrade()}__)}">-->
+<!--                            </span>-->
+
                             <div class="row">
                                 <div class="col-md-3 form-group">
                                     <label>Hour:</label>
                                     <select class="form-control" th:field="*{hour}">
+                                        <option th:each="hour :  ${#numbers.sequence( __${from}__, __${to}__)}" th:value="${hour + ':00'}" th:text="${hour + ':00'}"></option>
                                         <option value="00:00">00:00</option>
                                         <option value="01:00">01:00</option>
                                         <option value="02:00">02:00</option>

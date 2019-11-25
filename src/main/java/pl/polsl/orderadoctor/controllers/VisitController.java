@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import pl.polsl.orderadoctor.dto.DoctorDto;
 import pl.polsl.orderadoctor.dto.UserDto;
 import pl.polsl.orderadoctor.dto.VisitDto;
+import pl.polsl.orderadoctor.model.Visit;
 import pl.polsl.orderadoctor.model.VisitState;
 import pl.polsl.orderadoctor.services.DoctorService;
 import pl.polsl.orderadoctor.services.MedicalProductService;
@@ -44,7 +45,26 @@ public class VisitController {
         visitDto.setVisitState(VisitState.CREATED);
         model.addAttribute("visit", visitDto);
 
+        DoctorDto doctor = doctorService.findDtoById(doctorId);
+
+        String hourFrom = doctor.getWorkingFrom();
+        String hourTo = doctor.getWorkingTo();
+        int hF = Integer.valueOf(hourFrom.split(":")[0]);
+        int hT = Integer.valueOf(hourTo.split(":")[0]);
+
+        model.addAttribute("from", hF);
+        model.addAttribute("to", hT);
+
         return "login/logged/user/find/product/visit/visitform";
+    }
+
+    @GetMapping("user/{id}/visit/{visitId}/delete")
+    public String deleteVisitByUser(@PathVariable Long visitId, @PathVariable Long id){
+        log.debug("deleting visit id: " + visitId);
+
+        visitService.deleteVitById(visitId);
+
+        return "redirect:/user/" + id + "/logged";
     }
 
     @PostMapping("/user/{userId}/visit")
@@ -83,6 +103,15 @@ public class VisitController {
         return "redirect:/doctor/" + doctorId + "/logged";
     }
 
+    @GetMapping("doctor/{id}/visit/{visitId}/delete")
+    public String deleteVisitByDoctor(@PathVariable Long visitId, @PathVariable Long id){
+        log.debug("deleting visit id: " + visitId);
+
+        visitService.deleteVitById(visitId);
+
+        return "redirect:/doctor/" + id + "/logged";
+    }
+
 
     @GetMapping("doctor/{doctorId}/visit/{visitId}/updateVisitStatus")
     public String updateVisitStatus(@PathVariable Long doctorId, @PathVariable Long visitId){
@@ -100,7 +129,21 @@ public class VisitController {
         visitDto.setDoctorId(doctorId);
         visitDto.setMedicalProductIds(new Long[]{visitService.findById(visitId).getMedicalProducts().get(0).getId()});
         visitDto.setVisitState(VisitState.CONFIRMED);
+        Visit visit = visitService.findById(visitId);
+        visitDto.setStartingDate(visit.getDateFrom().toLocalDate().toString());
+        visitDto.setHour(visit.getDateFrom().toLocalTime().toString());
         model.addAttribute("visit", visitDto);
+
+        DoctorDto doctor = doctorService.findDtoById(doctorId);
+
+        String hourFrom = doctor.getWorkingFrom();
+        String hourTo = doctor.getWorkingTo();
+        int hF = Integer.valueOf(hourFrom.split(":")[0]);
+        int hT = Integer.valueOf(hourTo.split(":")[0]);
+
+        model.addAttribute("from", hF);
+        model.addAttribute("to", hT);
+
 
         return "login/logged/doctor/visitform";
     }
@@ -114,7 +157,20 @@ public class VisitController {
         visitDto.setDoctorId(doctorId);
         visitDto.setMedicalProductIds(new Long[]{visitService.findById(visitId).getMedicalProducts().get(0).getId()});
         visitDto.setVisitState(VisitState.CREATED);
+        Visit visit = visitService.findById(visitId);
+        visitDto.setStartingDate(visit.getDateFrom().toLocalDate().toString());
+        visitDto.setHour(visit.getDateFrom().toLocalTime().toString());
         model.addAttribute("visit", visitDto);
+
+        DoctorDto doctor = doctorService.findDtoById(doctorId);
+
+        String hourFrom = doctor.getWorkingFrom();
+        String hourTo = doctor.getWorkingTo();
+        int hF = Integer.valueOf(hourFrom.split(":")[0]);
+        int hT = Integer.valueOf(hourTo.split(":")[0]);
+
+        model.addAttribute("from", hF);
+        model.addAttribute("to", hT);
 
         return "login/logged/user/visitform";
     }

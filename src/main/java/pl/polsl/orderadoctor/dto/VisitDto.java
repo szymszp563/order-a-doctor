@@ -5,10 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.polsl.orderadoctor.model.VisitState;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
@@ -34,9 +31,4 @@ public class VisitDto {
     private String hour;
 
     private Long doctorId;
-
-//    private Integer month;
-//
-//    private Integer day;
-
 }

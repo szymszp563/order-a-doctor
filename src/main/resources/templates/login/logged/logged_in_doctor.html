@@ -76,6 +76,8 @@
                 <td th:text="${visit.visitState.toString()}"></td>
                 <td><a th:if="${visit.getVisitState()== T(pl.polsl.orderadoctor.model.VisitState).CREATED}"
                        href="#" th:href="@{'/doctor/' + ${doctor.id} + '/visit/' + ${visit.id} + '/updateVisitStatus'}">Confirm</a></td>
+                <td><a th:if="${visit.getVisitState()== T(pl.polsl.orderadoctor.model.VisitState).CREATED || visit.getVisitState()== T(pl.polsl.orderadoctor.model.VisitState).CONFIRMED}"
+                       href="#" th:href="@{'/doctor/' + ${doctor.id} + '/visit/' + ${visit.id} + '/delete'}">Delete</a></td>
             </tr>
             </tbody>
         </table>
