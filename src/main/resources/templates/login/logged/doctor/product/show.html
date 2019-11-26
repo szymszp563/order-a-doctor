@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Order a Doctor Logged-In</title>
+    <title th:text="#{index.page.title}">Order a Doctor Logged-In</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -23,21 +23,22 @@
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class="navbar-brand" href="#" th:href="@{'/doctor/' + ${doctor.id} + '/logged'}">Order a Doctor</a>
+                <a th:text="#{label.index.page.title}" class="navbar-brand" href="#" th:href="@{'/doctor/' + ${doctor.id} + '/logged'}">Order a Doctor</a>
             </div>
 
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
 <!--                    <li class="active"><a href="#">Link </a></li>-->
 <!--                    <li><a href="#" th:href="@{'/find_doctor'}">Find Doctor</a></li>-->
-                    <li><a href="#" th:href="@{'/doctor/' + ${doctor.id} + '/show'}">View Profile</a></li>
+                    <li><a th:text="#{navbar.view.profile}" href="#" th:href="@{'/doctor/' + ${doctor.id} + '/show'}">View Profile</a></li>
 
                 </ul>
 
-                <p class="navbar-text navbar-right">Signed in as
+                <p class="navbar-text navbar-right">
+                    <i th:text="#{navbar.signed.as}" >Signed in as</i>
                     <a style="font-weight:bold" href="#" th:href="@{'/doctor/' + ${doctor.id} + '/show'}"
                        class="navbar-link" th:text="${doctor.firstName}+' '+${doctor.lastName}">Doc Name</a>
-                    <a href="#" th:href="@{'/logout'}" class="navbar-link">Logout</a>
+                    <a th:text="#{navbar.button.logout}" href="#" th:href="@{'/logout'}" class="navbar-link">Logout</a>
                 </p>
 
 
@@ -51,7 +52,7 @@
                 <div class="panel panel-primary">
 
                     <div class="panel-heading">
-                        <h1 class="panel-title">Medical Product</h1>
+                        <h1 class="panel-title" th:text="#{label.medical.product}">Medical Product</h1>
                     </div>
                     <div class="panel-body">
 
@@ -59,9 +60,9 @@
                             <table class="table table-hover ">
                                 <thead class="thead-inverse">
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Duration</th>
-                                    <th>Price</th>
+                                    <th th:text="#{label.name}">Name</th>
+                                    <th th:text="#{label.duration}">Duration</th>
+                                    <th th:text="#{label.price}">Price</th>
                                 </tr>
                                 </thead>
                                 <tr th:remove="all">
@@ -82,7 +83,7 @@
 
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h1 class="panel-title">Description</h1>
+                        <h1 class="panel-title" th:text="#{label.description}">Description</h1>
                     </div>
                     <div class="panel-body">
                         <div class="row">

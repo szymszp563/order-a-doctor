@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Order a Doctor Logged-In</title>
+    <title th:text="#{index.page.title}">Order a Doctor Logged-In</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -23,21 +23,22 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="#" th:href="@{'/doctor/' + ${doctor.id} + '/logged'}">Order a Doctor</a>
+            <a th:text="#{label.index.page.title}" class="navbar-brand" href="#" th:href="@{'/doctor/' + ${doctor.id} + '/logged'}">Order a Doctor</a>
         </div>
 
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <!--                    <li class="active"><a href="#">Link </a></li>-->
                 <!--                    <li><a href="#" th:href="@{'/find_doctor'}">Find Doctor</a></li>-->
-                <li class="active"><a href="#" th:href="@{'/doctor/' + ${doctor.id} + '/show'}">View Profile</a></li>
+                <li class="active"><a th:text="#{navbar.view.profile}" href="#" th:href="@{'/doctor/' + ${doctor.id} + '/show'}">View Profile</a></li>
 
             </ul>
 
-            <p class="navbar-text navbar-right">Signed in as
+            <p class="navbar-text navbar-right">
+                <i th:text="#{navbar.signed.as}" >Signed in as</i>
                 <a style="font-weight:bold" href="#" th:href="@{'/doctor/' + ${doctor.id} + '/show'}"
                    class="navbar-link" th:text="${doctor.firstName}+' '+${doctor.lastName}">Doc Name</a>
-                <a href="#" th:href="@{'/logout'}" class="navbar-link">Logout</a>
+                <a th:text="#{navbar.button.logout}" href="#" th:href="@{'/logout'}" class="navbar-link">Logout</a>
             </p>
 
         </div><!-- /.navbar-collapse -->
@@ -50,7 +51,7 @@
             <form th:object="${doctor}" th:action="@{'/doctor/' + ${doctor.id} + '/update'}" method="post">
 
                 <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
-                    <p>Please Correct Errors Below</p>
+                    <p th:text="#{label.error.in.form}">Please Correct Errors Below</p>
                 </div>
 
                 <input type="hidden" th:field="*{id}"/>
@@ -63,14 +64,14 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-md-10">
-                                    <h1 class="panel-title">Account Details</h1>
+                                    <h1 th:text="#{label.account.details}" class="panel-title">Account Details</h1>
                                 </div>
                             </div>
                         </div>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-3 form-group">
-                                    <label>Degree:</label>
+                                    <label th:text="#{label.form.degree}">Degree:</label>
                                     <select class="form-control" th:field="*{degree}">
                                         <option th:remove="all">MD</option>
                                         <option th:remove="all">PhD</option>
@@ -83,7 +84,7 @@
                             <div class="row">
                                 <div class="col-md-3 form-group" th:class="${#fields.hasErrors('firstName')}
                                 ? 'col-md-3 form-group has-error' : 'col-md-3 form-group'">
-                                    <label>First Name:</label>
+                                    <label th:text="#{label.form.first.name}">First Name:</label>
                                     <input type="text" class="form-control" th:field="*{firstName}" th:errorclass="has-error"/>
                                     <span class="help-block" th:if="${#fields.hasErrors('firstName')}">
                                         <ul>
@@ -95,7 +96,7 @@
                             <div class="row">
                                 <div class="col-md-3 form-group" th:class="${#fields.hasErrors('lastName')}
                                 ? 'col-md-3 form-group has-error' : 'col-md-3 form-group'">
-                                    <label>Last Name:</label>
+                                    <label th:text="#{label.form.last.name}">Last Name:</label>
                                     <input type="text" class="form-control" th:field="*{lastName}" th:errorclass="has-error"/>
                                     <span class="help-block" th:if="${#fields.hasErrors('lastName')}">
                                         <ul>
@@ -107,7 +108,7 @@
                             <div class="row">
                                 <div class="col-md-3 form-group" th:class="${#fields.hasErrors('city')}
                                 ? 'col-md-3 form-group has-error' : 'col-md-3 form-group'">
-                                    <label>City:</label>
+                                    <label th:text="#{label.form.city}">City:</label>
                                     <input type="text" class="form-control" th:field="*{city}" th:errorclass="has-error"/>
                                     <span class="help-block" th:if="${#fields.hasErrors('city')}">
                                         <ul>
@@ -119,7 +120,7 @@
                             <div class="row">
                                 <div class="col-md-3 form-group" th:class="${#fields.hasErrors('street')}
                                 ? 'col-md-3 form-group has-error' : 'col-md-3 form-group'">
-                                    <label>Street:</label>
+                                    <label th:text="#{label.form.street}">Street:</label>
                                     <input type="text" class="form-control" th:field="*{street}" th:errorclass="has-error"/>
                                     <span class="help-block" th:if="${#fields.hasErrors('street')}">
                                         <ul>
@@ -131,7 +132,7 @@
                             <div class="row">
                                 <div class="col-md-3 form-group" th:class="${#fields.hasErrors('email')}
                                 ? 'col-md-3 form-group has-error' : 'col-md-3 form-group'">
-                                    <label>Email:</label>
+                                    <label th:text="#{label.form.email}">Email:</label>
                                     <input type="text" class="form-control" th:field="*{email}" th:errorclass="has-error"/>
                                     <span class="help-block" th:if="${#fields.hasErrors('email')}">
                                         <ul>
@@ -142,7 +143,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-3 form-group">
-                                    <label>Working hour from:</label>
+                                    <label th:text="#{label.form.working.from}">Working hour from:</label>
                                     <select class="form-control" th:field="*{workingFrom}">
                                         <option value="00:00">00:00</option>
                                         <option value="01:00">01:00</option>
@@ -173,7 +174,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-3 form-group">
-                                    <label>Working hour to:</label>
+                                    <label th:text="#{label.form.working.to}">Working hour to:</label>
                                     <select class="form-control" th:field="*{workingTo}">
                                         <option value="0:00">00:00</option>
                                         <option value="00:00">00:00</option>
@@ -208,7 +209,7 @@
 
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h1 class="panel-title">About</h1>
+                            <h1 th:text="#{label.form.about}" class="panel-title">About</h1>
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -218,7 +219,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button th:text="#{label.button.submit}" type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
         </div>

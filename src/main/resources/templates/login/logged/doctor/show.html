@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Order a Doctor Logged-In</title>
+    <title th:text="#{index.page.title}">Order a Doctor Logged-In</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -30,21 +30,22 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="#" th:href="@{'/doctor/' + ${doctor.id} + '/logged'}">Order a Doctor</a>
+            <a th:text="#{label.index.page.title}" class="navbar-brand" href="#" th:href="@{'/doctor/' + ${doctor.id} + '/logged'}">Order a Doctor</a>
         </div>
 
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <!--                    <li class="active"><a href="#">Link </a></li>-->
                 <!--                    <li><a href="#" th:href="@{'/find_doctor'}">Find Doctor</a></li>-->
-                <li class="active"><a href="#" th:href="@{'/doctor/' + ${doctor.id} + '/show'}">View Profile</a></li>
+                <li class="active"><a th:text="#{navbar.view.profile}" href="#" th:href="@{'/doctor/' + ${doctor.id} + '/show'}">View Profile</a></li>
 
             </ul>
 
-            <p class="navbar-text navbar-right">Signed in as
+            <p class="navbar-text navbar-right">
+                <i th:text="#{navbar.signed.as}" >Signed in as</i>
                 <a style="font-weight:bold" href="#" th:href="@{'/doctor/' + ${doctor.id} + '/show'}"
                    class="navbar-link" th:text="${doctor.firstName}+' '+${doctor.lastName}">Doc Name</a>
-                <a href="#" th:href="@{'/logout'}" class="navbar-link">Logout</a>
+                <a th:text="#{navbar.button.logout}" href="#" th:href="@{'/logout'}" class="navbar-link">Logout</a>
             </p>
 
         </div><!-- /.navbar-collapse -->
@@ -64,11 +65,11 @@
                             </div>
 
                             <div class="col-md-2">
-                                <a class="btn btn-default" href="#"
+                                <a th:text="#{label.button.edit.profile}" class="btn btn-default" href="#"
                                    th:href="@{'/doctor/' + ${doctor.id} + '/update'}" role="button">Edit Profile</a>
                             </div>
                             <div class="col-md-1">
-                                <a class="btn btn-default" href="#"
+                                <a th:text="#{label.button.change.image}" class="btn btn-default" href="#"
                                    th:href="@{'/doctor/' + ${doctor.id} + '/image'}" role="button">Change Image</a>
                             </div>
                         </div>
@@ -76,15 +77,15 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-2">
-                                <p>Degree:</p>
-                                <p>First Name:</p>
-                                <p>Last Name:</p>
-                                <p>Average Grade:</p>
-                                <p>Rating:</p>
-                                <p>Email:</p>
-                                <p>City:</p>
-                                <p>Street:</p>
-                                <p>Working Hours:</p>
+                                <p th:text="#{label.form.degree}">Degree:</p>
+                                <p th:text="#{label.form.first.name}">First Name:</p>
+                                <p th:text="#{label.form.last.name}">Last Name:</p>
+                                <p th:text="#{label.form.average.grade}">Average Grade:</p>
+                                <p th:text="#{label.form.rating}">Rating:</p>
+                                <p th:text="#{label.form.email}">Email:</p>
+                                <p th:text="#{label.form.city}">City:</p>
+                                <p th:text="#{label.form.street}">Street:</p>
+                                <p th:text="#{label.form.working.hours}">Working Hours:</p>
                             </div>
                             <div class="col-md-7">
                                 <p th:text="${(doctor.degree)}">Medical Doctor</p>
@@ -122,10 +123,10 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-md-10 ">
-                                <h1 class="panel-title">Specialities</h1>
+                                <h1 th:text="#{label.specialities}" class="panel-title">Specialities</h1>
                             </div>
                             <div class="col-md-2">
-                                <a class="btn btn-default btn-block" href="#"
+                                <a th:text="#{label.button.view}" class="btn btn-default btn-block" href="#"
                                    th:href="@{'/doctor/' + ${doctor.id} + '/specialities'}" role="button">View</a>
                             </div>
                         </div>
@@ -149,10 +150,10 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-md-10 ">
-                                <h1 class="panel-title">Medical Products</h1>
+                                <h1 th:text="#{label.medical.products}" class="panel-title">Medical Products</h1>
                             </div>
                             <div class="col-md-2">
-                                <a class="btn btn-default btn-block" href="#"
+                                <a th:text="#{label.button.view}" class="btn btn-default btn-block" href="#"
                                    th:href="@{'/doctor/' + ${doctor.id} + '/products'}" role="button">View</a>
                             </div>
                         </div>
@@ -174,7 +175,7 @@
 
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h1 class="panel-title">About</h1>
+                        <h1 th:text="#{label.form.about}" class="panel-title">About</h1>
                     </div>
                     <div class="panel-body">
                         <div class="row">
@@ -206,7 +207,7 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-md-12">
-                                <h1 class="panel-title">Grades</h1>
+                                <h1 th:text="#{label.grades}" class="panel-title">Grades</h1>
                             </div>
                         </div>
                     </div>

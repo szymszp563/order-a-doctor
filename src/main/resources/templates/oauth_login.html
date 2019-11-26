@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Order a Doctor Home</title>
+    <title th:text="#{index.page.title}">Order a Doctor Home</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -54,7 +54,7 @@
 <!--    </p>-->
 
     <div class="row">
-        <h3 style="margin-left: 45%">Login with:</h3>
+        <h3 th:text="#{login.page.label.with}" style="margin-left: 42%">Login with:</h3>
     </div>
     <div th:each="url : ${urls}">
         <a class="button button2" style="margin-left: 36.5%" href="#" th:text="${url.key}" th:href="${url.value}" role="button">Patient</a>

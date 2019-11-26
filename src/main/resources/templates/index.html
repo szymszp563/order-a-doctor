@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Order a Doctor Home</title>
+    <title th:text="#{index.page.title}">Order a Doctor Home</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -22,9 +22,9 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="jumbotron">
-                <h1>Order a Doctor</h1>
-                <p>Welcome in Order a Doctor site. Here you will find BEST doctor in BEST price!</p>
-                <p><a class="btn btn-primary btn-lg" href="#" th:href="@{'/register_or_logged_in'}" role="button">Login</a></p>
+                <h1 th:text="#{index.page.title}">Order a Doctor</h1>
+                <p th:text="#{index.page.desc}">Welcome in Order a Doctor site. Here you will find BEST doctor in BEST price!</p>
+                <p><a class="btn btn-primary btn-lg" href="#" th:href="@{'/register_or_logged_in'}" th:text="#{index.page.login.button}" role="button">Login</a></p>
             </div>
         </div>
     </div>

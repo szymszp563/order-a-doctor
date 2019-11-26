@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Order a Doctor Logged-In</title>
+    <title th:text="#{index.page.title}">Order a Doctor Logged-In</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -40,21 +40,22 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="#" th:href="@{'/doctor/' + ${doctor.id} + '/logged'}">Order a Doctor</a>
+            <a th:text="#{label.index.page.title}" class="navbar-brand" href="#" th:href="@{'/doctor/' + ${doctor.id} + '/logged'}">Order a Doctor</a>
         </div>
 
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <!--                    <li class="active"><a href="#">Link </a></li>-->
                 <!--                    <li><a href="#" th:href="@{'/find_doctor'}">Find Doctor</a></li>-->
-                <li><a href="#" th:href="@{'/doctor/' + ${doctor.id} + '/show'}">View Profile</a></li>
+                <li><a th:text="#{navbar.view.profile}" href="#" th:href="@{'/doctor/' + ${doctor.id} + '/show'}">View Profile</a></li>
 
             </ul>
 
-            <p class="navbar-text navbar-right">Signed in as
+            <p class="navbar-text navbar-right">
+                <i th:text="#{navbar.signed.as}" >Signed in as</i>
                 <a style="font-weight:bold" href="#" th:href="@{'/doctor/' + ${doctor.id} + '/show'}"
                    class="navbar-link" th:text="${doctor.firstName}+' '+${doctor.lastName}">Doc Name</a>
-                <a href="#" th:href="@{'/logout'}" class="navbar-link">Logout</a>
+                <a th:text="#{navbar.button.logout}" href="#" th:href="@{'/logout'}" class="navbar-link">Logout</a>
             </p>
 
 
@@ -68,7 +69,7 @@
             <form th:object="${visit}" th:action="@{'/doctor/' + ${doctor.id} + '/visit'} " method="post">
 
                 <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
-                    <p>Please Correct Errors Below</p>
+                    <p th:text="#{label.error.in.form}">Please Correct Errors Below</p>
                 </div>
 
                 <input type="hidden" th:field="*{id}"/>
@@ -80,7 +81,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-md-11">
-                                    <h1 class="panel-title">Edit Visit Date</h1>
+                                    <h1 th:text="#{label.edit.visit.date}" class="panel-title">Edit Visit Date</h1>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +89,7 @@
                             <div class="row">
                                 <div class="col-md-3 form-group" th:class="${#fields.hasErrors('startingDate')}
                                 ? 'col-md-3 form-group has-error' : 'col-md-3 form-group'">
-                                    <label>Date:</label>
+                                    <label th:text="#{label.form.date}">Date:</label>
                                     <input type="text" class="form-control" th:field="*{startingDate}"
                                            th:errorclass="has-error" id="datepicker"/>
                                     <span class="help-block" th:if="${#fields.hasErrors('startingDate')}">
@@ -99,13 +100,9 @@
                                 </div>
                             </div>
 
-<!--                            <span th:if="__${doc.getIntGrade()}__ < 5" class="fa fa-heartbeat"-->
-<!--                                  th:each="heart : ${#numbers.sequence( 1, __${5 - doc.getIntGrade()}__)}">-->
-<!--                            </span>-->
-
                             <div class="row">
                                 <div class="col-md-3 form-group">
-                                    <label>Hour:</label>
+                                    <label th:text="#{label.form.hour}">Hour:</label>
                                     <select class="form-control" th:field="*{hour}">
                                         <option th:each="hour :  ${#numbers.sequence( __${from}__, __${to}__)}" th:value="${hour + ':00'}" th:text="${hour + ':00'}"></option>
                                         <option value="00:00">00:00</option>
@@ -138,7 +135,7 @@
 
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button th:text="#{label.button.submit}" type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
         </div>
