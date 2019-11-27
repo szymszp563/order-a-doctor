@@ -82,7 +82,7 @@
             <div class="panel panel-primary">
 
                 <div class="panel-heading">
-                    <h1 class="panel-title">Medical Product</h1>
+                    <h1 th:text="#{label.medical.product}" class="panel-title">Medical Product</h1>
                 </div>
                 <div class="panel-body">
 
@@ -90,9 +90,9 @@
                         <table class="table table-hover ">
                             <thead class="thead-inverse">
                             <tr>
-                                <th>Name</th>
-                                <th>Duration</th>
-                                <th>Price</th>
+                                <th th:text="#{label.name}">Name</th>
+                                <th th:text="#{label.duration}">Duration</th>
+                                <th th:text="#{label.price}">Price</th>
                             </tr>
                             </thead>
                             <tr th:remove="all">
@@ -115,7 +115,7 @@
 
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h1 class="panel-title">Description</h1>
+                    <h1 th:text="#{label.description}" class="panel-title">Description</h1>
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -145,7 +145,7 @@
             </div>
 
             <div>
-                <a class="button button2" style="margin-left: 36.5%" href="#" th:text="${'Schedule a Visit'}"
+                <a class="button button2" style="margin-left: 36.5%" href="#" th:text="#{label.button.schedule.visit}"
                    th:href="@{'/user/' + ${user.id} + '/show/' + ${doctor.id} + '/' + ${product.id} + '/visit'}" role="button">
                     Visit
                 </a>

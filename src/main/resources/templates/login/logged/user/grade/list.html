@@ -60,11 +60,11 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div class="col-md-8">
-                                <h1 class="panel-title">Grades</h1>
+                                <h1 th:text="#{label.grades}" class="panel-title">Grades</h1>
                             </div>
 
                             <div class="col-md-2">
-                                <a class="btn btn-default btn-block" href="#" th:href="@{'/user/' + ${user.id} + '/show'}" role="button">Back</a>
+                                <a th:text="#{label.button.back}" class="btn btn-default btn-block" href="#" th:href="@{'/user/' + ${user.id} + '/show'}" role="button">Back</a>
                             </div>
 
                         </div>
@@ -77,11 +77,11 @@
                             <table class="table table-hover ">
                                 <thead class="thead-inverse">
                                 <tr>
-                                    <th>Doctor Name</th>
-                                    <th>Grade</th>
-                                    <th>Show</th>
-                                    <th>Update</th>
-                                    <th>Delete</th>
+                                    <th th:text="#{label.doctor.name}">Doctor Name</th>
+                                    <th th:text="#{label.list.grade}">Grade</th>
+                                    <th th:text="#{label.show}">Show</th>
+                                    <th th:text="#{label.update}">Update</th>
+                                    <th th:text="#{label.delete}">Delete</th>
                                 </tr>
                                 </thead>
                                 <tr th:remove="all">

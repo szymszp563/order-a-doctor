@@ -47,21 +47,21 @@
     </nav>
 
     <div class="row">
-        <h3 style="margin-left: 45%; margin-bottom: 2%; font-size: 30px; font-weight: bold;">Visits:</h3>
+        <h3 th:text="#{label.visits}" style="margin-left: 45%; margin-bottom: 2%; font-size: 30px; font-weight: bold;">Visits:</h3>
     </div>
 
     <div style="margin-left: 1%">
         <table class="table table-hover">
             <thead>
             <tr style="font-size: 18px;">
-                <th>Date</th>
-                <th>Hour From</th>
-                <th>Hour To</th>
-                <th>Procedure</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone Number</th>
-                <th>Status</th>
+                <th th:text="#{label.list.date}">Date</th>
+                <th th:text="#{label.hour.from}">Hour From</th>
+                <th th:text="#{label.hour.to}">Hour To</th>
+                <th th:text="#{label.list.procedure}">Procedure</th>
+                <th th:text="#{label.patient.name}">Name</th>
+                <th th:text="#{label.list.email}">Email</th>
+                <th th:text="#{label.list.phone.number}">Phone Number</th>
+                <th th:text="#{label.list.status}">Status</th>
             </tr>
             </thead>
             <tbody>
@@ -75,9 +75,9 @@
                 <td th:text="${visit.user.email}"></td>
                 <td th:text="${visit.user.phoneNumber}"></td>
                 <td th:text="${visit.visitState.toString()}"></td>
-                <td><a th:if="${visit.getVisitState()== T(pl.polsl.orderadoctor.model.VisitState).CREATED}"
+                <td><a th:text="#{label.confirm}" th:if="${visit.getVisitState()== T(pl.polsl.orderadoctor.model.VisitState).CREATED}"
                        href="#" th:href="@{'/doctor/' + ${doctor.id} + '/visit/' + ${visit.id} + '/updateVisitStatus'}">Confirm</a></td>
-                <td><a th:if="${visit.getVisitState()== T(pl.polsl.orderadoctor.model.VisitState).CREATED || visit.getVisitState()== T(pl.polsl.orderadoctor.model.VisitState).CONFIRMED}"
+                <td><a th:text="#{label.delete}" th:if="${visit.getVisitState()== T(pl.polsl.orderadoctor.model.VisitState).CREATED || visit.getVisitState()== T(pl.polsl.orderadoctor.model.VisitState).CONFIRMED}"
                        href="#" th:href="@{'/doctor/' + ${doctor.id} + '/visit/' + ${visit.id} + '/delete'}">Delete</a></td>
             </tr>
             </tbody>

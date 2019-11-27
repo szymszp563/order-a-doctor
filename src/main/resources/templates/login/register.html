@@ -51,18 +51,12 @@
 
 <body>
     <div class="row">
-        <h3 style="margin-left: 45%">Register as:</h3>
+        <h3 th:text="#{label.register.as}" style="margin-left: 45%">Register as:</h3>
     </div>
     <div class="row" style="margin-top: 20px">
-        <a class="button button2" style="margin-left: 25%" href="#" th:href="@{'/register/user'}" role="button">Patient</a>
+        <a th:text="#{label.patient}" class="button button2" style="margin-left: 25%" href="#" th:href="@{'/register/user'}" role="button">Patient</a>
 
-        <a class="button button2" th:href="@{'/register/doctor'}" role="button">Doctor</a>
+        <a th:text="#{label.doctor.name}" class="button button2" th:href="@{'/register/doctor'}" role="button">Doctor</a>
     </div>
 </body>
 </html>
-
-<!--        <div class="col-md-6">-->
-<!--            <img src=""-->
-<!--                 th:src="@{'/userr/' + '1' + '/userimage'}"-->
-<!--                 width="200" height="200">-->
-<!--        </div>-->

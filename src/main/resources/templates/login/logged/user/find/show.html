@@ -78,15 +78,15 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-2">
-                                    <p>Degree:</p>
-                                    <p>First Name:</p>
-                                    <p>Last Name:</p>
-                                    <p>Average Grade:</p>
-                                    <p>Rating:</p>
-                                    <p>Email:</p>
-                                    <p>City:</p>
-                                    <p>Street:</p>
-                                    <p>Working Hours:</p>
+                                    <p th:text="#{label.form.degree}">Degree:</p>
+                                    <p th:text="#{label.form.first.name}">First Name:</p>
+                                    <p th:text="#{label.form.last.name}">Last Name:</p>
+                                    <p th:text="#{label.form.average.grade}">Average Grade:</p>
+                                    <p th:text="#{label.form.rating}">Rating:</p>
+                                    <p th:text="#{label.form.email}">Email:</p>
+                                    <p th:text="#{label.form.city}">City:</p>
+                                    <p th:text="#{label.form.street}">Street:</p>
+                                    <p th:text="#{label.form.working.hours}">Working Hours:</p>
                                 </div>
                                 <div class="col-md-7">
                                     <p th:text="${(doctor.degree)}">Medical Doctor</p>
@@ -124,7 +124,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-md-10 ">
-                                    <h1 class="panel-title">Specialities</h1>
+                                    <h1 th:text="#{label.specialities}" class="panel-title">Specialities</h1>
                                 </div>
                             </div>
                         </div>
@@ -147,7 +147,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-md-10 ">
-                                    <h1 class="panel-title">Medical Products</h1>
+                                    <h1 th:text="#{label.medical.products}" class="panel-title">Medical Products</h1>
                                 </div>
                             </div>
                         </div>
@@ -157,9 +157,9 @@
                                     <table class="table table-hover">
                                         <thead>
                                         <tr style="font-size: 15px;">
-                                            <th>Name</th>
-                                            <th>Duration</th>
-                                            <th>Price</th>
+                                            <th th:text="#{label.name}">Name</th>
+                                            <th th:text="#{label.duration}">Duration</th>
+                                            <th th:text="#{label.price}">Price</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -178,7 +178,7 @@
 
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h1 class="panel-title">About</h1>
+                            <h1 th:text="#{label.form.about}" class="panel-title">About</h1>
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -210,7 +210,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <h1 class="panel-title">Grades</h1>
+                                    <h1 th:text="#{label.grades}" class="panel-title">Grades</h1>
                                 </div>
                             </div>
                         </div>
@@ -220,9 +220,9 @@
                                     <table class="table table-striped">
                                         <thead>
                                         <tr style="font-size: 15px;">
-                                            <th>Grade</th>
-                                            <th>Name</th>
-                                            <th>Comment</th>
+                                            <th th:text="#{label.list.rating}">Grade</th>
+                                            <th th:text="#{label.patient.name}">Name</th>
+                                            <th th:text="#{label.comment}">Comment</th>
                                         </tr>
                                         </thead>
                                         <tbody>

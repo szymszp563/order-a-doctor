@@ -70,7 +70,7 @@
     <div style="margin-top: 10%">
         <div class="row">
             <select class="selectpicker" data-style="btn-info" data-size="10" data-width="70%" id="sel"
-                    data-live-search="true" data-header="Select a specialization"
+                    data-live-search="true" data-header="Select a specialization" th:data-header="#{label.select.specialization}"
             >
                 <option th:remove="all">spec1</option>
                 <option th:remove="all">spec2</option>
@@ -80,19 +80,19 @@
                         th:text="${spec.description}">val
                 </option>
             </select>
-            <button onclick="find()" type="submit" class="btn btn-primary">Submit</button>
+            <button th:text="#{label.button.search}" onclick="find()" type="submit" class="btn btn-primary">Submit</button>
         </div>
         <div class="row" style="margin-top: 1%">
-            <select class="selectpicker" multiple data-actions-box="true" data-width="30%" id="filter">
-                <option value="C">City</option>
+            <select th:title="#{label.nothing.selected}" class="selectpicker" multiple data-actions-box="true" data-width="30%" id="filter">
+                <option th:text="#{label.list.city}" value="C">City</option>
 <!--                <option value="B">sth1</option>-->
 <!--                <option value="A">sth2</option>-->
             </select>
-            <button onclick="filterFunc()" type="submit" class="btn btn-primary">Filter</button>
+            <button th:text="#{label.button.filter}" onclick="filterFunc()" type="submit" class="btn btn-primary">Filter</button>
         </div>
         <div class="row" style="margin-top: 1%">
             <select class="selectpicker" data-style="btn-info" data-size="10" data-width="50%" id="sel2"
-                    data-live-search="true" data-header="Select city">
+                    data-live-search="true" data-header="Select city" th:data-header="#{label.select.city}" >
                 <option th:each="city : ${cities}" th:text="${city.name}"></option>
                 <option th:remove="all">Opole</option>
                 <option th:remove="all">Katowice</option>

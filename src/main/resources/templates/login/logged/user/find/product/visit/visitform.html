@@ -78,7 +78,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-md-11">
-                                    <h1 class="panel-title">Edit Your Visit</h1>
+                                    <h1 th:text="#{label.edit.visit}" class="panel-title">Edit Your Visit</h1>
                                 </div>
                             </div>
                         </div>
@@ -87,7 +87,7 @@
                             <div class="row">
                                 <div class="col-md-3 form-group" th:class="${#fields.hasErrors('startingDate')}
                                 ? 'col-md-3 form-group has-error' : 'col-md-3 form-group'">
-                                    <label>Date:</label>
+                                    <label th:text="#{label.form.date}">Date:</label>
                                     <input type="text" class="form-control" th:field="*{startingDate}"
                                            th:errorclass="has-error" id="datepicker"/>
                                     <span class="help-block" th:if="${#fields.hasErrors('startingDate')}">
@@ -100,7 +100,7 @@
 
                             <div class="row">
                                 <div class="col-md-3 form-group">
-                                    <label>Hour:</label>
+                                    <label th:text="#{label.form.hour}">Hour:</label>
                                     <select class="form-control" th:field="*{hour}">
                                         <option th:each="hour :  ${#numbers.sequence( __${from}__, __${to}__)}" th:value="${hour + ':00'}" th:text="${hour + ':00'}"></option>
                                     </select>
@@ -113,7 +113,7 @@
 
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h1 class="panel-title">Additional information </h1>
+                            <h1 th:text="#{label.additional.information}" class="panel-title">Additional information </h1>
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -123,7 +123,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button th:text="#{label.button.submit}" type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
         </div>

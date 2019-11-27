@@ -69,7 +69,7 @@
             <form th:object="${visit}" th:action="@{'/user/' + ${user.id} + '/visit/update'} " method="post">
 
                 <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
-                    <p>Please Correct Errors Below</p>
+                    <p th:text="#{label.error.in.form}">Please Correct Errors Below</p>
                 </div>
 
                 <input type="hidden" th:field="*{id}"/>
@@ -82,7 +82,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-md-11">
-                                    <h1 class="panel-title">Edit Visit Date</h1>
+                                    <h1 th:text="#{label.edit.visit.date}" class="panel-title">Edit Visit Date</h1>
                                 </div>
                             </div>
                         </div>
@@ -90,7 +90,7 @@
                             <div class="row">
                                 <div class="col-md-3 form-group" th:class="${#fields.hasErrors('startingDate')}
                                 ? 'col-md-3 form-group has-error' : 'col-md-3 form-group'">
-                                    <label>Date:</label>
+                                    <label th:text="#{label.form.date}">Date:</label>
                                     <input type="text" class="form-control" th:field="*{startingDate}"
                                            th:errorclass="has-error" id="datepicker"/>
                                     <span class="help-block" th:if="${#fields.hasErrors('startingDate')}">
@@ -103,7 +103,7 @@
 
                             <div class="row">
                                 <div class="col-md-3 form-group">
-                                    <label>Hour:</label>
+                                    <label th:text="#{label.form.hour}">Hour:</label>
                                     <select class="form-control" th:field="*{hour}">
                                         <option th:each="hour :  ${#numbers.sequence( __${from}__, __${to}__)}" th:value="${hour + ':00'}" th:text="${hour + ':00'}"></option>
                                     </select>
@@ -112,7 +112,7 @@
 
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button th:text="#{label.button.submit}" type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </form>
         </div>

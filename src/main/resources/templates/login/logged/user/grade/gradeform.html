@@ -23,19 +23,22 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <a th:text="#{label.index.page.title}" class="navbar-brand" href="#" th:href="@{'/user/' + ${user.id} + '/logged'}">Order a Doctor</a>
+            <a th:text="#{label.index.page.title}" class="navbar-brand" href="#"
+               th:href="@{'/user/' + ${user.id} + '/logged'}">Order a Doctor</a>
         </div>
 
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <!--                    <li class="active"><a href="#">Link </a></li>-->
-                <li><a th:text="#{navbar.find.doctor}" href="#" th:href="@{'/user/' + ${user.id} + '/find_doctor'}">Find Doctor</a></li>
-                <li><a th:text="#{navbar.view.profile}" href="#" th:href="@{'/user/' + ${user.id} + '/show'}">View Profile</a></li>
+                <li><a th:text="#{navbar.find.doctor}" href="#" th:href="@{'/user/' + ${user.id} + '/find_doctor'}">Find
+                    Doctor</a></li>
+                <li><a th:text="#{navbar.view.profile}" href="#" th:href="@{'/user/' + ${user.id} + '/show'}">View
+                    Profile</a></li>
 
             </ul>
 
             <p class="navbar-text navbar-right">
-                <i th:text="#{navbar.signed.as}" >Signed in as</i>
+                <i th:text="#{navbar.signed.as}">Signed in as</i>
                 <a style="font-weight:bold" href="#" th:href="@{'/user/' + ${user.id} + '/show'}"
                    class="navbar-link" th:text="${user.firstName}+' '+${user.lastName}">User Name</a>
                 <a th:text="#{navbar.button.logout}" href="#" th:href="@{'/logout'}" class="navbar-link">Logout</a>
@@ -59,7 +62,7 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-md-11">
-                                    <h1 class="panel-title">Edit Your Grade and Comment</h1>
+                                    <h1 th:text="#{label.edit.grade.comment}" class="panel-title">Edit Your Grade and Comment</h1>
                                 </div>
 
                                 <div class="col-md-1">
@@ -68,23 +71,11 @@
                                 </div>
                             </div>
                         </div>
-<!--                        <div class="panel-body">-->
-<!--                            <div class="row">-->
-<!--                                <div class="col-md-3 form-group">-->
-<!--                                    <label>Doctor:</label>-->
-<!--                                    <select class="form-control" th:field="*{doctorId}">-->
-<!--                                        <option th:each="doctor : ${doctors}"-->
-<!--                                                th:value="${doctor.id}"-->
-<!--                                                th:text="${doctor.id + ' ' + doctor.firstName + ' ' + doctor.lastName}">-->
-<!--                                            val-->
-<!--                                        </option>-->
-<!--                                    </select>-->
-<!--                                </div>-->
-<!--                            </div>-->
 
-                            <div class="row">
-                                <div class="col-md-3 form-group">
-                                    <label>Grade:</label>
+                        <div class="row">
+                            <div class="col-md-3 form-group">
+                                <div class="col-md-12 form-group">
+                                    <label th:text="#{label.form.grade}">Grade:</label>
                                     <select class="form-control" th:field="*{grade}">
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -94,37 +85,38 @@
                                     </select>
                                 </div>
                             </div>
-
                         </div>
+
                     </div>
+                </div>
 
 
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h1 class="panel-title">Comment</h1>
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-3 form-group" th:class="${#fields.hasErrors('comment')}
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h1 th:text="#{label.comment}" class="panel-title">Comment</h1>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-3 form-group" th:class="${#fields.hasErrors('comment')}
                                 ? 'col-md-3 form-group has-error' : 'col-md-3 form-group'">
-                                    <div class="col-md-12 form-group">
-                                        <textarea class="form-control" rows="3" th:field="*{comment}"></textarea>
-                                    </div>
-                                    <span class="help-block" th:if="${#fields.hasErrors('comment')}">
+                                <div class="col-md-12 form-group">
+                                    <textarea class="form-control" rows="3" th:field="*{comment}"></textarea>
+                                </div>
+                                <span class="help-block" th:if="${#fields.hasErrors('comment')}">
                                         <ul>
                                             <li th:each="err : ${#fields.errors('comment')}" th:text="${err}"/>
                                         </ul>
                                     </span>
-                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-            </form>
+
+                <button th:text="#{label.button.submit}" type="submit" class="btn btn-primary">Submit</button>
         </div>
+        </form>
     </div>
+</div>
 </div>
 
 </body>

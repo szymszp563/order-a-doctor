@@ -58,11 +58,11 @@
                                 </div>
 
                                 <div class="col-md-2">
-                                    <a class="btn btn-default" href="#"
+                                    <a th:text="#{label.button.edit.profile}" class="btn btn-default" href="#"
                                        th:href="@{'/user/' + ${user.id} + '/update'}" role="button">Edit Profile</a>
                                 </div>
                                 <div class="col-md-1">
-                                    <a class="btn btn-default" href="#"
+                                    <a th:text="#{label.button.change.image}" class="btn btn-default" href="#"
                                        th:href="@{'/user/' + ${user.id} + '/image'}" role="button">Change Image</a>
                                 </div>
                             </div>
@@ -70,16 +70,18 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-2">
-                                    <h5>First Name:</h5>
-                                    <h5>Last Name:</h5>
-                                    <h5>Email:</h5>
-                                    <h5>City:</h5>
+                                    <h5 th:text="#{label.form.first.name}">First Name:</h5>
+                                    <h5 th:text="#{label.form.last.name}">Last Name:</h5>
+                                    <h5 th:text="#{label.form.email}">Email:</h5>
+                                    <h5 th:text="#{label.form.city}">City:</h5>
+                                    <h5 th:text="#{label.form.phone.number}">Phone Number:</h5>
                                 </div>
                                 <div class="col-md-7">
-                                    <p th:text="${(user.firstName)}">John</p>
-                                    <p th:text="${(user.lastName)}">Doe</p>
-                                    <p th:text="${(user.email)}">JohnDoe@mail.com</p>
-                                    <p th:text="${(user.city)}">New York</p>
+                                    <h5 th:text="${(user.firstName)}">John</h5>
+                                    <h5 th:text="${(user.lastName)}">Doe</h5>
+                                    <h5 th:text="${(user.email)}">JohnDoe@mail.com</h5>
+                                    <h5 th:text="${(user.city)}">New York</h5>
+                                    <h5 th:text="${(user.phoneNumber)}">653466444</h5>
                                 </div>
                                 <div class="col-md-2">
                                     <img src="../../../images/user.jpg"
@@ -93,10 +95,10 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-md-10">
-                                    <h1 class="panel-title">Comments</h1>
+                                    <h1 th:text="#{label.comments}" class="panel-title">Comments</h1>
                                 </div>
                                 <div class="col-md-2">
-                                    <a class="btn btn-default btn-block" href="#"
+                                    <a th:text="#{label.button.view}" class="btn btn-default btn-block" href="#"
                                        th:href="@{'/user/' + ${user.id} + '/grades'}" role="button">View</a>
                                 </div>
                             </div>
