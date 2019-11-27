@@ -20,10 +20,15 @@ import pl.polsl.orderadoctor.repositories.SpecialityRepository;
 import pl.polsl.orderadoctor.repositories.UserRepository;
 import pl.polsl.orderadoctor.repositories.VisitRepository;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Scanner;
 
 @Component
 public class OrderADoctorBootstrap implements ApplicationListener<ContextRefreshedEvent> {
@@ -35,6 +40,8 @@ public class OrderADoctorBootstrap implements ApplicationListener<ContextRefresh
     private final VisitRepository visitRepository;
     private final GradeRepository gradeRepository;
     private final CityRepository cityRepository;
+
+    private List<String> specs;
 
     public OrderADoctorBootstrap(DoctorRepository doctorRepository, MedicalProductRepository medicalProductRepository, SpecialityRepository specialityRepository, UserRepository userRepository, VisitRepository visitRepository, GradeRepository gradeRepository, CityRepository cityRepository) {
         this.doctorRepository = doctorRepository;
@@ -49,25 +56,32 @@ public class OrderADoctorBootstrap implements ApplicationListener<ContextRefresh
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
 
+        specs = readSpecialities();
+        if(specialityRepository.count()<specs.size()){
+            loadSpecialities(specs);
+        }
+
+        if(doctorRepository.count()<2){
+            setData();
+        }
+
         doctorRepository.findAll().forEach(d->{
             if(!cityRepository.findByName(d.getCity()).isPresent())
                 cityRepository.save(City.builder().name(d.getCity()).build());
         });
 
-        if(specialityRepository.count()==0){
-            setData();
-        }
-
     }
 
     private void setData() {
-        Speciality surgery = Speciality.builder().description("Surgery").build();
-        Speciality internist = Speciality.builder().description("Internist").build();
-        Speciality oncologist = Speciality.builder().description("Oncologist").build();
-        Speciality orthopaedist = Speciality.builder().description("Orthopaedist").build();
-        Speciality ophthalmologist = Speciality.builder().description("Ophthalmologist").build();
-        Speciality dermatologist = Speciality.builder().description("Dermatologist").build();
-        specialityRepository.saveAll(Arrays.asList(surgery, internist, oncologist, orthopaedist, ophthalmologist, dermatologist));
+//        Speciality surgery = Speciality.builder().description("Surgery").build();
+//        Speciality internist = Speciality.builder().description("Internist").build();
+//        Speciality oncologist = Speciality.builder().description("Oncologist").build();
+//        Speciality orthopaedist = Speciality.builder().description("Orthopaedist").build();
+//        Speciality ophthalmologist = Speciality.builder().description("Ophthalmologist").build();
+//        Speciality dermatologist = Speciality.builder().description("Dermatologist").build();
+//        specialityRepository.saveAll(Arrays.asList(surgery, internist, oncologist, orthopaedist, ophthalmologist, dermatologist));
+
+        List<Speciality> specialities = specialityRepository.findAll();
 
         MedicalProduct armRemoval = MedicalProduct.builder()
                 .name("Arm Removal").duration("80").price(600.00).build();
@@ -89,9 +103,9 @@ public class OrderADoctorBootstrap implements ApplicationListener<ContextRefresh
         Grade g5 = Grade.builder().grade((byte) 1).comment("Worst doctor ever...").build();
         Grade g6 = Grade.builder().grade((byte) 5).comment("Extra!").build();
 
-        Doctor d1 = Doctor.builder().externalId("1").firstName("John W.").lastName("Thackery").city("Katowice").degree(DegreeType.PhD)
+        Doctor d1 = Doctor.builder().externalId("1").firstName("John W.").lastName("Thackery").city("Katowice").degree(DegreeType.prof)
                 .email("J.W.Thack@gmail.com").street("Raciborska 6/65").workingFrom("8:00").workingTo("16:00")
-                .about("Best Medical Doctor of 20th Century").specialities(Arrays.asList(surgery, internist, orthopaedist))
+                .about("Best Medical Doctor of 20th Century").specialities(Arrays.asList(specialities.get(0), specialities.get(1), specialities.get(2), specialities.get(3), specialities.get(4), specialities.get(5)))
                 .visits(new LinkedList<>()).medicalProducts(new LinkedList<>()).grades(new HashSet<>()).averageGrade(0D)
                 .accountType(AccountType.GOOGLE).build();
         d1.addMedicalProduct(armRemoval);
@@ -99,9 +113,9 @@ public class OrderADoctorBootstrap implements ApplicationListener<ContextRefresh
         d1.addGrade(g1);
         d1.addGrade(g2);
 
-        Doctor d2 = Doctor.builder().externalId("2").firstName("Kevin").lastName("Garvey").city("Katowice").degree(DegreeType.MD)
+        Doctor d2 = Doctor.builder().externalId("2").firstName("Kevin").lastName("Garvey").city("Katowice").degree(DegreeType.lek)
                 .email("DrGarvey@gmail.com").street("MPK 8").workingFrom("8:00").workingTo("16:00")
-                .about("Where is his mind").specialities(Arrays.asList(internist, oncologist))
+                .about("Where is his mind").specialities(Arrays.asList(specialities.get(8), specialities.get(11), specialities.get(22), specialities.get(33), specialities.get(24), specialities.get(15)))
                 .visits(new LinkedList<>()).medicalProducts(new LinkedList<>()).grades(new HashSet<>()).averageGrade(0D)
                 .accountType(AccountType.GOOGLE).build();
         d2.addMedicalProduct(childbirth);
@@ -109,9 +123,9 @@ public class OrderADoctorBootstrap implements ApplicationListener<ContextRefresh
         d2.addGrade(g3);
         d2.addGrade(g4);
 
-        Doctor d3 = Doctor.builder().externalId("3").firstName("Algernon").lastName("Edwards").city("Opole").degree(DegreeType.PhD)
+        Doctor d3 = Doctor.builder().externalId("3").firstName("Algernon").lastName("Edwards").city("Opole").degree(DegreeType.dr)
                 .email("Algernon@facebook.com").street("Koszalinska 32/64").workingFrom("8:00").workingTo("16:00")
-                .about("Rich mind").specialities(Arrays.asList(ophthalmologist, dermatologist, internist))
+                .about("Rich mind").specialities(Arrays.asList(specialities.get(10), specialities.get(18), specialities.get(32), specialities.get(13), specialities.get(24), specialities.get(5)))
                 .visits(new LinkedList<>()).medicalProducts(new LinkedList<>()).grades(new HashSet<>()).averageGrade(0D)
                 .accountType(AccountType.FACEBOOK).build();
         d3.addMedicalProduct(consultation);
@@ -199,5 +213,28 @@ public class OrderADoctorBootstrap implements ApplicationListener<ContextRefresh
         d3.addVisit(v6);
 
         visitRepository.saveAll(Arrays.asList(v1, v2, v3, v4, v5, v6));
+    }
+
+    private List<String> readSpecialities(){
+        Scanner scanner = null;
+        File currDir = new File("src/main/resources/data/.");
+        String path = currDir.getAbsolutePath();
+        String fileLocation = path.substring(0, path.length() - 1) + "specialities.txt";
+        try {
+            scanner = new Scanner(new File(fileLocation));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        List<String> specs = new LinkedList<>();
+        while(scanner.hasNextLine()){
+            specs.add(scanner.nextLine());
+        }
+        Collections.sort(specs);
+
+        return specs;
+    }
+
+    private void loadSpecialities(List<String> specs){
+        specs.forEach(s -> specialityRepository.save(Speciality.builder().description(s).build()));
     }
 }

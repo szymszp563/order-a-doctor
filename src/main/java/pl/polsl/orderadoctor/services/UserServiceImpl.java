@@ -112,7 +112,7 @@ public class UserServiceImpl implements UserService {
         user.getGrades().remove(grade);
         doctor.getGrades().remove(grade);
         doctor.calculateAverageGrade();
-        visit.setVisitState(VisitState.ENDED);
+        visit.setVisitState(VisitState.ZAKONCZONA);
         visit.setGrade(null);
         visitRepository.save(visit);
         doctorRepository.save(doctor);
@@ -126,8 +126,8 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).get();
 
         user.getVisits().stream().forEach(v -> {
-            if(v.getDateFrom().isBefore(LocalDateTime.now()) && v.getVisitState()!=VisitState.RATED){
-                v.setVisitState(VisitState.ENDED);
+            if(v.getDateFrom().isBefore(LocalDateTime.now()) && v.getVisitState()!=VisitState.OCENIONA){
+                v.setVisitState(VisitState.ZAKONCZONA);
             }
         });
         userRepository.save(user);

@@ -39,17 +39,17 @@ public class DoctorController {
 
         doctor.getVisits().sort((v1, v2)-> {
                     if (v1.getVisitState() != v2.getVisitState()) {
-                        if (v2.getVisitState() == VisitState.CREATED) {
+                        if (v2.getVisitState() == VisitState.UTWORZONA) {
                             return 1;
-                        } else if (v1.getVisitState() == VisitState.CREATED) {
+                        } else if (v1.getVisitState() == VisitState.UTWORZONA) {
                             return -1;
-                        } else if (v1.getVisitState() == VisitState.ENDED) {
-                            if(v2.getVisitState()==VisitState.RATED){
+                        } else if (v1.getVisitState() == VisitState.ZAKONCZONA) {
+                            if(v2.getVisitState()==VisitState.OCENIONA){
                                 return v1.getDateFrom().compareTo(v2.getDateFrom());
                             }
                             return 1;
-                        }else if(v1.getVisitState()==VisitState.RATED){
-                            if(v2.getVisitState()==VisitState.ENDED){
+                        }else if(v1.getVisitState()==VisitState.OCENIONA){
+                            if(v2.getVisitState()==VisitState.ZAKONCZONA){
                                 return v1.getDateFrom().compareTo(v2.getDateFrom());
                             }
                             return 1;

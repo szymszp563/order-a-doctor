@@ -1,0 +1,49 @@
+Alergolog
+Anestezjolog
+Angiolog
+Chirurg dziecięcy
+Chirurg klatki piersiowej
+Chirurg naczyniowy
+Chirurg ogólny
+Chirurg onkologiczny
+Chirurg plastyczny
+Chirurg szczękowo-twarzowy
+Dermatolog
+Diabetolog
+Diagnostyk laboratoryjny
+Endokrynolog
+Epidemiolog
+Gastroenterolog
+Gastroenterolog dziecięcy
+Geriatra
+Ginekolog
+Ginekolog onkologiczny
+Hematolog
+Hipertensjolog
+Immunolog
+Kardiochirurg
+Kardiolog
+Nefrolog
+Nefrolog dziecięcy
+Neonatolog
+Neurochirurg
+Neurolog
+Neurolog dziecięcy
+Neuropatolog
+Okulista
+Onkolog dziecięcy
+Onkolog kliniczny
+Ortopeda
+Otorynolaryngolog
+Otorynolaryngolog dziecięcy
+Patomorfolog
+Pediatra
+Perinatolog
+Psychiatra
+Psychiatra dziecy
+Radiolog
+Reumatolog
+Seksuolog
+Toksykolog
+Urolog
+Urolog dziecięcy

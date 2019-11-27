@@ -42,7 +42,7 @@ public class VisitController {
         VisitDto visitDto = new VisitDto();
         visitDto.setDoctorId(doctorId);
         visitDto.setMedicalProductIds(new Long[]{productId});
-        visitDto.setVisitState(VisitState.CREATED);
+        visitDto.setVisitState(VisitState.UTWORZONA);
         model.addAttribute("visit", visitDto);
 
         DoctorDto doctor = doctorService.findDtoById(doctorId);
@@ -128,7 +128,7 @@ public class VisitController {
         VisitDto visitDto = visitService.findDtoById(visitId);
         visitDto.setDoctorId(doctorId);
         visitDto.setMedicalProductIds(new Long[]{visitService.findById(visitId).getMedicalProducts().get(0).getId()});
-        visitDto.setVisitState(VisitState.CONFIRMED);
+        visitDto.setVisitState(VisitState.ZATWIERDZONA);
         Visit visit = visitService.findById(visitId);
         visitDto.setStartingDate(visit.getDateFrom().toLocalDate().toString());
         visitDto.setHour(visit.getDateFrom().toLocalTime().toString());
@@ -156,7 +156,7 @@ public class VisitController {
         VisitDto visitDto = visitService.findDtoById(visitId);
         visitDto.setDoctorId(doctorId);
         visitDto.setMedicalProductIds(new Long[]{visitService.findById(visitId).getMedicalProducts().get(0).getId()});
-        visitDto.setVisitState(VisitState.CREATED);
+        visitDto.setVisitState(VisitState.UTWORZONA);
         Visit visit = visitService.findById(visitId);
         visitDto.setStartingDate(visit.getDateFrom().toLocalDate().toString());
         visitDto.setHour(visit.getDateFrom().toLocalTime().toString());

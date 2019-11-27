@@ -102,7 +102,7 @@ public class VisitServiceImpl implements VisitService {
     public void confirmVisit(Long visitId) {
         Optional<Visit> visit = visitRepository.findById(visitId);
         if(visit.isPresent()){
-            visit.get().setVisitState(VisitState.CONFIRMED);
+            visit.get().setVisitState(VisitState.ZATWIERDZONA);
             visitRepository.save(visit.get());
         }
     }
@@ -111,7 +111,7 @@ public class VisitServiceImpl implements VisitService {
     public void rateVisit(Long visitId) {
         Optional<Visit> visit = visitRepository.findById(visitId);
         if(visit.isPresent()){
-            visit.get().setVisitState(VisitState.RATED);
+            visit.get().setVisitState(VisitState.OCENIONA);
             visitRepository.save(visit.get());
         }
     }

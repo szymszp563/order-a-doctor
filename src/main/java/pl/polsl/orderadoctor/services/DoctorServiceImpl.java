@@ -165,8 +165,8 @@ public class DoctorServiceImpl implements DoctorService {
         Doctor doctor = doctorRepository.findById(id).get();
 
         doctor.getVisits().stream().forEach(v -> {
-            if(v.getDateFrom().isBefore(LocalDateTime.now())&& v.getVisitState()!=VisitState.RATED){
-                v.setVisitState(VisitState.ENDED);
+            if(v.getDateFrom().isBefore(LocalDateTime.now())&& v.getVisitState()!=VisitState.OCENIONA){
+                v.setVisitState(VisitState.ZAKONCZONA);
             }
         });
         doctorRepository.save(doctor);

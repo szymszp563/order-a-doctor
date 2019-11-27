@@ -87,13 +87,13 @@
             <td th:text="${visit.doctor.degree + ' ' + visit.doctor.firstName + ' ' + visit.doctor.lastName}"></td>
             <td th:text="${visit.doctor.email}"></td>
             <td th:text="${visit.visitState.toString()}"></td>
-            <td><a th:text="#{label.edit}" th:if="${visit.getVisitState()== T(pl.polsl.orderadoctor.model.VisitState).CREATED}"
+            <td><a th:text="#{label.edit}" th:if="${visit.getVisitState()== T(pl.polsl.orderadoctor.model.VisitState).UTWORZONA}"
                    href="#" th:href="@{'/user/' + ${user.id} + '/visit/' + ${visit.id} + '/updateVisit/' + ${visit.doctor.id}}">Edit</a></td>
-            <td><a th:text="#{label.rate}" th:if="${visit.getVisitState()== T(pl.polsl.orderadoctor.model.VisitState).ENDED}"
+            <td><a th:text="#{label.rate}" th:if="${visit.getVisitState()== T(pl.polsl.orderadoctor.model.VisitState).ZAKONCZONA}"
                    href="#" th:href="@{'/user/' + ${user.id} + '/grade/' + ${visit.id} + '/new'}">Rate</a></td>
-            <td><a th:text="#{label.update.rate}" th:if="${visit.getVisitState()== T(pl.polsl.orderadoctor.model.VisitState).RATED}"
+            <td><a th:text="#{label.update.rate}" th:if="${visit.getVisitState()== T(pl.polsl.orderadoctor.model.VisitState).OCENIONA}"
                    href="#" th:href="@{'/user/' + ${user.id} + '/grade/' + ${visit.grade.id} + '/update'}">Update Rate</a></td>
-            <td><a th:text="#{label.delete}" th:if="${visit.getVisitState()== T(pl.polsl.orderadoctor.model.VisitState).CREATED}"
+            <td><a th:text="#{label.delete}" th:if="${visit.getVisitState()== T(pl.polsl.orderadoctor.model.VisitState).UTWORZONA}"
                    href="#" th:href="@{'/user/' + ${user.id} + '/visit/' + ${visit.id} + '/delete'}">Delete</a></td>
         </tr>
         </tbody>
