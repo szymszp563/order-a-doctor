@@ -110,9 +110,9 @@
                                     </td>
 
 
-                                    <td><a href="#" th:href="@{'/user/' + ${user.id} + '/grade/' + ${grade.id} + '/show'}">Show</a></td>
-                                    <td><a href="#" th:href="@{'/user/' + ${user.id} + '/grade/' + ${grade.id} + '/update'}">Update</a></td>
-                                    <td><a href="#" th:href="@{'/user/' + ${user.id} + '/grade/' + ${grade.id} + '/delete'}">Delete</a></td>
+                                    <td><a th:text="#{label.show}" href="#" th:href="@{'/user/' + ${user.id} + '/grade/' + ${grade.id} + '/show'}">Show</a></td>
+                                    <td><a th:text="#{label.update}" href="#" th:href="@{'/user/' + ${user.id} + '/grade/' + ${grade.id} + '/update'}">Update</a></td>
+                                    <td><a th:text="#{label.delete}" href="#" th:href="@{'/user/' + ${user.id} + '/grade/' + ${grade.id} + '/delete'}">Delete</a></td>
                                 </tr>
                             </table>
                         </div>
