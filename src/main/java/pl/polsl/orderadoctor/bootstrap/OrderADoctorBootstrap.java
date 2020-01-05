@@ -217,11 +217,11 @@ public class OrderADoctorBootstrap implements ApplicationListener<ContextRefresh
 
     private List<String> readSpecialities(){
         Scanner scanner = null;
-        File currDir = new File("src/main/resources/data/.");
+        File currDir = new File("specialities.txt");
         String path = currDir.getAbsolutePath();
-        String fileLocation = path.substring(0, path.length() - 1) + "specialities.txt";
+//        String fileLocation = path.substring(0, path.length() - 1) + "specialities.txt";
         try {
-            scanner = new Scanner(new File(fileLocation));
+            scanner = new Scanner(new File(path));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

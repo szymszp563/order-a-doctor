@@ -1,6 +1,7 @@
 package pl.polsl.orderadoctor.config;
 
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.stereotype.Component;
 import pl.polsl.orderadoctor.model.Doctor;
@@ -25,7 +26,6 @@ public class UserSecurity {
         Doctor d = doctorService.findByExternalId(authentication.getName());
         log.debug("In hasUserId");
 
-
         if (u != null) {
             return u.getId().equals(userId);
         } else if (d != null) {
@@ -36,7 +36,11 @@ public class UserSecurity {
 
     }
 
-    public boolean hasNoUserId(OAuth2AuthenticationToken authentication) {//Authentication authentication1
+    public boolean hasUserId(AnonymousAuthenticationToken authentication, Long userId) {
+        return false;
+    }
+
+    public boolean hasNoUserId(OAuth2AuthenticationToken authentication) {
         User u = userService.findByExternalId(authentication.getName());
         Doctor d = doctorService.findByExternalId(authentication.getName());
         log.debug("In hasNoUserId");
@@ -46,5 +50,9 @@ public class UserSecurity {
 
         return true;
 
+    }
+
+    public boolean hasNoUserId(AnonymousAuthenticationToken authentication) {
+        return true;
     }
 }
