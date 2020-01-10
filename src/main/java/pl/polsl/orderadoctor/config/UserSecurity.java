@@ -23,20 +23,31 @@ public class UserSecurity {
 
     public boolean hasUserId(OAuth2AuthenticationToken authentication, Long userId) {//Authentication authentication1
         User u = userService.findByExternalId(authentication.getName());
-        Doctor d = doctorService.findByExternalId(authentication.getName());
         log.debug("In hasUserId");
 
         if (u != null) {
             return u.getId().equals(userId);
-        } else if (d != null) {
+        }
+
+        return false;
+    }
+
+    public boolean hasDoctorId(OAuth2AuthenticationToken authentication, Long userId) {//Authentication authentication1
+        Doctor d = doctorService.findByExternalId(authentication.getName());
+        log.debug("In hasUserId");
+
+        if (d != null) {
             return d.getId().equals(userId);
         }
 
         return false;
-
     }
 
     public boolean hasUserId(AnonymousAuthenticationToken authentication, Long userId) {
+        return false;
+    }
+
+    public boolean hasDoctorId(AnonymousAuthenticationToken authentication, Long userId) {
         return false;
     }
 
