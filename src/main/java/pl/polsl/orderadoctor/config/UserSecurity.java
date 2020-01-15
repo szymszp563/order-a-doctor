@@ -21,14 +21,12 @@ public class UserSecurity {
         this.doctorService = doctorService;
     }
 
-    public boolean hasUserId(OAuth2AuthenticationToken authentication, Long userId) {//Authentication authentication1
+    public boolean hasUserId(OAuth2AuthenticationToken authentication, Long userId) {
         User u = userService.findByExternalId(authentication.getName());
         log.debug("In hasUserId");
-
         if (u != null) {
             return u.getId().equals(userId);
         }
-
         return false;
     }
 
